@@ -15,10 +15,10 @@
     * Click on Resource and select "Sessions" tab located in the left side of the page (image demo1_2.jpg); Inherited sessions should display "console" session
     * Run "console" session to open a new SSH connection to Resource
 
-Paragraph
+
 
 # Images:
-Paragraph ![Image from file](demo1_1.jpg)
+![Image from file](demo1_1.jpg)
 (image demo1_1.jpg)
 Paragraph ![Image from file](demo1_2.jpg)
 (image demo1_2.jpg)
