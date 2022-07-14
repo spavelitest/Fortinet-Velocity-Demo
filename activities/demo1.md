@@ -10,7 +10,8 @@
     * Click on "Reservation of \[demo#1\] Topology" to enter Velocity Reservations page
 * **On Reservation Page:**
     * On Information tab you should see the Reservation status as Active
-    * Goto Topology tab and click on the Resource
+    * Goto Topology tab and click on the Resource; the Topology page should open
+    * Click on the Resource and select "Actions" -> "HTTP"; a new HTTP connection to Resource should open in a new window
   
 
 
