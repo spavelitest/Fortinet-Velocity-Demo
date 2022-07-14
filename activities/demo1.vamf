@@ -1,6 +1,6 @@
 {
 	"name": "Demo #1",
-	"shortDescription": "Reservation of a single resource topology: Topology reservation demo; HTTP and Console user access; Power On/Off actions and automated tasks; Backup script automated task to retrieve reservation information details, topology and device configuration files via email.",
+	"shortDescription": "Reservation of a single resource topology: Topology reservation demo; HTTP and Console user access; Power On/Off user actions on-demand and/or as automated tasks.",
 	"icon": "fortinet-logo.png",
 	"descriptionMarkdown": "demo1.md",
 	"topology": [
