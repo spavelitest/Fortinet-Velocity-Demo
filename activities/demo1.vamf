@@ -5,10 +5,10 @@
 	"descriptionMarkdown": "demo1.md",
 	"topology": [
 		{
-			"name": "Topology Logical",
+			"name": "[demo#1] Topology",
 			"addRepositoryNamePrefix": "false",
 			"actionTitle": "Reserve",
-			"description": "Topology reservation with Static Automation only",
+			"description": "Topology reservation for a single Inventory Resource",
 			"reservationDuration": "60",
 			"automation": [
 				{
@@ -107,26 +107,6 @@
 				}
 			]
 		},
-		{
-			"name": "Topology Abstract 2",
-			"addRepositoryNamePrefix": "false",
-			"actionTitle": "Reserve",
-			"description": "Topology reservation with Startup/Teardown and Automation",
-			"reservationDuration": "5",
-			"intervalToRunEndTestCase": "60",
-			"automation": [
-				{
-					"addRepositoryNamePrefix": "false",
-					"name": "Name1",
-					"allowToRunWithOptions":true,
-					"testPath": "main/simpleTestCase/test_cases/nothing.fftc"
-				},
-				{
-					"addRepositoryNamePrefix": "false",
-					"name": "Name2",
-					"testPath": "main/simpleTestCase/test_cases/nothing.fftc"
-				}
-			]
-		}
+		
 	]
 }
