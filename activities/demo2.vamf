@@ -1,0 +1,132 @@
+{
+	"name": "Demo #2",
+	"shortDescription": "Reservation of a Fortigate firewall connected to a Test switch topology: Topology reservation demo; single and/or multiple VLAN automated actions; Backup script automated task to retrieve reservation information details, topology and device configuration files via email.",
+	"icon": "fortinet-logo.png",
+	"descriptionMarkdown": "demo1.md",
+	"topology": [
+		{
+			"name": "Topology Logical",
+			"addRepositoryNamePrefix": "false",
+			"actionTitle": "Reserve",
+			"description": "Topology reservation with Static Automation only",
+			"reservationDuration": "60",
+			"automation": [
+				{
+					"addRepositoryNamePrefix": "true",
+					"testPath": "activity-catalog-assets/regression/velo-6974_1.fftc"
+				},
+				{
+					"addRepositoryNamePrefix": "true",
+					"name": "Name Defined In Manifest",
+					"testPath": "activity-catalog-assets/regression/velo-6974_2.fftc"
+				},
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "main/simpleTestCase/test_cases/nothing.fftc"
+				},
+				{
+					"testPath": "demo/activity-catalog-assets/test_cases/runlistParamFile.fftc",
+					"allowToRunWithOptions":true,
+					"parameterFilePath": "demo/activity-catalog-assets/parameters/parameterFile1.ffpt",
+					"parametersList": [
+						{
+							"name": "parameterFile2",
+							"value": "asuihfasdhfu",
+							"type": "TEXT"
+						}
+					]
+				},
+				{
+					"testPath": "demo/activity-catalog-assets/test_cases/agentReq1.fftc",
+					"allowToRunWithOptions":true,
+					"requirements":[
+						{
+							"name": "testreq1",
+							"value": "testvalue2"
+						}
+					]
+				},
+				{
+					"testPath": "eduard-repo-package/runlists/scl_1.vrl",
+					"parameterFilePath": "main/simpleTestCase/libraries/parameters.ffpt"
+				}
+			]
+		},
+		{
+			"name": "Topology Abstract",
+			"addRepositoryNamePrefix": "false",
+			"actionTitle": "Reserve",
+			"description": "Topology reservation with mixed Automation",
+			"reservationDuration": "5",
+			"intervalToRunEndTestCase": "60",
+			"startupTasks": [
+				{
+					"addRepositoryNamePrefix": "true",
+					"testPath": "activity-catalog-assets/regression/velo-7159_1.fftc"
+				},
+				{
+					"addRepositoryNamePrefix": "true",
+					"name": "Name Defined In Manifest",
+					"testPath": "activity-catalog-assets/regression/velo-7159_2.fftc"
+				},
+				{
+					"testPath": "demo/activity-catalog-assets/test_cases/manifestParams.fftc",
+					"parametersList": [
+						{
+							"name": "manifestParam2",
+							"type": "TEXT",
+							"value": "testValue2"
+						},
+						{
+							"name": "manifestParam3",
+							"type": "TEXT",
+							"value": "testValue3"
+						}
+					]
+				},
+				{
+					"addRepositoryNamePrefix": "true",
+					"testPath": "activity-catalog-assets/test_cases/agentReq1.fftc"
+				}
+			],
+			"teardownTasks": [
+				{
+					"testPath": "demo/activity-catalog-assets/test_cases/manifestParams.fftc",
+					"parametersList": [
+						{
+							"name": "manifestParam2",
+							"type": "TEXT",
+							"value": "blablablabla"
+						},
+						{
+							"name": "manifestParam3",
+							"type": "TEXT",
+							"value": "testValue3"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Topology Abstract 2",
+			"addRepositoryNamePrefix": "false",
+			"actionTitle": "Reserve",
+			"description": "Topology reservation with Startup/Teardown and Automation",
+			"reservationDuration": "5",
+			"intervalToRunEndTestCase": "60",
+			"automation": [
+				{
+					"addRepositoryNamePrefix": "false",
+					"name": "Name1",
+					"allowToRunWithOptions":true,
+					"testPath": "main/simpleTestCase/test_cases/nothing.fftc"
+				},
+				{
+					"addRepositoryNamePrefix": "false",
+					"name": "Name2",
+					"testPath": "main/simpleTestCase/test_cases/nothing.fftc"
+				}
+			]
+		}
+	]
+}
