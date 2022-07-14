@@ -5,6 +5,9 @@
     * Make sure to fill in Name, Description and Tags fields for advanced filtering
     * Below you can find a sample Topology that can be used for training purposes (click on "Reserve" button for \[demo#1\] Topology)
 * **Reserve Topology**  
+    * Default Reservation duration is 60 minutes
+* **On Reservation:**
+    * Click on Resource and select HTTP connection
   
 
 
