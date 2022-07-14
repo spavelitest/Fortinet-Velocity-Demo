@@ -22,3 +22,5 @@
     * For example run vBOT "Power Cycle" and check "Results" tab for the execution report; Click on "View report" to open the "Execution Report" page in a new window (you can check script result and execution messages for detailed information)
 
 
+# Images:
+![Image from file](demo1.jpg)
