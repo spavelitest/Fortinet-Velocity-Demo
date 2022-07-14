@@ -18,10 +18,10 @@
 
 
 # Images:
-<br>
+<br></br>
 ![Image from file](demo1_1.jpg)
 (image demo1_1.jpg)
-<br>
+<br></br>
 ![Image from file](demo1_2.jpg)
 (image demo1_2.jpg)
 
