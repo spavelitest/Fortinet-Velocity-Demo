@@ -11,8 +11,13 @@
 * **On Reservation Page:**
     * On Information tab you should see the Reservation status as Active
     * Goto Topology tab and click on the Resource; the Topology page should open
-    * Click on the Resource and select "Actions" -> "HTTP"; a new HTTP connection to Resource should open in a new window
-  
+    * Click on the Resource and select "Actions" -> "HTTP"; a new HTTP connection to Resource should open in a new window (image demo1_1.jpg)
+
+
+
+# Images:
+![Image from file](demo1_1.jpg)
+(image demo1_1.jpg)
 
 
 
