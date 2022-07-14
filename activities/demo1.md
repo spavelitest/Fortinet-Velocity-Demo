@@ -6,7 +6,9 @@
     * Below you can find a sample Topology that can be used for training purposes (click on "Reserve" button for \[demo#1\] Topology)
 * **Reserve Topology**  
     * Default Reservation duration is 60 minutes
-* **On Reservation:**
+    * If Reservation is successful you should get "Release" button to end Rservation
+    * Click on "Reservation of \[demo#1\] Topology" to enter Reservation page
+* **On Reservation Page:**
     * Click on Resource and select HTTP connection
   
 
