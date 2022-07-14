@@ -18,8 +18,10 @@
 
 
 # Images:
+Paragraph line 1
 ![Image from file](demo1_1.jpg)
-Paragraph (image demo1_1.jpg)
+(image demo1_1.jpg)
+Paragraph line 2
 ![Image from file](demo1_2.jpg)
-Paragraph (image demo1_2.jpg)
+(image demo1_2.jpg)
 
