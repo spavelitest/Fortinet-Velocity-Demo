@@ -2,7 +2,7 @@
 	"name": "Demo#2",
 	"shortDescription": "Reservation of a Fortigate firewall connected to a Test switch topology: Topology reservation demo; Dynamically add/remove single/multiple VLAN(s) using tagging; Backup script automated task to retrieve reservation details and configuration files via user email.",
 	"icon": "fortinet-logo.png",
-	"descriptionMarkdown": "demo1.md",
+	"descriptionMarkdown": "demo2.md",
 	"topology": [
 		{
 			"name": "Topology Logical",
