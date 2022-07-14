@@ -17,6 +17,6 @@
     * Inside console connection you should see "QuickCalls" menu in the top-left corner of the page; a list of console quickcalls (user actions) are implemented and available for use
     * Select "consoleLogin" and Run Quickcall; you should automatically connect to Resource via the console connection
     * You can eiter use the console to enter commands or use some of the avilable Quickcalls to perform specific actions (some of the quickcalls require user input parameters) 
-    * 
+    * For example select "getPortSpeed" Quickcall and enter port name (e.g. port31) to display port speed settings inside the console window
 
 
