@@ -19,7 +19,7 @@
 
 # Images:
 ![Image from file](demo1_1.jpg)
-(image demo1_1.jpg)
-Paragraph ![Image from file](demo1_2.jpg)
-(image demo1_2.jpg)
+Paragraph (image demo1_1.jpg)
+![Image from file](demo1_2.jpg)
+Paragraph (image demo1_2.jpg)
 
