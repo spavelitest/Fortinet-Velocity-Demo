@@ -3,7 +3,7 @@
 * **Create a new Topology with a single Resource added from Velocity Inventory**
     * L1 and L2 Inventory Resources are not available to choose when creating a new Toplogy as they are used dynamically by Velocity when building L1 or L2 connections between Resources
     * Make sure to fill in Name, Description and Tags fields for advanced filtering
-    * Below you can find a sample Topology that can be used for training purposes (\[Demo #1\] Topology)
+    * Below you can find a sample Topology that can be used for training purposes (click on "Reserve" button on \[Demo#1\] Topology)
 * **Reserve Topology**  
   
 
