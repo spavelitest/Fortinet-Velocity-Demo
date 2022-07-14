@@ -14,14 +14,9 @@
     * Click on Resource and select "Actions" -> "HTTP"; a new HTTP connection to Resource should open in a new window (image demo1_1.jpg)
     * Click on Resource and select "Sessions" tab located in the left side of the page (image demo1_2.jpg); Inherited sessions should display "console" session
     * Run "console" session to open a new SSH connection to Resource
+    * Inside console connection you should see "QuickCalls" menu in the top-left corner of the page; a list of console quickcalls (user actions) are implemented and available for use
+    * Select "consoleLogin" and Run Quickcall; you should automatically connect to Resource via the console connection
+    * You can eiter use the console to enter commands or use some of the avilable Quickcalls to perform specific actions (some of the quickcalls require user input parameters) 
+    * 
 
-
-
-# Images:
-<br></br>
-![Image from file](demo1_1.jpg)
-(image demo1_1.jpg)
-<br></br>
-![Image from file](demo1_2.jpg)
-(image demo1_2.jpg)
 
