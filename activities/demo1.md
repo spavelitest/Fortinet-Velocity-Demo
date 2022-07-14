@@ -9,7 +9,8 @@
     * If Reservation is successful you should see "Release" button to end Reservation
     * Click on "Reservation of \[demo#1\] Topology" to enter Velocity Reservations page
 * **On Reservation Page:**
-    * Click on Resource and select HTTP connection
+    * On Information tab you should see the Reservation status as Active
+    * Goto Topology tab and click on the Resource
   
 
 
