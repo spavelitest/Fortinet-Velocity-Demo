@@ -1,4 +1,4 @@
-# Demo #1 User Steps:
+# Demo#1 User Steps:
 
 * **Create a new Topology with a single Resource added from Velocity Inventory**
     * L1 and L2 Inventory Resources are not available to choose when creating a new Toplogy as they are used dynamically by Velocity when building L1 or L2 connections between Resources
