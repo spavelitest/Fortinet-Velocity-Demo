@@ -51,62 +51,7 @@
 					"parameterFilePath": "main/simpleTestCase/libraries/parameters.ffpt"
 				}
 			]
-		},
-		{
-			"name": "Topology Abstract",
-			"addRepositoryNamePrefix": "false",
-			"actionTitle": "Reserve",
-			"description": "Topology reservation with mixed Automation",
-			"reservationDuration": "5",
-			"intervalToRunEndTestCase": "60",
-			"startupTasks": [
-				{
-					"addRepositoryNamePrefix": "true",
-					"testPath": "activity-catalog-assets/regression/velo-7159_1.fftc"
-				},
-				{
-					"addRepositoryNamePrefix": "true",
-					"name": "Name Defined In Manifest",
-					"testPath": "activity-catalog-assets/regression/velo-7159_2.fftc"
-				},
-				{
-					"testPath": "demo/activity-catalog-assets/test_cases/manifestParams.fftc",
-					"parametersList": [
-						{
-							"name": "manifestParam2",
-							"type": "TEXT",
-							"value": "testValue2"
-						},
-						{
-							"name": "manifestParam3",
-							"type": "TEXT",
-							"value": "testValue3"
-						}
-					]
-				},
-				{
-					"addRepositoryNamePrefix": "true",
-					"testPath": "activity-catalog-assets/test_cases/agentReq1.fftc"
-				}
-			],
-			"teardownTasks": [
-				{
-					"testPath": "demo/activity-catalog-assets/test_cases/manifestParams.fftc",
-					"parametersList": [
-						{
-							"name": "manifestParam2",
-							"type": "TEXT",
-							"value": "blablablabla"
-						},
-						{
-							"name": "manifestParam3",
-							"type": "TEXT",
-							"value": "testValue3"
-						}
-					]
-				}
-			]
-		},
+		}
 		
 	]
 }
