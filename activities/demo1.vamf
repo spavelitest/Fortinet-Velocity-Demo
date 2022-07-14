@@ -1,6 +1,6 @@
 {
-	"name": "Fortinet Demo #1",
-	"shortDescription": "Activity page used for training purposes on Velocity topologies and automation assets.",
+	"name": "Demo #1",
+	"shortDescription": "Activity page used for training purposes on Velocity Topologies and Automation Assets. Demo #1: Reservation of a single Resource - HTTP and Console access; Power On/Off actions and tasks; Backup script task to retrieve Reservation details, Topology file and Resource configuration file via email",
 	"icon": "fortinet-logo.png",
 	"descriptionMarkdown": "demo1.md",
 	"topology": [
