@@ -1,7 +1,7 @@
 {
-	"name": "Fortinet Demo",
-	"shortDescription": "Activity page used for training purposes on Velocity topologies and automation assets",
-	"icon": "fortinet-demo.svg",
+	"name": "Fortinet Demo #1",
+	"shortDescription": "Activity page used for training purposes on Velocity topologies and automation assets.",
+	"icon": "/activities/fortinet-demo.png",
 	"descriptionMarkdown": "demo1.md",
 	"topology": [
 		{
