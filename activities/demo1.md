@@ -11,7 +11,7 @@
 * **On Reservation Page:**
     * On Information tab you should see the Reservation status as Active
     * Goto Topology tab and click on the Fortigate resource; the Topology page should open
-    * Click on Fortigate resource and select "Actions" -> "HTTP"; a new HTTP connection to Resource should open in a new window
+    * Click on Fortigate resource and select "Actions" -> "HTTP"; a new HTTP connection to Fortigate should open in a new window
     * Click on Fortigate resource and select "Sessions" tab located in the left side of the page; Inherited sessions tab should display the "console" session
     * Run "console" session to open a new Console connection to Fortigate
     * Inside the console connection you should see "QuickCalls" menu in the top-left corner of the page; a list of console quickcalls (custom user actions) are implemented and available for use
