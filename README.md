@@ -1,1 +1,2 @@
-# Fortinet-Velocity-Demo
+# Fortinet-Demo
+ Fortinet demo repository
