@@ -1,6 +1,6 @@
 # Demo#1 User Steps:
 
-* **Create a new Topology with a single Resource added from Velocity Inventory**
+* **Create a new Topology with a single Fortigate resource added from Velocity Inventory**
     * L1 and L2 Inventory Resources are not available to choose when creating a new Toplogy as they are used dynamically by Velocity when building L1 or L2 connections between Resources
     * Make sure to fill in Name, Description and Tags fields for advanced filtering
     * Below you can find a sample Topology that can be used for training purposes (click on "Reserve" button for \[demo#1\] Topology)
@@ -10,13 +10,14 @@
     * Click on "Reservation of \[demo#1\] Topology" to enter Velocity Reservations page
 * **On Reservation Page:**
     * On Information tab you should see the Reservation status as Active
-    * Goto Topology tab and click on the Resource; the Topology page should open
-    * Click on Resource and select "Actions" -> "HTTP"; a new HTTP connection to Resource should open in a new window (image demo1_1.jpg)
-    * Click on Resource and select "Sessions" tab located in the left side of the page (image demo1_2.jpg); Inherited sessions should display "console" session
-    * Run "console" session to open a new SSH connection to Resource
-    * Inside console connection you should see "QuickCalls" menu in the top-left corner of the page; a list of console quickcalls (user actions) are implemented and available for use
-    * Select "consoleLogin" and Run Quickcall; you should automatically connect to Resource via the console connection
-    * You can eiter use the console to enter commands or use some of the avilable Quickcalls to perform specific actions (some of the quickcalls require user input parameters) 
-    * For example select "getPortSpeed" Quickcall and enter port name (e.g. port31) to display port speed settings inside the console window
+    * Goto Topology tab and click on the Fortigate resource; the Topology page should open
+    * Click on Fortigate resource and select "Actions" -> "HTTP"; a new HTTP connection to Resource should open in a new window
+    * Click on Fortigate resource and select "Sessions" tab located in the left side of the page; Inherited sessions tab should display the "console" session
+    * Run "console" session to open a new Console connection to Fortigate
+    * Inside the console connection you should see "QuickCalls" menu in the top-left corner of the page; a list of console quickcalls (custom user actions) are implemented and available for use
+    * Select "consoleLogin" and "Run Quickcall"; you should automatically connect to Resource via the console connection
+    * Now, you can eiter use the console to enter any commands or use some of the avilable quickcalls to perform specific actions (some of the quickcalls require user input parameters) 
+    * For example select "getPortSpeed" quickcall and enter port name parameter (e.g. port31) to display port name speed settings inside the console window
+    * Click on Fortigate resource and select "VBOTS" tab located in the top-left corner of the page; "Power On", "Power Off" and "Power Cycle" user actions should be available for use(please note that Power On/Off actions are implemented for Fortigate resources only)
 
 
