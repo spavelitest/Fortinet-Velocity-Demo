@@ -9,7 +9,7 @@
 			"addRepositoryNamePrefix": "false",
 			"actionTitle": "Reserve",
 			"description": "Topology with Fortigate firewall connected to a Test switch using a single Port and Vlan",
-			"reservationDuration": "60",
+			"reservationDuration": "15",
 			"intervalToRunEndTestCase": "60",
 			"startupTasks": [
 				{
@@ -28,8 +28,8 @@
 			"name": "[demo#2] Topology 2",
 			"addRepositoryNamePrefix": "false",
 			"actionTitle": "Reserve",
-			"description": "Topology with Fortigate firewall connected to a Test switch using a two Ports and multiple Vlans.",
-			"reservationDuration": "60",
+			"description": "Topology with Fortigate firewall connected to a Test switch using a two Ports and multiple Vlans",
+			"reservationDuration": "15",
 			"intervalToRunEndTestCase": "60",
 			"startupTasks": [
 				{
