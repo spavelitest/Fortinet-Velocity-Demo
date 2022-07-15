@@ -8,7 +8,7 @@
 			"name": "[demo#1] Topology",
 			"addRepositoryNamePrefix": "false",
 			"actionTitle": "Reserve",
-			"description": "Topology reservation for a single Fortigate Firewall resource",
+			"description": "Topology with single Fortigate firewall device",
 			"reservationDuration": "60",
 			"intervalToRunEndTestCase": "60",
 			"startupTasks": [
