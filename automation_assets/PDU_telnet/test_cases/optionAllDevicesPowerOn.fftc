@@ -376,7 +376,7 @@
                                     <nestedSteps>
                                         <item guid="e7e7af2a-ad71-4939-9f4b-4226eb5e9f90" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
                                             <command>
-                                                <body>/velocity/api/inventory/v16/device/[device_id]/ports</body>
+                                                <body>/velocity/api/inventory/v16/device/[device_id]/ports?limit=200</body>
                                             </command>
                                             <postProcessing>
                                                 <analysisRules>
@@ -414,7 +414,7 @@
                                                     </item>
                                                 </analysisRules>
                                             </postProcessing>
-                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/inventory/v16/device/[device_id]/ports" action.inherit="false"/>
+                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/inventory/v16/device/[device_id]/ports?limit=200" action.inherit="false"/>
                                         </item>
                                         <item guid="6f762333-f2b5-4331-8383-50fae531a66e" action="eval" useFieldsInCommand="false">
                                             <command>
