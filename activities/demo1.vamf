@@ -1,6 +1,6 @@
 {
 	"name": "Demo#1",
-	"shortDescription": "Reservation of a single resource topology: Topology reservation demo; HTTP and Console user access and predefined user actions; Power On/Off user actions and automated tasks.",
+	"shortDescription": "Reservation of a single Fortigate resource topology: Topology reservation demo; HTTP and Console user access and predefined user actions; Power On/Off/Cycle user automated actions and tasks.",
 	"icon": "fortinet-logo.png",
 	"descriptionMarkdown": "demo1.md",
 	"topology": [
@@ -8,7 +8,7 @@
 			"name": "[demo#1] Topology",
 			"addRepositoryNamePrefix": "false",
 			"actionTitle": "Reserve",
-			"description": "Topology reservation for a single Inventory Resource",
+			"description": "Topology reservation for a single Fortigate Firewall resource",
 			"reservationDuration": "60",
 			"automation": [
 				{

@@ -1,6 +1,6 @@
-# Demo#1 User Steps:
+# User Steps:
 
-* **Create a new Topology with a single Resource added from Velocity Inventory**
+* **Create a new Topology with a single Fortigate resource added from Velocity Inventory**
     * L1 and L2 Inventory Resources are not available to choose when creating a new Toplogy as they are used dynamically by Velocity when building L1 or L2 connections between Resources
     * Make sure to fill in Name, Description and Tags fields for advanced filtering
     * Below you can find a sample Topology that can be used for training purposes (click on "Reserve" button for \[demo#1\] Topology)
@@ -10,110 +10,17 @@
     * Click on "Reservation of \[demo#1\] Topology" to enter Velocity Reservations page
 * **On Reservation Page:**
     * On Information tab you should see the Reservation status as Active
-    * Goto Topology tab and click on the Resource; the Topology page should open
-    * Click on the Resource and select "Actions" -> "HTTP"; a new HTTP connection to Resource should open in a new window (image demo1_1.jpg)
-
+    * Goto Topology tab and click on the Fortigate resource; the Topology page should open
+    * Click on Fortigate resource and select "Actions" -> "HTTP"; a new HTTP connection to Fortigate should open in a new window
+    * Click on Fortigate resource and select "Sessions" tab located in the left side of the page; Inherited sessions tab should display the "console" session
+    * Run "console" session to open a new Console connection to Fortigate
+    * Inside the console connection you should see "QuickCalls" menu in the top-left corner of the page; a list of console quickcalls (custom user actions) are implemented and available for use
+    * Select "consoleLogin" and "Run Quickcall"; you should automatically connect to Resource via the console connection
+    * Now, you can eiter use the console to enter any commands or use some of the avilable quickcalls to perform specific actions (some of the quickcalls require user input parameters) 
+    * For example select "getPortSpeed" quickcall and enter port name parameter (e.g. port31) to display port name speed settings inside the console window
+    * Click on Fortigate resource and select "VBOTS" tab located in the top-left corner of the page; "Power On", "Power Off" and "Power Cycle" user actions list should be available for use (please note that Power On/Off actions are implemented for Fortigate resources only; implementation is based on specific tag "optionPDU" assigned to "Fortigate Firewall" template)
+    * For example run vBOT "Power Cycle" and check "Results" tab for the execution report; Click on "View report" to open the "Execution Report" page in a new window (you can check script result and execution messages for detailed information)
 
 
 # Images:
-![Image from file](demo1_1.jpg)
-(image demo1_1.jpg)
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Text formats
-
-_This is sample italic text_  
-**This is sample bold text**  
-**_This is sample bold and italic text_**  
-
-# Headings
-
-# Heading 1 sample
-## Heading 2 sample
-### Heading 3 sample
-#### Heading 4 sample
-##### Heading 5 sample
-###### Heading 6 sample
-
-# Links
-
-[Hyperlink](https://www.google.com)  
-[Hyperlink with **bold** and _italic_ words](www.google.com)  
-Please access the following [link](www.google.com)  
-
-# References
-
-This is a [link][reference-1] to reference-1  
-This is a [link][reference-2] to reference-2  
-
-# Images
-
-![Sample image](https://i.kinja-img.com/gawker-media/image/upload/s--GgpOUVnh--/c_scale,f_auto,fl_progressive,q_80,w_800/riufs7rtpk6okzrqiqmy.jpg)  
-![Image with reference][reference-3]  
-![Image from file](mars.jpg)
-
-# Videos
-
-[Sample Video](https://www.youtube.com/watch?v=m8DL12m9D8U)  
-[![https://st.motortrend.com/uploads/sites/10/2015/09/2016-Lamborghini-Aventador-LP-750-4-Superveloce-front-three-quarter-in-motion-026.jpg?interpolation=lanczos-none&fit=around|392:261](http://img.youtube.com/vi/m8DL12m9D8U/0.jpg)](http://www.youtube.com/watch?v=m8DL12m9D8U "Sample Video 2")
-
-# Blockquotes
-
-## This is a single line blockquote:
-> "Something wonderful here"  
-
-## This is a multi line blockquote:
-> Line 1  
->  
-> _Line 2_  
->  
-> **Line 3**  
-
-# Lists
-
-## First list - unordered
-* List element 1  
-* _List element 2_  
-* **List element 3**  
-## Second list - ordered
-1. List element 1
-2. _List element 2_
-3. **List element 3**
-## Third list - indented
-* List element 1  
-    * List element 1.1  
-        * List element 1.1.1  
-        * List element 1.1.2  
-    * List element 1.2  
-        * List element 1.2.1  
-        * List element 1.2.2  
-
-# Paragraphs
-
-Paragraph line 1  
-Paragraph line 2  
-
-# Table
-
-| Header1   | Header2  | Header3  |
-|   :---    |   :---:  |    ---:  |
-| info1     |    ✔    |     ❗    |
-| info2     |    ✔    |     ❗    |
-| info3     |    ✔    |     ❗    |
-
-# References (should not be displayed)
-
-[reference-1]: www.google.com
-[reference-2]: www.youtube.com
-[reference-3]: https://st.motortrend.com/uploads/sites/10/2015/09/2016-Lamborghini-Aventador-LP-750-4-Superveloce-front-three-quarter-in-motion-026.jpg?interpolation=lanczos-none&fit=around|392:261
+![Image from file](demo1.jpg)
