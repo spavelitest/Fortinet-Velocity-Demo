@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<TestCaseCatalog version="8.7.0.202112151246">
+    <testCaseCatalog>
+        <item name="session_profiles/ssh_qc.fftc">
+            <tcDescriptor version="8.7.0.202112151246">
+                <general>
+                    <sessionClass includeTestCase="true" sessionType="ssh.ffsp"/>
+                    <language>Python</language>
+                </general>
+                <procedures>
+                    <item name="setProtocol" isPublic="true">
+                        <arguments>
+                            <item name="port">
+                                <description>Port name from Lepton (e.g. 2.12, 2.13)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="protocol">
+                                <description>Port protocol value (e.g. eth-100g, eth-100m, eth-10g, eth-10g-fec237, eth-10g-fec238, eth-1g, eth-25g, eth-40g)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="getConnectedPort" isPublic="true">
+                        <arguments>
+                            <item name="port">
+                                <description>Port name from Lepton (e.g. 2.12, 2.13)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                </procedures>
+            </tcDescriptor>
+        </item>
+    </testCaseCatalog>
+</TestCaseCatalog>

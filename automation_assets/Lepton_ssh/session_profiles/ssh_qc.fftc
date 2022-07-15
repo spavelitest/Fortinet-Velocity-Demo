@@ -1,0 +1,373 @@
+<?xml version="1.0"?>
+<testCase version="8.7.0.202112151246">
+    <general>
+        <sessionClass includeTestCase="true" sessionType="ssh.ffsp"/>
+        <language>Python</language>
+    </general>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="5ce71311-069e-42f7-b9d8-00d6496d422b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Quickcall library for Lepton</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="setProtocol" isPublic="true">
+            <steps>
+                <item guid="0129aba9-5bfa-4b29-9ddc-c0dd1723cc32" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="525d0a40-8cbb-408a-82f6-c2994f013084" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="dc0e5fd4-10b9-458f-99d7-8b7f59cc842f" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(port)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="55380b40-c775-4d4d-8972-9258cc8ad25a" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(protocol)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="4c3c82ee-2a92-4fd8-892a-18f97bd8c45a" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>set port protocol</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="d8cd2bc5-9835-438f-9738-b4f23811139e" action="command" session="[session]" estimatedStepExecutionTime="0.007">
+                            <command>
+                                <body>lcli</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>promptName()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;prompt2&quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>--- prompt failed; fail test...</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                <completionProperties expectedIdleTime="0.244" expectedIdleTime.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="22cdcbce-27a5-456c-ac4b-cc9a85d1ded9" action="command" session="[session]" estimatedStepExecutionTime="0.007">
+                            <command>
+                                <body>Port [port]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                <completionProperties expectedIdleTime="0.244" expectedIdleTime.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="c696c47f-aa3d-450d-be29-50f232d6942a" action="command" session="[session]" estimatedStepExecutionTime="0.038">
+                            <command>
+                                <body>Protocol [protocol]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                <completionProperties expectedIdleTime="3.135" expectedIdleTime.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="c9ff3159-8995-45cd-b024-ecfae8abdb8c" action="command" session="[session]" estimatedStepExecutionTime="0.038">
+                            <command>
+                                <body>Protocol</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>Protocol()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == str(protocol)</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>--- port protocol not ok; fail test...</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                <completionProperties expectedIdleTime="3.135" expectedIdleTime.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="c09e7e54-01fa-4f7e-9c0b-b36c44f37060" action="command" session="[session]" normalOffset="59.412" estimatedStepExecutionTime="0.012">
+                            <command>
+                                <body>Exit</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;Bye!&quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>--- exit not ok; fail test...</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                <completionProperties expectedIdleTime="0.133" expectedIdleTime.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="36cad510-3f36-417b-9ee7-4deb82023ff1" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return result</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="b8f47010-afd5-4fc2-be5f-e3cc8a81d64c" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: &quot;[retCode]&quot;}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="port">
+                    <description>Port name from Lepton (e.g. 2.12, 2.13)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="protocol">
+                    <description>Port protocol value (e.g. eth-100g, eth-100m, eth-10g, eth-10g-fec237, eth-10g-fec238, eth-1g, eth-25g, eth-40g)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="getConnectedPort" isPublic="true">
+            <steps>
+                <item guid="dc6e079e-4e7c-49d6-ba14-bffb531e6e90" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="a79520b7-50bc-4e0b-966e-94e3b41097ab" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="0716d2bb-4c15-4695-ae28-b2ff95c1d6f8" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(port)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="14d8e187-a02e-43e0-8794-ac0eea66b51e" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>get connected port</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ac7db051-7389-4f23-8642-c5ed5b4da13a" action="command" session="[session]" estimatedStepExecutionTime="0.007">
+                            <command>
+                                <body>lcli</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>promptName()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;prompt2&quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>--- prompt failed; fail test...</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                <completionProperties expectedIdleTime="0.244" expectedIdleTime.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="fbe6a47f-e153-4535-a993-42906f91c60f" action="command" session="[session]" estimatedStepExecutionTime="0.007">
+                            <command>
+                                <body>Chassis</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                <completionProperties expectedIdleTime="0.244" expectedIdleTime.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="dce63a6c-005c-40f7-8563-6385cc1bf339" action="command" session="[session]" estimatedStepExecutionTime="0.038">
+                            <command>
+                                <body>show flow [port]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>Ingress()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>conn_port_lepton</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                <completionProperties expectedIdleTime="3.135" expectedIdleTime.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="6e7ce220-ba12-47b8-8ec6-87a404cbd3ae" action="command" session="[session]" normalOffset="59.412" estimatedStepExecutionTime="0.012">
+                            <command>
+                                <body>Exit</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;Bye!&quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>--- exit not ok; fail test...</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                <completionProperties expectedIdleTime="0.133" expectedIdleTime.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f7352a78-91bd-443f-8820-29e762a4e298" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return result</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="8577b9d1-c57d-40c0-a94d-eae3801ad7eb" action="return">
+                            <command>
+                                <body>[conn_port_lepton]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="port">
+                    <description>Port name from Lepton (e.g. 2.12, 2.13)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+    </procedures>
+</testCase>

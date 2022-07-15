@@ -1,0 +1,373 @@
+<?xml version="1.0"?>
+<testCase version="8.7.0.202112151246">
+    <general>
+        <language>Python</language>
+    </general>
+    <execution>
+        <parameters version="8.7.0.202112151246">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <vlan_id pt:description="Vlan Id for Management"/>
+                    <ip_add pt:description="Network Ip Addr corresponding to Vlan Id"/>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="d6bc23fd-a3fb-447f-8ade-1e1ebf30906f" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="6a59881e-adb5-4684-ac34-9f7ce9e6a4b2" action="eval" skip="true" useFieldsInCommand="false">
+                            <command>
+                                <body>path = &quot;C:/Users/spirent/iTest_8.7_workspace/Utilitaries/configuration/vlans.txt&quot;; print(path)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="4e64495a-959a-4859-993f-ddccb004d7bf" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>path = &quot;C:/Users/spirent/Documents/vlans.txt&quot;; print(path)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="332baff5-e86e-4faa-b4b7-b423b69b6742" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>vlan_id=param(&apos;vlan_id&apos;); print(vlan_id)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="b8e8a81b-c16a-4492-b779-d42dd0c2e6d2" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>ip_add=param(&apos;ip_add&apos;); print(ip_add)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="b0d4fcd7-0baa-414b-bdd4-866d79712958" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Open and read the content of vlan map file</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="none">
+                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                </extractorInfo>
+                                <processorInfo ruleType="message">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                        <message>Open and read the content of vlan map file</message>
+                                        <tag sub="false" defaultValue=""/>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <nestedSteps>
+                        <item guid="b750815f-5d52-487f-a741-90248540c68b" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>f = open(path, &quot;r&quot;); print(f.read())</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>vlan_map</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="b9eaa0f2-6fcf-4f9d-b437-f6fc96654571" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>vlan_map = eval(vlan_map)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="0121ab3c-093b-4cb2-adab-581245126ca1" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Verify current vlan map file content</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="none">
+                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                </extractorInfo>
+                                <processorInfo ruleType="message">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                        <message>Verify current vlan map file content:</message>
+                                        <tag sub="false" defaultValue=""/>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <nestedSteps>
+                        <item guid="efe47fb5-6241-40bc-a67c-1d6ba08c32c1" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(vlan_map)</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>isEmpty()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == &quot;false&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>--- vlan map file is not empty</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
+                                                            <message> --- vlan map file is empty; please update...</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="b9b714a3-2544-43bd-b07b-e6eda8e8fd3f" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>type(vlan_map) !=dict:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="c9e6c12a-4c2c-4605-b2ab-dcd5aaec1916" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>vlan_map={}</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c2272342-e1a0-4deb-bc48-fc43167b9971" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>initial=len(vlan_map)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f4ca720a-ec71-48c3-b098-ab9783c7c2bb" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Add new entry to vlan map file</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="none">
+                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                </extractorInfo>
+                                <processorInfo ruleType="message">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                        <message>Add new entry to vlan map file: {&apos;[vlan_id]&apos;: &apos;[ip_add]&apos;}</message>
+                                        <tag sub="false" defaultValue=""/>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <nestedSteps>
+                        <item guid="d4a5d155-536d-4d28-bf43-4e360f274ff4" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>ip_address=ip_add.split(&quot;/&quot;)[0]; print(ip_address)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="56dbc037-815a-4029-a79a-cc5c66dd6548" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>ip_address_parts=ip_address.split(&quot;.&quot;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="1255fc86-b1de-441d-970a-b32b097bf01a" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>&quot;/&quot; in ip_add and ip_address.count(&quot;.&quot;)==3 and len(ip_address.split(&quot;.&quot;))==4:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="535419a1-5b77-44b5-bc6d-8d49c08343ef" action="if" useFieldsInCommand="false">
+                                    <command>
+                                        <body>0&lt;=int(ip_address_parts[0])&lt;=255 and 0&lt;=int(ip_address_parts[1])&lt;=255 and 0&lt;=int(ip_address_parts[2])&lt;=255 and 0&lt;=int(ip_address_parts[3])&lt;=255:</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="9d489cc2-d4af-4444-9394-7089a318ac4e" action="if" useFieldsInCommand="false">
+                                            <command>
+                                                <body>1&lt;=int(vlan_id)&lt;=4094:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="b3d53513-63ac-4300-a776-e9900334054a" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>vlan_map[vlan_id]=ip_add; print(vlan_map)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="4d0921b0-3dad-4e3c-a67e-3b516ddade2b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Update vlan map file with new vlan id entry and display file content</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="none">
+                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                </extractorInfo>
+                                <processorInfo ruleType="message">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                        <message>Update vlan map file with new vlan id entry and display file content:</message>
+                                        <tag sub="false" defaultValue=""/>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <nestedSteps>
+                        <item guid="7f136701-d3ce-4edb-b2a1-b472e556bfa3" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>f = open(path, &quot;w&quot;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="095196e1-e5c2-4baa-af60-47963fdad807" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>f.write(str(vlan_map))</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="3bda677f-902f-4ac6-9e73-0a8105d5464a" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>f.close()</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="35c42919-1d57-48d1-bcbc-d9e768a59be8" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>f = open(path, &quot;r&quot;); print(f.read())</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>vlan_map</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c4988206-d395-407c-a142-46b623a5d320" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>vlan_map = eval(vlan_map)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e1aaa152-502b-4254-aa0c-fe5ce1b845d0" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(vlan_map)</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>vlan_id in eval(value).keys() and len(eval(value)) == initial and ip_address.count(&quot;.&quot;) ==3 and &quot;/&quot; in ip_add</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>--- vlan id &quot;[vlan_id]&quot; entry is already in the file and it will be updated</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>vlan_id in eval(value).keys() and len(eval(value)) &gt; initial  and ip_address.count(&quot;.&quot;) ==3 and &quot;/&quot; in ip_add</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>--- new vlan id &quot;[vlan_id]&quot; entry mapping was successfully added</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>int(vlan_id)&gt;4094 or ip_address.count(&quot;.&quot;) !=3 or &quot;/&quot; not in  ip_add</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>--- new vlan id &quot;[vlan_id]&quot; entry is not valid; fail test...</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>

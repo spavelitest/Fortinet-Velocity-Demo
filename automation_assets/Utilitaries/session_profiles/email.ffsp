@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<SessionTemplate version="8.7.0.202112151246">
+    <baseApplication>com.fnfr.svt.applications.mail</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.mail.MailSessionProperties">
+        <smtpUrl inherit="false">10.210.254.11</smtpUrl>
+        <ssl inherit="false" defaultValue=""/>
+        <sessionbuilderInitializeAction type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://Utilitaries/</responseLibrary>
+    <formMapLibrary inherit="false">project://Utilitaries/</formMapLibrary>
+    <isReferenceProfile>true</isReferenceProfile>
+    <language>Python</language>
+</SessionTemplate>

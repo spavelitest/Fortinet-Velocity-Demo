@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<ResponseMap version="8.7.0.202112151246">
+    <sampleDictionary>
+        <item name="sample2">
+            <responseBody>Routing table for VRF=0
+S*      0.0.0.0/0 [10/0] via 10.210.107.254, mgmt</responseBody>
+        </item>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>get router info routing-table static</body>
+                </command>
+            </action>
+            <responseBody>Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, D - SHARP,
+       F - PBR, f - OpenFabric,
+       &gt; - selected route, * - FIB route, q - queued route, r - rejected route ^ - HW install failed
+
+S&gt;*  0.0.0.0/0 [10/0] via 10.210.107.254, mgmt, 17:00:19
+
+tester-sw1-FS-30~ # 
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;responseLine&gt;Codes: K - kernel route, C - connected, S - static, R - RIP,&lt;/responseLine&gt;
+    &lt;promptName&gt;prompt2&lt;/promptName&gt;
+    &lt;echo&gt;get router info routing-table static&lt;/echo&gt;
+    &lt;prompt&gt;tester-sw1-FS-30~ # &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="responseLine">
+                    <queryFormatString>.//responseLine</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.3</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="pattern1">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>.*\\s+((\\d+\\.)+\\d+)/\\d+\\s+\\[\\d+/\\d+] via\\s+</regex>
+                            <start>0</start>
+                            <end>26</end>
+                        </item>
+                        <item name="gateway_ip_addr">
+                            <regex>((\\d+\\.)+\\d+)</regex>
+                            <named>true</named>
+                            <start>26</start>
+                            <end>40</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="((\d+\.)+\d+)">one or more of digit and dots</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>,\\s+</regex>
+                            <start>40</start>
+                            <end>42</end>
+                        </item>
+                        <item name="interface">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>42</start>
+                            <end>46</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>S&gt;*  0.0.0.0/0 [10/0] via 10.210.107.254, mgmt</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="get router info routing-table static">
+        <application>
+            <item>com.fnfr.svt.applications.telnet</item>
+        </application>
+    </applicabilityProperties>
+</ResponseMap>

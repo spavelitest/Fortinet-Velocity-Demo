@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<TestCaseCatalog version="8.7.0.202112151246">
+    <testCaseCatalog>
+        <item name="session_profiles/console_qc.fftc">
+            <tcDescriptor version="8.7.0.202112151246">
+                <general>
+                    <notes>Fortigate QuickCalls library (console)</notes>
+                    <sessionClass includeTestCase="true" sessionType="project://Fortigate_console/session_profiles/console.ffsp"/>
+                    <language>Python</language>
+                </general>
+                <procedures>
+                    <item name="consoleLogin" isPublic="true">
+                        <multilineDescription>Console login credentials: admin/fortinet</multilineDescription>
+                    </item>
+                    <item name="checkVdom" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                    </item>
+                    <item name="consoleExit" isPublic="true">
+                        <multilineDescription>Console exit</multilineDescription>
+                    </item>
+                    <item name="setMgmtIpAddress" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="ipAddress">
+                                <description>IP address and subnet mask (syntax = 1.1.1.1/24)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="setGatewayIpAddress" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="ipAddress">
+                                <description>IP address and subnet mask (syntax = 1.1.1.1/24)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="getPortSpeed" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="port">
+                                <description>port name (e.g port32)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="backupConfigTFTP" isPublic="true">
+                        <multilineDescription>Backup configuration to tftp server</multilineDescription>
+                        <arguments>
+                            <item name="config_name">
+                                <description>Config name to be uploaded to tftp
+e.g. backup.cfg</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="tftp">
+                                <description>TFTP ip address</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="restoreConfigTFTP" isPublic="true">
+                        <multilineDescription>Restoring configuration from tftp server</multilineDescription>
+                        <arguments>
+                            <item name="config_name">
+                                <description>Config name to be uploaded from tftp
+e.g. backup.cfg</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="tftp">
+                                <description>TFTP ip address</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="setSplitPort" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="port">
+                                <description>Port name</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="setSpeedPort" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="port">
+                                <description>Port name</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="speed"/>
+                        </arguments>
+                    </item>
+                    <item name="unsetSplitPort" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                    </item>
+                    <item name="getMgmtCurrentInfo" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                    </item>
+                    <item name="configureVdom" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="name">
+                                <description>Name of Virtual Domain</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="assignInterfacesToVdom" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="port">
+                                <description>Port name</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="name">
+                                <description>Name of Virtual Domain</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="configureLag" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="port">
+                                <description>Port name</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="name">
+                                <description>Name of Virtual Domain</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="ports">
+                                <description>List of member ports (e.g port20, port21)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="configureVlanUnderLag" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="vlanPort">
+                                <description>Port name</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="vdomName">
+                                <description>Name of Virtual Domain</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="vlanId">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="ipAddress">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="interfaceLAG">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="getLagDetails" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                    </item>
+                    <item name="deleteLag" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="name">
+                                <description>Name of Virtual Domain</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="assignInterfacesToDefaultVdom" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="port">
+                                <description>Port name</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="deleteVdom" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="name">
+                                <description>Name of Virtual Domain</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="disableVdom" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                    </item>
+                    <item name="enableVdom" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                    </item>
+                    <item name="deleteVlanUnderLag" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="vlanPort">
+                                <description>Port name</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                </procedures>
+            </tcDescriptor>
+        </item>
+    </testCaseCatalog>
+</TestCaseCatalog>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<SessionTemplate version="8.7.0.202112151246">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <TerminalProperties>
+            <stepDefaults>
+                <lineTerminator inherit="false">SLASH_R_SLASH_N</lineTerminator>
+            </stepDefaults>
+            <prompts merge="true">
+                <item name="prompt1" MatchMethod="WILDCARD">
+                    <Content sub="true">*:~$</Content>
+                </item>
+                <item name="prompt2" MatchMethod="WILDCARD">
+                    <Content sub="true">*&gt;</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+        <ipAddress inherit="false">10.210.107.90</ipAddress>
+        <user inherit="false">lepton</user>
+        <password inherit="false" masked="false">Lepton!</password>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://Lepton_ssh/</responseLibrary>
+    <formMapLibrary inherit="false">project://Lepton_ssh/</formMapLibrary>
+    <sessionClassTestCase inherit="false">ssh_qc.fftc</sessionClassTestCase>
+    <isReferenceProfile>true</isReferenceProfile>
+    <language>Python</language>
+</SessionTemplate>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<SessionTemplate version="8.7.0.202112151246">
+    <baseApplication>com.fnfr.svt.applications.telnet</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties">
+        <ipAddress inherit="false">10.210.107.30</ipAddress>
+        <port inherit="false">5008</port>
+        <TerminalProperties>
+            <stepDefaults>
+                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                <completionProperties>
+                    <idleChannel inherit="false">200</idleChannel>
+                </completionProperties>
+            </stepDefaults>
+            <keyboardProperties>
+                <carriageReturn inherit="false">SLASH_R</carriageReturn>
+            </keyboardProperties>
+            <prompts merge="true">
+                <item name="prompt1" MatchMethod="WILDCARD">
+                    <Content sub="true">* login: </Content>
+                </item>
+                <item name="prompt2">
+                    <Content>Password:</Content>
+                </item>
+                <item name="prompt3" MatchMethod="WILDCARD">
+                    <Content sub="true">*&gt;</Content>
+                </item>
+                <item name="prompt4" MatchMethod="WILDCARD">
+                    <Content sub="true">*#</Content>
+                </item>
+                <item name="prompt5" MatchMethod="WILDCARD">
+                    <Content sub="true">*(*)#</Content>
+                </item>
+                <item name="prompt6"/>
+            </prompts>
+        </TerminalProperties>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://Arista_console/</responseLibrary>
+    <formMapLibrary inherit="false">project://Arista_console/</formMapLibrary>
+    <sessionClassTestCase inherit="false">project://Arista_console/session_profiles/console_qc.fftc</sessionClassTestCase>
+    <nickName>arista_console</nickName>
+    <isReferenceProfile>true</isReferenceProfile>
+    <language>Python</language>
+</SessionTemplate>

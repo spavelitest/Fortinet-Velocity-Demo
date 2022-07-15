@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<ResponseMap version="8.7.0.202112151246">
+    <sampleDictionary>
+        <item name="sample1">
+            <responseBody>config system interface
+    edit &quot;port32&quot;
+        set vdom &quot;root&quot;
+        set type physical
+        set mediatype sr4
+        set snmp-index 32
+        set speed 40000full
+    next
+end
+
+</responseBody>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="pattern1">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>\\s+set\\s+speed\\s+</regex>
+                            <start>0</start>
+                            <end>18</end>
+                        </item>
+                        <item name="port_speed">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>18</start>
+                            <end>23</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>full</regex>
+                            <start>23</start>
+                            <end>27</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>        set speed 40000full</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" includeInLibrary="false">
+        <application>
+            <item>com.fnfr.svt.applications.telnet</item>
+        </application>
+    </applicabilityProperties>
+</ResponseMap>

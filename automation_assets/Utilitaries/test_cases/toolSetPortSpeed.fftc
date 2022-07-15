@@ -1,0 +1,394 @@
+<?xml version="1.0"?>
+<testCase version="8.7.0.202112151246">
+    <general>
+        <language>Python</language>
+    </general>
+    <execution>
+        <parameters version="8.7.0.202112151246">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <device_name pt:datatype="device_name"/>
+                    <device_port pt:datatype="device_port"/>
+                    <port_speed pt:datatype="port_speed"/>
+                </parameters>
+            </parameters>
+            <parametersTypes>
+                <item name="device_name">
+                    <items>
+                        <item name="fgt3501F-velocity_107.202"/>
+                    </items>
+                </item>
+                <item name="device_port">
+                    <items>
+                        <item name="port1"/>
+                        <item name="port2"/>
+                        <item name="port3"/>
+                        <item name="port4"/>
+                        <item name="port5"/>
+                        <item name="port6"/>
+                        <item name="port7"/>
+                        <item name="port8"/>
+                        <item name="port9"/>
+                        <item name="port10"/>
+                        <item name="port11"/>
+                        <item name="port12"/>
+                        <item name="port13"/>
+                        <item name="port14"/>
+                        <item name="port15"/>
+                        <item name="port16"/>
+                        <item name="port17"/>
+                        <item name="port18"/>
+                        <item name="port19"/>
+                        <item name="port20"/>
+                        <item name="port21"/>
+                        <item name="port22"/>
+                        <item name="port23"/>
+                        <item name="port24"/>
+                        <item name="port25"/>
+                        <item name="port26"/>
+                        <item name="port27"/>
+                        <item name="port28"/>
+                        <item name="port29"/>
+                        <item name="port30"/>
+                        <item name="port31"/>
+                        <item name="port32"/>
+                        <item name="port33"/>
+                        <item name="port34"/>
+                        <item name="port35"/>
+                        <item name="port36"/>
+                    </items>
+                </item>
+                <item name="port_speed">
+                    <items>
+                        <item name="40000full "/>
+                        <item name="100Gfull "/>
+                    </items>
+                </item>
+            </parametersTypes>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="2a073c88-42d2-49f7-b5b8-d9237e721e88" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="8b098ebf-26b7-48f7-9cad-e8cf11e9111f" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>device_name = param(&apos;device_name&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e4925ab5-14b7-42d4-acd6-7535c5bb2a83" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>device_port = param(&apos;device_port&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="edc3d3b4-5732-4762-a2cc-f5096eec3f52" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>port_speed = param(&apos;port_speed&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="93d40c2b-469f-4797-9f56-63d9c0e3253d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get device details</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="558aaadf-8596-40ff-a5e3-ed14bb7aa6bc" action="open" session="session">
+                            <command>
+                                <body>application:com.fnfr.itest.applications.webservices.restful</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="https://10.210.107.10" url.inherit="false" version="2" version.inherit="false">
+                                    <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Basic" authenticationType.inherit="false" user="superadmin" user.inherit="false" password.masked="false" password="superadmin" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                </sessionProperties>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="0ab508a4-b6b1-44cf-af31-bde44010046b" action="GET" session="session" estimatedStepExecutionTime="0.305">
+                            <command>
+                                <body>velocity/api/inventory/v16/devices?includeProperties=true&amp;searchString=[device_name]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                <query>mapped/Json/devices/item/properties/item[name = &apos;Console&apos;]/value</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>device_console_ip_addr</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                <query>mapped/Json/devices/item/properties/item[name = &apos;Console Port&apos;]/value</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>device_console_port</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/devices/item/id</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>device_id</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="velocity/api/inventory/v16/devices?includeProperties=true&amp;searchString=[device_name]" action.inherit="false"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="6ddbbba5-4aa8-4f75-ab98-fc4ef66b9aee" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Set port speed command on device</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="2ff20674-b947-437a-a65e-03c725cca715" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>open session</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="1f724ed1-0227-42a8-8db2-8da4f0a300e0" action="open" session="fortigate">
+                                    <command>
+                                        <body>project://Fortigate_console/session_profiles/console.ffsp</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                            <completionProperties>
+                                                <completeWhen inherit="false">AUTO_OR_IDLE</completeWhen>
+                                            </completionProperties>
+                                        </stepProperties>
+                                        <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties">
+                                            <ipAddress inherit="false">[device_console_ip_addr]</ipAddress>
+                                            <port inherit="false">[device_console_port]</port>
+                                        </sessionProperties>
+                                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    </applicationProperties>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="3f0cfd8a-85b0-4e0c-8ed8-062c862ec9d0" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>console login and split device port</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="3c0afa90-a29b-4009-8786-51dfd7f1adac" action="command" session="fortigate">
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                                <item guid="cf723ba6-9a03-4cd2-b659-2c2ebb833df1" action="setSpeedPort" session="fortigate" useFieldsInCommand="false">
+                                    <command>
+                                        <body>-port [device_port] -speed [port_speed]</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>retCode()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                    <message>For &quot;[device_name]&quot;: set speed-port command for port &quot;[device_port]&quot; is ok</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                        <actionsWhenFalse>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                    <message>For &quot;[device_name]&quot;: set speed-port command for port &quot;[device_port]&quot; is not ok</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="FailTest">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenFalse>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="bdf308fd-8c4a-4914-910a-2a1a706ad7ee" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>close session</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="62e2986f-8ecb-4e32-9680-5e322de8efcd" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Discover and update port speed</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="065be6b0-3b4a-4552-9088-db552a9e5b21" action="POST" session="session">
+                            <command>
+                                <body>/velocity/api/inventory/v16/device/[device_id]/action?type=discover</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="none">
+                                            <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="message">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                <message> Waiting for discover operation on [device_name]</message>
+                                                <tag sub="false" defaultValue=""/>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" bodyType.inherit="false" action="/velocity/api/inventory/v16/device/[device_id]/action?type=discover" action.inherit="false" includeHttpHeaders.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                        <item guid="e198698a-69ea-4f31-82d6-57fc902d50ba" action="sleep">
+                            <command>
+                                <body>10</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="03cd8ff0-2f19-4c63-8232-65a9afff49d1" action="command" session="fortigate">
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                <query>promptName()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;prompt1&quot; </expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>For &quot;[device_name]&quot;: discover operation was successfully</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
+                                                            <message>--- discover operation is still in progress...</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="RepeatStep">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="100" delayBetweenRepeats="5.0"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                <promptProperties>
+                                    <stepPrompts>
+                                        <item name="prompt1" MatchMethod="WILDCARD">
+                                            <Content sub="true">* login:</Content>
+                                        </item>
+                                        <item name="prompt2" MatchMethod="WILDCARD" TypeOfPrompt="PASSWORD">
+                                            <Content sub="true">* #</Content>
+                                        </item>
+                                        <item name="prompt3">
+                                            <Content>Password:</Content>
+                                        </item>
+                                        <item name="prompt4">
+                                            <Content>--More-- </Content>
+                                            <MoreNextCommand> \\r</MoreNextCommand>
+                                        </item>
+                                        <item name="prompt5">
+                                            <Content>Do you want to continue? (y/n)</Content>
+                                        </item>
+                                        <item name="prompt6" MatchMethod="WILDCARD">
+                                            <Content sub="true">* (*) #</Content>
+                                        </item>
+                                        <item name="prompt7" MatchMethod="WILDCARD">
+                                            <Content sub="true">*:</Content>
+                                        </item>
+                                        <item name="prompt8" MatchMethod="WILDCARD">
+                                            <Content sub="true">*</Content>
+                                        </item>
+                                    </stepPrompts>
+                                </promptProperties>
+                                <completionProperties promptLearnUserResponseTime="60" promptLearnUserResponseTime.inherit="false">
+                                    <completeWhen inherit="false">AUTO_OR_IDLE</completeWhen>
+                                </completionProperties>
+                            </applicationProperties>
+                            <advancedProperties defaultSessionProfile="application:com.fnfr.svt.applications.telnet"/>
+                        </item>
+                        <item guid="397acbd6-7a0d-469f-ace8-747d50bc7cff" action="close" session="session">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="749e0b34-c3f0-4a20-bd35-76501d29a6e8" action="close" session="fortigate">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>

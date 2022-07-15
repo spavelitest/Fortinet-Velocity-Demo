@@ -1,0 +1,2191 @@
+<?xml version="1.0"?>
+<testCase version="8.7.0.202112151246">
+    <general>
+        <sessionClass includeTestCase="true" sessionType="project://Arista_console/session_profiles/console.ffsp"/>
+        <language>Python</language>
+    </general>
+    <execution>
+        <parameters version="8.7.0.202112151246">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <username>admin</username>
+                    <password>fortinet</password>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="4989e95e-8704-4889-aa0b-52d47fea1aa3" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Quickcall library for Arista console connection</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="consoleLogin" isPublic="true">
+            <steps>
+                <item guid="ae4d5f7f-0480-487a-b5d1-5f473f660af6" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e11b0a01-ccbf-4023-bda9-15df47c2f186" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="7df8ee47-126e-41fb-8c3f-ca541e26d198" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>username = param(&apos;username&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c62773e2-bb08-43fd-a021-055d2793342a" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>password = param(&apos;password&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="824f89cd-8bcc-4043-ba7e-7d177c9053d6" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>store the current prompt</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="54b68305-5567-4201-9c62-7b70f8d198d3" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                <completionProperties>
+                                    <idleChannel inherit="false" defaultValue=""/>
+                                    <completeWhen inherit="false">AUTO_OR_IDLE</completeWhen>
+                                </completionProperties>
+                            </applicationProperties>
+                        </item>
+                        <item guid="31f8ec8b-e5f4-4af0-a67f-4f40306660e2" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>promptName()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>current_prompt</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                <completionProperties>
+                                    <completeWhen inherit="false">AUTO_OR_IDLE</completeWhen>
+                                </completionProperties>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="224cbf30-b72d-4fa0-be17-0c5c9e111d5d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>check if already logged in</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4d98e1e6-605e-452b-b0ec-7c3650ff3e8d" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>current_prompt != &quot;prompt3&quot; and current_prompt != &quot;prompt4&quot;  :</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="6e163216-6018-4d00-8212-9faf2b4ef140" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="7995b781-f26c-4449-bdd3-2fa7b8578430" action="command" session="[session]" normalOffset="2.624" estimatedStepExecutionTime="0.066">
+                                    <command>
+                                        <body>[username]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                        <completionProperties>
+                                            <idleChannel inherit="false">1000</idleChannel>
+                                            <completeWhen inherit="false" defaultValue=""/>
+                                        </completionProperties>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="619a1a49-0948-484e-bbdd-91becbbab5b8" action="command" session="[session]" normalOffset="3.696" estimatedStepExecutionTime="0.117">
+                                    <command>
+                                        <body>[password]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                        <completionProperties expectedIdleTime="0.359" expectedIdleTime.inherit="false"/>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="31c916a5-3c8f-45fb-8174-b218a9c75d29" action="command" session="[session]" normalOffset="1.667" estimatedStepExecutionTime="0.08">
+                                    <command>
+                                        <body>enable</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                    </applicationProperties>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="a49b05e3-3046-4493-9455-2f1131377117" action="elif" useFieldsInCommand="false">
+                            <command>
+                                <body>current_prompt == &quot;prompt3&quot;:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="036abe79-d85d-40e8-be67-4cd2524322d9" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="c2e0c298-4ff5-4b26-a74b-59ec23da3e4e" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                                    <command>
+                                        <body>enable</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="57f370e3-5d17-42a5-934a-f12ac3dfcb84" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                    </applicationProperties>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="9112b86a-4326-4be3-a323-d5c9e18bbe4b" action="elif" useFieldsInCommand="false">
+                            <command>
+                                <body>current_prompt == &quot;prompt5&quot;:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="2afc2a9b-7a4d-47a5-9700-b69f5c50d6e5" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="77dbbf7b-6fe3-4939-93ec-af5c64cdf3ed" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                                    <command>
+                                        <body>exit</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="6c841720-778b-4723-a150-c77a3d590175" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                    </applicationProperties>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="a4e8efb8-3e68-49f4-a395-67b838a0aa1c" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="ee6df9c6-2f19-40ca-910e-b4d5a5a4c131" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>already logged in</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="40c6dd20-e163-49c1-899a-5c18497f31d3" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                            </applicationProperties>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="85fc1553-e9e6-4bfc-8b1b-100ea58e547c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="2408878f-4c34-438c-9d9e-a1f85b845662" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: [retCode]}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>Console login credentials: admin/fortinet</multilineDescription>
+            <arguments>
+                <item name="username">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="password">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="consoleExit" isPublic="true">
+            <steps>
+                <item guid="34b01e15-c256-4a12-99d0-6cec1e3ef347" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="5c1b5a83-bfa9-44c3-8ff2-7a864e1b46f6" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="cd05ef83-8dff-4138-adee-0c516a2d787c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>store the current prompt</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="577f4744-f6e8-4641-a81f-6970c9f557a2" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>promptName()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>current_prompt</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="0a193fe0-d989-4903-a098-5463b91617a6" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="9279a445-fc14-4902-bd89-558a17ca1e6b" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>current_prompt != &quot;prompt1&quot;:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="5bc4d28d-8e67-4e12-86a7-e17c30a8943e" action="command" session="[session]">
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                                <item guid="a44ed78a-f688-46da-88bf-fe5b8e3e283c" action="command" session="[session]" normalOffset="2.624" estimatedStepExecutionTime="0.066">
+                                    <command>
+                                        <body>exit</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>promptName()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>value == &quot;prompt1&quot;</expression>
+                                                        <actionsWhenFalse>
+                                                            <item actionId="RepeatStep">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="4" delayBetweenRepeats="1.0"/>
+                                                            </item>
+                                                        </actionsWhenFalse>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                        <completionProperties>
+                                            <idleChannel inherit="false">1000</idleChannel>
+                                            <completeWhen inherit="false" defaultValue=""/>
+                                        </completionProperties>
+                                    </applicationProperties>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="56ce3c21-bd00-4ba1-a926-8100fc1a1d81" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4e8ef468-3b26-421f-af6a-642ca2928938" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: [retCode]}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>Console exit</multilineDescription>
+        </item>
+        <item name="backupConfigTftp" isPublic="true">
+            <steps>
+                <item guid="782f62e1-fc6a-426b-895a-126fdfeb9829" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="7df6c834-ee2f-46e0-807c-22d15ed85982" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="9c8f1e6e-c699-45f7-937b-2ced1c7178ae" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>username = param(&apos;username&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="9bcc4dea-3722-4f47-938c-fccb8e17d131" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>password = param(&apos;password&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="583de217-d4e0-436b-8ad0-29994579fd9c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>console login</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="43c023a7-ac00-4ede-aca6-2cf5f37b437c" action="consoleLogin" session="[session]" normalOffset="1.19" estimatedStepExecutionTime="0.101" useFieldsInCommand="false">
+                            <command>
+                                <body>-username [param(&apos;username&apos;)] -password [param(&apos;password&apos;)]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="425410b8-f42a-4723-9462-4f96f5fce4a1" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send command</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="27f33fb6-0752-487d-83ab-3c72654289cd" action="command" session="[session]">
+                            <command>
+                                <body>copy running-config tftp:[tftp]/[arista_cfg_name] </body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>Copy completed successfully</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="bf9e6223-804f-431c-9007-a64a81d740e6" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4d3d2619-66b1-42ff-b320-a134f148f135" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: [retCode]}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>Backup configuration to tftp server</multilineDescription>
+            <arguments>
+                <item name="tftp">
+                    <description>TFTP ip address</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="arista_cfg_name">
+                    <description>Config name to be uploaded to tftp
+e.g. backup.cfg</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="restoreConfigTftp" isPublic="true">
+            <steps>
+                <item guid="58b0e3f7-f649-4dc3-9c9b-c46cee141b76" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="9ad38384-be7e-4e2e-9fe7-c12d38a18bb0" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="3838e0bf-ba21-4e7a-9694-4dac511ebc86" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>username = param(&apos;username&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="4f69772c-08fb-4de5-a44c-38b133249816" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>password = param(&apos;password&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="e8902305-66f8-41bf-983c-940758251cfe" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>console login</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="837853d2-dd0e-4cd6-9e4d-f13ef01eba7c" action="consoleLogin" session="[session]" normalOffset="1.19" estimatedStepExecutionTime="0.101" useFieldsInCommand="false">
+                            <command>
+                                <body>-username [param(&apos;username&apos;)] -password [param(&apos;password&apos;)]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="c57e63ab-4ede-404b-9bde-bee566143189" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send command</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="04a75806-115b-420f-b243-4bbc09d08962" action="command" session="[session]">
+                            <command>
+                                <body>copy tftp:[tftp]/[arista_cfg_name]  startup-config</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>%</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="3d25c2f1-72f8-4861-b7d3-58061802231c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="3f9ee34e-3f6d-4000-88e0-aaf5d637bf27" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: [retCode]}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>Backup configuration to tftp server</multilineDescription>
+            <arguments>
+                <item name="tftp">
+                    <description>TFTP ip address</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="arista_cfg_name">
+                    <description>Config name to be uploaded to tftp
+e.g. backup.cfg</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="setMgmtIpAddress" isPublic="true">
+            <steps>
+                <item guid="775acaa0-aa30-4651-9e14-2865d624145b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="52c8b99c-453d-4eb1-8148-8a66846fe4ff" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="ca461c58-54e2-459c-ad2f-c8e741bc1dff" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>username = param(&apos;username&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="64971dd9-1165-4fa9-a938-bc783229f21a" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>password = param(&apos;password&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="5c246e55-18eb-4dc6-8219-a983b7de7b49" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>console login</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="55c7b394-3ccc-4061-bd3e-41bf0cbcfd3c" action="consoleLogin" session="[session]" normalOffset="1.19" estimatedStepExecutionTime="0.101" useFieldsInCommand="false">
+                            <command>
+                                <body>-username [param(&apos;username&apos;)] -password [param(&apos;password&apos;)]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="13c40f7e-e1d8-4fa0-bef0-c3c53b416a10" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>configure mgmt interface ip address</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="58b497f3-72dc-4650-b263-e0e02fbea761" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="605e9a06-de59-4a51-b253-b82a7c1001a2" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>config</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="1a13ec94-73d0-480b-832e-691d0295fd5a" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>interface management 1</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="f4d0a3ba-a413-4316-97f2-21a0f58578cc" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>ip address [ipAddress]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>%</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="eafb6176-9f18-4a11-bd60-56fea5afcc80" action="consoleExit" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="31eac9c2-c347-481d-b8c5-444611b6130d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4e613aa8-7bf0-4b6d-bd0b-4740dbb2a1df" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: [retCode]}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>Set management ip address</multilineDescription>
+            <arguments>
+                <item name="ipAddress">
+                    <description>IP address and subnet mask (syntax = 1.1.1.1/24)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="addPortToSingleVlan" isPublic="true">
+            <steps>
+                <item guid="33122c12-09ce-4167-9401-ba629d911e87" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="f7099b23-9a55-4a8b-8975-4badb04e7d19" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="50ac401a-fa4d-4071-9c8d-7d8f9b86c02f" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>username = param(&apos;username&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="f592f184-252f-4023-ac97-17fb621aebfc" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>password = param(&apos;password&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="fa0ad779-48d8-4560-b841-37c07848172e" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>console login</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="94320dee-5b2a-4f56-9c6a-2206437f6f82" action="consoleLogin" session="[session]" normalOffset="1.19" estimatedStepExecutionTime="0.101" useFieldsInCommand="false">
+                            <command>
+                                <body>-username [param(&apos;username&apos;)] -password [param(&apos;password&apos;)]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="effa8519-ba52-4cf0-b0ee-ad1012a352ab" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>add port to single vlan</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="a2fa88f2-430e-4c02-8fbd-179933dc5197" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="bea55f30-ba77-49b7-9a05-76b5eb02c5cd" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>config</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="041eb473-0f76-41a6-9217-7eab79a57cbf" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>interface [port]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>%</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="f5a95ae0-3b16-48c9-a64a-d5bdd6c83468" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>switchport mode access</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="0e8f4b7e-9d21-4a24-aea2-980d2420957b" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>switchport access vlan [vlan]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>%</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="ff12f4c2-f2a8-4518-959e-d88163faa20f" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>switchport trunk native vlan [vlan]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>%</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="b5078f42-a661-48bc-9c17-db12a2030b8c" action="consoleExit" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="32b91756-54b6-42c2-9a84-e85c10534f49" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="89a711c7-28ed-4668-bb4e-a4d3cf716a82" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: [retCode]}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>Set management ip address</multilineDescription>
+            <arguments>
+                <item name="port">
+                    <description>Port name (e.g. Ethernet 33, Ethernet 6/1)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="vlan">
+                    <description>Vlan ID (e.g. 100)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="removePortFromNativeVlan" isPublic="true">
+            <steps>
+                <item guid="2121f733-1b84-4a29-9aba-160e391f10da" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="c88ec027-5cf9-49ae-a84a-f3d945218900" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="2ca734b4-efc5-4baa-9f00-dc824b694dc6" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>username = param(&apos;username&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="a4dada9a-2f5e-41f6-ab67-984d8957de59" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>password = param(&apos;password&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="82c5850f-3407-4d1b-b5e5-8911ff42c47c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>console login</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="6f48fe04-0b25-47f9-a0f1-c3efda0947c8" action="consoleLogin" session="[session]" normalOffset="1.19" estimatedStepExecutionTime="0.101" useFieldsInCommand="false">
+                            <command>
+                                <body>-username [param(&apos;username&apos;)] -password [param(&apos;password&apos;)]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="e4ed75fb-d59e-4ce4-8fd2-87109b385ae5" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>remove port from native vlan</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="cd914898-4c81-43bf-810d-27419a3f6360" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="4d99fe3b-b5c2-40e1-a779-5fb00966119e" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>config</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="4480cd5a-297d-44e4-afe9-810e8bfa8989" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>interface [port]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>%</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="3e6fad53-d5ae-447e-829b-ddecfa29da67" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>no switchport trunk native vlan </body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="e89219e7-a62c-4b36-bbd3-3c3f274df2ff" action="consoleExit" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="af902afb-b9ad-4d53-914c-45390035a964" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="6eea5bca-8569-4479-9389-80ee99680823" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: [retCode]}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>Set management ip address</multilineDescription>
+            <arguments>
+                <item name="port">
+                    <description>Port name (e.g. Ethernet 33, Ethernet 6/1)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="addPortToAllowedVlans" isPublic="true">
+            <steps>
+                <item guid="858f6baf-13e0-4949-808b-66cb5ce0983b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="19fffd97-5d20-4b66-9630-1d39974e3159" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="400ec81c-fde6-41f8-bd52-43d41c63ae99" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>username = param(&apos;username&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="3309aee9-261b-4250-864d-5f457ba85154" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>password = param(&apos;password&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="fe32485a-0e7f-4b25-a9ea-5b003df684ec" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>console login</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="480317b9-828a-470e-b112-6590149672ee" action="consoleLogin" session="[session]" normalOffset="1.19" estimatedStepExecutionTime="0.101" useFieldsInCommand="false">
+                            <command>
+                                <body>-username [param(&apos;username&apos;)] -password [param(&apos;password&apos;)]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="761bc688-6887-4fde-8228-75d19b115b11" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>add port to allowed vlans</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="d868a6ac-c9f4-4b90-9cb5-e087d03c1269" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="9ca59f3f-e483-44fe-8eaa-2c94a36db837" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>config </body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="0a4cb3e8-d565-4c82-9421-1db548859bf0" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>interface [port]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>%</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="0dcfe2b1-9d7b-4f45-ac89-638b56154db1" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>switchport trunk allowed vlan [vlan]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>%</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="2546ab23-e015-4a68-b0ba-b4e3482159ca" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>end</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d83df0fc-2df2-4273-80ab-951d1f111705" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="fa1919b2-638b-4b45-bdfa-ce9dd99c8c95" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: [retCode]}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>Add port to allowed vlans</multilineDescription>
+            <arguments>
+                <item name="port">
+                    <description>Port name (e.g. Ethernet 6/1, Eth 33)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="vlan">
+                    <description>Vlan ID (e.g. 100)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="removePortFromAllowedVlans" isPublic="true">
+            <steps>
+                <item guid="74deb087-c4a4-481b-96f0-0685a0f07eda" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="593f4bcd-6a06-4c3d-b2c0-4808083c4422" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="67385b76-4459-4a5f-abbf-07539f55e78b" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>username = param(&apos;username&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c22f8dd0-1c7a-4cb3-9e21-ac47df9e49f2" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>password = param(&apos;password&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="3eb77f18-72dc-4a61-9aef-8274daece1ac" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>console login</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="7a9d9720-20c2-4d27-a301-735210bbebca" action="consoleLogin" session="[session]" normalOffset="1.19" estimatedStepExecutionTime="0.101" useFieldsInCommand="false">
+                            <command>
+                                <body>-username [param(&apos;username&apos;)] -password [param(&apos;password&apos;)]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="8b28f3ca-5f91-4d06-935d-9da0a81c2156" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>remove port from allowed vlans</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="b70ef866-cbb7-4f2a-96c6-b7f8e741e393" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="2de9ac55-22c4-41d8-95b0-bdb76f800df3" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>config</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="8868bb03-dc4c-47af-b8ac-53d6cb312cce" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>interface [port]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>%</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="e42b847b-e9b2-4766-ada1-99de37b0c8fc" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>no switchport trunk allowed vlan </body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="e732c2dd-dd58-4061-a790-00446e2251d1" action="consoleExit" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="98e4b50e-5b35-4f48-825e-1a0788cdd0a1" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4896ac15-5195-46db-b718-89b098b1e5a1" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: [retCode]}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>Set management ip address</multilineDescription>
+            <arguments>
+                <item name="port">
+                    <description>Port name (e.g. Ethernet 33, Ethernet 6/1)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="setSwitchPortSpeed" isPublic="true">
+            <steps>
+                <item guid="f862d3c2-1847-4e53-ab3a-b51358bf1890" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="fc5232b9-1e46-41b3-a7c0-7ad5f60104e4" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="488f5c67-ecd8-4c92-8cd0-1aceb700a017" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>username = param(&apos;username&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="a64a76e7-4590-4971-a52d-7cc6d216e977" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>password = param(&apos;password&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="7ceb4eca-5fa2-4c0d-9223-e8c69fafa430" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>console login</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="f64476ed-e43a-46bd-82bc-6dafcc9de2d2" action="consoleLogin" session="[session]" normalOffset="1.19" estimatedStepExecutionTime="0.101" useFieldsInCommand="false">
+                            <command>
+                                <body>-username [param(&apos;username&apos;)] -password [param(&apos;password&apos;)]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="8ee0bc92-62af-4341-887a-9825591df15f" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>config switch port speed</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="74edeb53-bf1f-4171-9d05-cf88a04e081f" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="69665f0f-ce8c-413d-923f-b75edbb32299" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>config</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="54d64698-b3a1-483b-99cd-e7e5373ef985" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>interface [port]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>%</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="e49a8ac9-b5ed-4f75-8f30-dd4b2da17812" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>speed [speed]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>%</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="0c5b6c8b-ab52-4685-abfa-3240c98c02cb" action="consoleExit" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="bf5563a0-7a1c-41e6-8a97-c5137416a4b2" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="0f73c43f-b811-4b62-bcc5-5092307d5029" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: [retCode]}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="port">
+                    <description>port name (e.g Eth 6/1)</description>
+                </item>
+                <item name="speed">
+                    <description>speed option (e.g 25g)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="unsetSwitchPortSpeed" isPublic="true">
+            <steps>
+                <item guid="e42c86ae-93e4-47bd-ad70-908f8be4423c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="f8da0727-bf3a-4e17-9374-262957ad0048" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="01fa2c51-3885-498b-97d8-8e7e30827742" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>username = param(&apos;username&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="907c45ea-ea23-4af0-9a1d-84f24db13ce0" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>password = param(&apos;password&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2cbc86f0-2359-4d06-9885-5f94d6e99bcd" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>console login</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="387099c6-3e70-43a6-a84d-ab13b6a73cfa" action="consoleLogin" session="[session]" normalOffset="1.19" estimatedStepExecutionTime="0.101" useFieldsInCommand="false">
+                            <command>
+                                <body>-username [param(&apos;username&apos;)] -password [param(&apos;password&apos;)]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d81692d5-c695-4f23-93c5-3112b2ff3932" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>config switch port speed</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="c59f78c3-7909-44dc-9a4f-5d89f0064661" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="2c7e2b26-f0ac-4805-8db4-ada8d10d2a35" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>config</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="6f220784-575e-4b90-80d6-c3b758bc473e" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>interface [port]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>%</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="dc06d18c-76b4-4575-873e-35e866349e12" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>default speed</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="b6eab6ec-ce16-4c77-8f4c-227b0332a136" action="consoleExit" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f5827650-f1bf-4449-be2c-7471e45caee2" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="c525035f-c741-4f76-a153-c7b46bf66a90" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: [retCode]}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="port">
+                    <description>port name (e.g Eth 6/1)</description>
+                </item>
+            </arguments>
+        </item>
+        <item name="setSwitchPortChannel" isPublic="true">
+            <steps>
+                <item guid="6b69982b-ce0e-417c-b8f9-dfab40680461" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="fad28ce4-c488-49af-a021-91439b1f5865" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="6fd36698-ddd5-4c99-be4b-262533f88ca5" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>username = param(&apos;username&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="0ff76403-c353-4095-9647-d0a2fdb66653" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>password = param(&apos;password&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="cabb174e-ffcd-460c-9f02-646b8afa58af" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>console login</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ff1d07c8-4186-4208-b199-e8ea6ffc4074" action="consoleLogin" session="[session]" normalOffset="1.19" estimatedStepExecutionTime="0.101" useFieldsInCommand="false">
+                            <command>
+                                <body>-username [param(&apos;username&apos;)] -password [param(&apos;password&apos;)]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="996097a2-d503-4447-ba3f-fef8ac52c440" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>config switch port channel</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="51472884-2e1b-41c3-9ce9-937e1e2d19fb" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="d408e1e6-0f3d-450f-b588-01e872681b66" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>config</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="09f66cda-d272-4142-a8fe-c9f195f71d42" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>interface port-channel [number]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>%</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="9bd43023-2056-4a9d-a04b-c825e739ce01" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>interface [interfaces]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>%</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="09c42d1b-5593-4651-b9eb-16c8f44ac9d1" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>channel-group [number] mode [mode]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>%</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="7ae1f5c4-c1eb-471e-a567-8c78f621c2c8" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>exit</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="45fc6891-2bd9-416c-8556-903537f9cf34" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="2be384e4-fea0-4039-88d8-dad3e5671916" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: [retCode]}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="number">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="interfaces">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="mode">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="unsetSwitchPortChannel" isPublic="true">
+            <steps>
+                <item guid="f3848e7e-91e1-4bc6-b1b9-d05091ab3a1a" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="912be6bb-b88b-4956-adbc-752d65af30ae" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="5f3da227-da12-485d-a2bf-8d67aa81074c" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>username = param(&apos;username&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="f0c6b75e-384c-4d20-9f73-0ae4caa8e3ad" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>password = param(&apos;password&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="053fe32b-4410-48ff-88d3-f4c1ce947c2b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>console login</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="09d24618-ab94-441d-a93e-52165532a9d8" action="consoleLogin" session="[session]" normalOffset="1.19" estimatedStepExecutionTime="0.101" useFieldsInCommand="false">
+                            <command>
+                                <body>-username [param(&apos;username&apos;)] -password [param(&apos;password&apos;)]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="89b9237c-8174-41f7-be22-a92636cb3fda" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>delete switch port channel</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="83044999-f4a5-4df9-9120-91835505782a" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="60ad16d1-7b31-4d6a-8cab-7ca28c836a8a" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>config</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="a89110b0-9f9d-4ae9-8ba0-e27e1824a859" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>no interface port-channel [number]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>%</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                        <item guid="8e9d82ee-ee18-467a-9a7d-515a65a54467" action="command" session="[session]" normalOffset="0.999" estimatedStepExecutionTime="0.061">
+                            <command>
+                                <body>exit</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="0d4b68b1-2794-4029-bc43-1e2e42e41a01" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="87972669-60c2-48a3-9ab4-38d95364c557" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: [retCode]}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="number">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+    </procedures>
+</testCase>

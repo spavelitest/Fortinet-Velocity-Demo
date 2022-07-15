@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<SessionTemplate version="8.7.0.202112151246">
+    <baseApplication>com.fnfr.svt.applications.telnet</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties">
+        <ipAddress inherit="false">10.210.107.30</ipAddress>
+        <port inherit="false">5001</port>
+        <TerminalProperties>
+            <stepDefaults>
+                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+            </stepDefaults>
+            <keyboardProperties>
+                <carriageReturn inherit="false">SLASH_R</carriageReturn>
+            </keyboardProperties>
+            <prompts merge="true">
+                <item name="prompt1" MatchMethod="WILDCARD">
+                    <Content sub="true">* login:</Content>
+                </item>
+                <item name="prompt2" MatchMethod="WILDCARD">
+                    <Content>* #</Content>
+                </item>
+                <item name="prompt3">
+                    <Content>Password:</Content>
+                </item>
+                <item name="prompt4">
+                    <Content>--More--</Content>
+                    <MoreNextCommand></MoreNextCommand>
+                </item>
+                <item name="prompt5">
+                    <Content>Do you want to continue? (y/n)</Content>
+                </item>
+                <item name="prompt6" MatchMethod="WILDCARD">
+                    <Content sub="true">* (*) #</Content>
+                </item>
+                <item name="prompt7" TypeOfPrompt="PASSWORD">
+                    <Content>Serial number: FS3E32T419000078</Content>
+                </item>
+                <item name="prompt8" TypeOfPrompt="PASSWORD">
+                    <Content>Booting backup partition : FortiSwitch-3032E v6.4.6,build0470,210211</Content>
+                </item>
+                <item name="prompt9" TypeOfPrompt="PASSWORD">
+                    <Content>Please see details by the command &apos;diagnose debug config-error-log read&apos;</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://Fortiswitch_console/</responseLibrary>
+    <formMapLibrary inherit="false">project://Fortiswitch_console/</formMapLibrary>
+    <sessionClassTestCase inherit="false">console_qc.fftc</sessionClassTestCase>
+    <nickName>console</nickName>
+    <isReferenceProfile>true</isReferenceProfile>
+    <language>Python</language>
+</SessionTemplate>

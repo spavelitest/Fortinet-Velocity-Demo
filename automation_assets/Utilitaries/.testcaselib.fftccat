@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<TestCaseCatalog version="8.7.0.202112151246">
+    <testCaseCatalog>
+        <item name="libraries/utilitaries_procedures.fftc">
+            <tcDescriptor version="8.7.0.202112151246">
+                <general>
+                    <isProcedureLibrary>true</isProcedureLibrary>
+                    <language>Python</language>
+                </general>
+                <procedures>
+                    <item name="getHostAddresses" isPublic="true">
+                        <arguments>
+                            <item name="ip_add_mask">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="getConfigFromVds" isPublic="true">
+                        <arguments>
+                            <item name="config_name">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                </procedures>
+            </tcDescriptor>
+        </item>
+    </testCaseCatalog>
+</TestCaseCatalog>

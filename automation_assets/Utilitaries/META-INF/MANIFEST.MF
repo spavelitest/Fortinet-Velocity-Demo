@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+iTest-Manifest-Version: 1.0
+iTest-Dependent-Project: "Fortigate_console","Lepton_ssh","Arista_consol
+ e","Fortiswitch_console"
+

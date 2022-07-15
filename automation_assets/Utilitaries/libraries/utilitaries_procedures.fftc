@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<testCase version="8.7.0.202112151246">
+    <general>
+        <isProcedureLibrary>true</isProcedureLibrary>
+        <language>Python</language>
+    </general>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="5a97c1a5-17e7-4bfa-a12c-46dea9e48547" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Utilitaries procedures</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2ec0c882-38cd-4120-bf04-e1ced4fa1191" action="call" useFieldsInCommand="false">
+                    <command>
+                        <body>getHostAddresses(&quot;10.10.200.250/24&quot;)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getHostAddresses" isPublic="true">
+            <steps>
+                <item guid="7efd8e36-46e8-4e2c-b2cd-388ab568b5af" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="7eaaff13-155b-43b8-9f31-e470c2d4b9aa" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>import ipaddress</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="6ff70e4c-9042-4892-b770-7473296019c1" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>list_ips=[]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f33d0e8d-1327-4c02-8b08-bc02b674e11c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>get network address</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="d38cfcb8-ab6e-46b6-b13b-3f071f6d0600" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>ip_add=ipaddress.ip_interface(ip_add_mask)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="dd9f5c07-a8ad-4e8d-9111-a28f7acc2459" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>mask = ip_add_mask.split(&quot;/&quot;)[1]; print(mask)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="f63b4f62-f36f-45d0-94d3-04b2275b7b24" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>network_address=ip_add.network</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="b23b6f5f-8f5f-4527-9780-0012b18fcad0" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>get host addresses</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="bd7ed588-df17-42ea-89f8-d44c5dd4a4d8" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>ip in network_address.hosts():</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="21befcdb-9c17-4de0-8c5f-013e25531036" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>list_ips.append(str(ip)+&quot;/&quot;+str(mask))</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="49545f1b-7ae6-429d-b273-085d0f3a863a" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>ip_add_mask.split(&quot;/&quot;)[1] == &quot;31&quot; or ip_add_mask.split(&quot;/&quot;)[1] == &quot;32&quot;:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="fdde5c94-e72f-4f39-852c-942764d39254" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>list_ips=[]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="5c6ae971-97c9-4dc6-8055-e941706def29" action="return">
+                            <command>
+                                <body>[list_ips]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="ip_add_mask">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="getConfigFromVds" isPublic="true">
+            <steps>
+                <item guid="914f2559-5362-48e8-bbf7-968a82ecdcfd" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ddeec02e-e4ed-41cb-a454-47a2fb8fc0eb" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(config_name)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="7075eb75-fc29-44b8-922e-d09fdd99fbc5" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>open session to vds and download config name</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ceb3b62b-3bb6-4800-86c1-d80dc6247dc6" action="open" session="vds">
+                            <command>
+                                <body>application:com.fnfr.itest.applications.webservices.restful</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="10.210.107.20" url.inherit="false" version="2" version.inherit="false">
+                                    <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Basic" authenticationType.inherit="false" user="admin" user.inherit="false" password.masked="false" password="admin" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                </sessionProperties>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="2c2c7800-f612-4a44-88bd-465156e0ab42" action="GET" session="vds">
+                            <command>
+                                <body>https://10.210.107.20/tftp/[config_name]?mode=download&amp;id=[config_name]</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>config_content</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="https://10.210.107.20/tftp/[config_name]?mode=download&amp;id=[config_name]" action.inherit="false"/>
+                        </item>
+                        <item guid="5deb1527-216f-42bf-bf5e-9e9cfdf411e7" action="close" session="vds" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="66100cdd-6899-477f-a40d-e46f029f0cf3" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return config content</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="39421b5b-ab4f-45e4-bf3e-1dbc35becefe" action="return">
+                            <command>
+                                <body>[config_content]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="config_name">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+    </procedures>
+</testCase>

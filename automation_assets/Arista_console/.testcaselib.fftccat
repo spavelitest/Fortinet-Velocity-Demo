@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<TestCaseCatalog version="8.7.0.202112151246">
+    <testCaseCatalog>
+        <item name="session_profiles/console_qc.fftc">
+            <tcDescriptor version="8.7.0.202112151246">
+                <general>
+                    <sessionClass includeTestCase="true" sessionType="project://Arista_console/session_profiles/console.ffsp"/>
+                    <language>Python</language>
+                </general>
+                <procedures>
+                    <item name="consoleLogin" isPublic="true">
+                        <multilineDescription>Console login credentials: admin/fortinet</multilineDescription>
+                        <arguments>
+                            <item name="username">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="password">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="consoleExit" isPublic="true">
+                        <multilineDescription>Console exit</multilineDescription>
+                    </item>
+                    <item name="backupConfigTftp" isPublic="true">
+                        <multilineDescription>Backup configuration to tftp server</multilineDescription>
+                        <arguments>
+                            <item name="tftp">
+                                <description>TFTP ip address</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="arista_cfg_name">
+                                <description>Config name to be uploaded to tftp
+e.g. backup.cfg</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="restoreConfigTftp" isPublic="true">
+                        <multilineDescription>Backup configuration to tftp server</multilineDescription>
+                        <arguments>
+                            <item name="tftp">
+                                <description>TFTP ip address</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="arista_cfg_name">
+                                <description>Config name to be uploaded to tftp
+e.g. backup.cfg</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="setMgmtIpAddress" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="ipAddress">
+                                <description>IP address and subnet mask (syntax = 1.1.1.1/24)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="addPortToSingleVlan" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="port">
+                                <description>Port name (e.g. Ethernet 33, Ethernet 6/1)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="vlan">
+                                <description>Vlan ID (e.g. 100)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="removePortFromNativeVlan" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="port">
+                                <description>Port name (e.g. Ethernet 33, Ethernet 6/1)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="addPortToAllowedVlans" isPublic="true">
+                        <multilineDescription>Add port to allowed vlans</multilineDescription>
+                        <arguments>
+                            <item name="port">
+                                <description>Port name (e.g. Ethernet 6/1, Eth 33)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="vlan">
+                                <description>Vlan ID (e.g. 100)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="removePortFromAllowedVlans" isPublic="true">
+                        <multilineDescription>Set management ip address</multilineDescription>
+                        <arguments>
+                            <item name="port">
+                                <description>Port name (e.g. Ethernet 33, Ethernet 6/1)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="setSwitchPortSpeed" isPublic="true">
+                        <arguments>
+                            <item name="port">
+                                <description>port name (e.g Eth 6/1)</description>
+                            </item>
+                            <item name="speed">
+                                <description>speed option (e.g 25g)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="unsetSwitchPortSpeed" isPublic="true">
+                        <arguments>
+                            <item name="port">
+                                <description>port name (e.g Eth 6/1)</description>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="setSwitchPortChannel" isPublic="true">
+                        <arguments>
+                            <item name="number">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="interfaces">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="mode">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="unsetSwitchPortChannel" isPublic="true">
+                        <arguments>
+                            <item name="number">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                </procedures>
+            </tcDescriptor>
+        </item>
+    </testCaseCatalog>
+</TestCaseCatalog>

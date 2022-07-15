@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<SessionTemplate version="8.7.0.202112151246">
+    <baseApplication>com.fnfr.svt.applications.telnet</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties">
+        <ipAddress inherit="false">10.210.107.30</ipAddress>
+        <port inherit="false">5004</port>
+        <negOpt inherit="false" defaultValue=""/>
+        <TerminalProperties>
+            <stepDefaults>
+                <completionProperties>
+                    <idleChannel inherit="false">200</idleChannel>
+                </completionProperties>
+            </stepDefaults>
+            <captureProperties>
+                <commandBreakChars inherit="false">
+                    <item>[char Ctrl-C]</item>
+                </commandBreakChars>
+                <commandCompletionchars inherit="false">
+                    <item>t</item>
+                    <item>n</item>
+                </commandCompletionchars>
+            </captureProperties>
+            <keyboardProperties>
+                <carriageReturn inherit="false">SLASH_R</carriageReturn>
+            </keyboardProperties>
+            <prompts merge="true">
+                <item name="prompt1" MatchMethod="WILDCARD">
+                    <Content sub="true">* login:</Content>
+                </item>
+                <item name="prompt2" MatchMethod="WILDCARD" TypeOfPrompt="PASSWORD">
+                    <Content sub="true">* #</Content>
+                </item>
+                <item name="prompt3">
+                    <Content>Password:</Content>
+                </item>
+                <item name="prompt4">
+                    <Content>--More-- </Content>
+                    <MoreNextCommand> \\r</MoreNextCommand>
+                </item>
+                <item name="prompt5">
+                    <Content>Do you want to continue? (y/n)</Content>
+                </item>
+                <item name="prompt6" MatchMethod="WILDCARD">
+                    <Content sub="true">* (*) #</Content>
+                </item>
+                <item name="prompt7" TypeOfPrompt="PASSWORD">
+                    <Content>FortiGate-3501F # exit</Content>
+                </item>
+                <item name="prompt8" TypeOfPrompt="PASSWORD">
+                    <Content>.........</Content>
+                </item>
+                <item name="prompt9" TypeOfPrompt="PASSWORD">
+                    <Content>Enter C,R,T,F,B,I,Q,or H:</Content>
+                </item>
+                <item name="prompt10" TypeOfPrompt="PASSWORD">
+                    <Content>System is starting...</Content>
+                </item>
+                <item name="prompt11" TypeOfPrompt="PASSWORD">
+                    <Content>fgt101F-velocity # config system global</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://Fortigate_console/</responseLibrary>
+    <formMapLibrary inherit="false">project://Fortigate_console/</formMapLibrary>
+    <sessionClassTestCase inherit="false">project://Fortigate_console/session_profiles/console_qc.fftc</sessionClassTestCase>
+    <nickName>console</nickName>
+    <isReferenceProfile>true</isReferenceProfile>
+    <language>Python</language>
+</SessionTemplate>

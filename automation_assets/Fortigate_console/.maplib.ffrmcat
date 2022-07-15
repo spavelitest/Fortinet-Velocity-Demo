@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ResponseMapCatalog version="8.7.0.202112151246">
+    <mapCatalog>
+        <item name="response_maps/get_router_info_routing_table_static.ffrm">
+            <applicability actionType="command" command="get router info routing-table static">
+                <application>
+                    <item>com.fnfr.svt.applications.telnet</item>
+                </application>
+            </applicability>
+        </item>
+        <item name="response_maps/interface_show_full-configuration.ffrm">
+            <applicability actionType="command" command="show full-configuration">
+                <application>
+                    <item>com.fnfr.svt.applications.telnet</item>
+                </application>
+            </applicability>
+        </item>
+    </mapCatalog>
+</ResponseMapCatalog>

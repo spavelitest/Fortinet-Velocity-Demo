@@ -1,0 +1,1566 @@
+<?xml version="1.0"?>
+<testCase version="8.7.0.202112151246">
+    <general>
+        <language>Python</language>
+    </general>
+    <execution>
+        <parameters version="8.7.0.202112151246">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <default_vlan pt:description="Default Vlan ID (e.g. 1020)">1020</default_vlan>
+                    <gateway_ip_addr pt:description="Default Gateway ipAddress">10.210.107.254</gateway_ip_addr>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="4f268ab5-0b7b-41a0-8ff6-4d1a6c89887b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="fa9449a1-e4e3-4832-b0d7-4a8bccc7e071" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>default settings</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="dd1ad244-2ac9-4e56-be23-a434b2fa4d07" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>reservationId = velocity(&quot;reservationId&quot;); print(reservationId)</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="none">
+                                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="message">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                        <message>Found reservationId: &quot;[reservationId]&quot;</message>
+                                                        <tag sub="false" defaultValue=""/>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="eed438d8-3e02-4c53-bd75-11f7144d4810" action="eval" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>reservationId = &quot;9d87bab5-e6c0-4f04-a717-c70cfa251635&quot;</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="none">
+                                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="message">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                        <message>Found reservationId: &quot;[reservationId]&quot;</message>
+                                                        <tag sub="false" defaultValue=""/>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="13a9e3c0-3354-405d-93f0-d313ea44652a" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>tag_name = &quot;optionSetMgmtIpAddr&quot;; print(tag_name)</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="none">
+                                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="message">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                        <message>--- device tag name to search: &quot;[tag_name]&quot;</message>
+                                                        <tag sub="false" defaultValue=""/>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="22530bdd-1dd0-4dbd-b74e-1de3c7daeecc" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>default_vlan = param(&apos;default_vlan&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="e2d6dc7f-d434-4992-934e-dbeb9e1ad592" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>gateway_ip_addr = param(&apos;gateway_ip_addr&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="13da0c75-5082-418a-a553-4c901c0bd849" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>initialization dicts for restoring vlan config</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="403e8e6e-e235-41cc-b932-1e1cb614b05e" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>device_ports_dict={}</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="c529b5f2-0b18-4d92-b6d8-e1404fa8678d" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>device_mgmt_dict={}</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="e2f939b1-54b5-426f-89da-aca558cbb458" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>mgmt_conn_list=[]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="5b2682d4-b137-4ac9-a621-96b929e631f0" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>conn_prop_devices_name_list=[]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="970af0cf-12cb-41d6-9407-b4f86e757dd0" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>conn_prop_devices_port_list=[]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="31197687-2d70-413c-8822-d3455c2f509d" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>mgmt_port_id_list=[]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="87ecb1f8-51e1-4abb-93db-905c32912409" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>mgmt_conn_ports_dict={}</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="f6397bc3-cfbc-41a5-ba35-ce3b5e5f9b43" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>mgmt_port_names_list=[]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="9939c651-f6cb-4d32-a009-f5e9a226dd82" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>mgmt_names=[]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="7a01d9ee-2c03-4534-b544-33b0048593c8" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>mgmt_console_ip_add_list=[]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="1a9b5b3b-989b-4108-9bf6-5346a80955a2" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>mgmt_console_port_list=[]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="b93eea08-5b05-4285-b2ae-d1f7a9831c6b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Open sessions</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="f5e176bc-5215-47fb-9599-74e9275f9037" action="open" session="velocity" useFieldsInCommand="false">
+                            <command>
+                                <body>application:com.fnfr.itest.applications.webservices.restful</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="https://10.210.107.10" url.inherit="false" version="2" version.inherit="false">
+                                    <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Basic" authenticationType.inherit="false" user="superadmin" user.inherit="false" password.masked="false" password="superadmin" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                </sessionProperties>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ae8de89e-f417-4ae3-889f-fe31b0c6db3d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get all devices from reservation</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="0fa5c8eb-7ac3-4edc-9fab-79a9e0785742" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                            <command>
+                                <body>/velocity/api/reservation/v18/reservation/[reservationId]/resources</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/items/*[type = &quot;DEVICE&quot;]/inventoryResourceId</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>reservation_devices_ids</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/reservation/v18/reservation/[reservationId]/resources" action.inherit="false"/>
+                        </item>
+                        <item guid="7f1d6d55-e7ed-4be6-906c-9fb8ecac44d8" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>type(reservation_devices_ids)</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>class()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>type</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="fcb1b6d5-bcd7-4ce3-a010-b3ca387044aa" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>str(type) == &quot;str&quot;:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="c5f3b66f-e6d9-45f1-9ba6-0ed1444d2074" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>reservation_devices_list = reservation_devices_ids.split(&quot; &quot;); print(reservation_devices_list)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e47691c2-7f93-4eef-ad2b-57b37a36dd40" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="feeb5581-bcc2-479b-a62a-92a1bd84d25f" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>reservation_devices_list = list(reservation_devices_ids); print(reservation_devices_list)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="782dddc0-3ee0-4132-81fc-4d6fdd5d864e" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Restore default management configuration for devices w/ predefined tag value</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="43b4b4e0-13b9-4c02-979c-f1463e6e085c" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>device_id in reservation_devices_list:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="b5b28f4a-0634-495d-909e-94593b330f9e" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                    <command>
+                                        <body>/velocity/api/inventory/v16/device/[device_id]</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>mapped/Json/tags</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>device_tags</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>mapped/Json/properties/item[name = &quot;Console&quot;]/value</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>console</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>mapped/Json/properties/item[name = &quot;Console Port&quot;]/value</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>console_port</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>mapped/Json/properties/item[name = &quot;username&quot;]/value</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>username</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>mapped/Json/properties/item[name = &quot;password&quot;]/value</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>password</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>mapped/Json/properties/item[name = &quot;Dynamic ipAddress&quot;]/value</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>optionIpAdd</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>mapped/Json/name</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>device_name</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/inventory/v16/device/[device_id]" action.inherit="false"/>
+                                </item>
+                                <item guid="a052d9a3-3716-451e-ab53-1d9042f2da87" action="if" useFieldsInCommand="false">
+                                    <command>
+                                        <body>device_tags != &quot;&quot;:</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="810c30a3-66be-4f98-9f4e-3028b0352416" action="if" useFieldsInCommand="false">
+                                            <command>
+                                                <body>re.search(&quot;optionSetMgmtIpAddr&quot;, device_tags):</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="5181c092-6fc2-4112-b0d1-159466b41a65" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>build mgmt ip address value based on gateway address and device name</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="f9ea6fdc-7e47-445d-936e-769c84ea18b6" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>mgmt_ip_addr = str(gateway_ip_addr).split(&quot;.&quot;)[0]+&quot;.&quot;+str(gateway_ip_addr).split(&quot;.&quot;)[1]+&quot;.&quot;+str(device_name.split(&quot;_&quot;)[1])+&quot;/24&quot;; print(mgmt_ip_addr)</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="51476475-73fe-446d-8202-981c9b538e72" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>if required restore management ip address and gateway for device_id</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="70c83f84-58f5-4899-9743-b1857db7072f" action="open" session="console">
+                                                            <command>
+                                                                <body>project://Fortigate_console/session_profiles/console.ffsp</body>
+                                                            </command>
+                                                            <postProcessing>
+                                                                <analysisRules>
+                                                                    <item>
+                                                                        <extractorInfo extractorType="none">
+                                                                            <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                                        </extractorInfo>
+                                                                        <processorInfo ruleType="message">
+                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                                                <message>For device name &quot;[device_name]&quot;:</message>
+                                                                                <tag sub="false" defaultValue=""/>
+                                                                            </ruleProperties>
+                                                                        </processorInfo>
+                                                                    </item>
+                                                                </analysisRules>
+                                                            </postProcessing>
+                                                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                                                <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                                                    <completionProperties>
+                                                                        <completeWhen inherit="false">AUTO_OR_IDLE</completeWhen>
+                                                                    </completionProperties>
+                                                                </stepProperties>
+                                                                <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties">
+                                                                    <ipAddress inherit="false">[console]</ipAddress>
+                                                                    <port inherit="false">[console_port]</port>
+                                                                </sessionProperties>
+                                                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </applicationProperties>
+                                                        </item>
+                                                        <item guid="ff4c5249-96d1-4549-a597-7e07c46d8bb0" action="consoleLogin" session="console" useFieldsInCommand="false">
+                                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                        </item>
+                                                        <item guid="646af0fe-2cb5-406e-a3ae-7cc4f08461d9" action="getMgmtCurrentInfo" session="console" useFieldsInCommand="false">
+                                                            <postProcessing>
+                                                                <analysisRules>
+                                                                    <item>
+                                                                        <extractorInfo extractorType="query">
+                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                <query>mgmt_ip_addr()</query>
+                                                                            </extractorProperties>
+                                                                        </extractorInfo>
+                                                                        <processorInfo ruleType="store">
+                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                <storageLocation>current_mgmt_ip_addr</storageLocation>
+                                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                            </ruleProperties>
+                                                                        </processorInfo>
+                                                                    </item>
+                                                                    <item>
+                                                                        <extractorInfo extractorType="query">
+                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                <query>gateway_ip_addr()</query>
+                                                                            </extractorProperties>
+                                                                        </extractorInfo>
+                                                                        <processorInfo ruleType="store">
+                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                <storageLocation>current_gateway_ip_addr</storageLocation>
+                                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                            </ruleProperties>
+                                                                        </processorInfo>
+                                                                    </item>
+                                                                </analysisRules>
+                                                            </postProcessing>
+                                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                        </item>
+                                                        <item guid="21cd8951-3766-4a06-8f49-b3ff19ed34a6" action="if" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>str(current_mgmt_ip_addr) != str(mgmt_ip_addr).split(&quot;/&quot;)[0]:</body>
+                                                            </command>
+                                                            <nestedSteps>
+                                                                <item guid="be67b75e-72af-4c18-a0c8-e5f58e5bb89e" action="setMgmtIpAddress" session="console" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>-ipAddress [mgmt_ip_addr]</body>
+                                                                    </command>
+                                                                    <postProcessing>
+                                                                        <analysisRules>
+                                                                            <item>
+                                                                                <extractorInfo extractorType="query">
+                                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                        <query>retCode()</query>
+                                                                                    </extractorProperties>
+                                                                                </extractorInfo>
+                                                                                <processorInfo ruleType="assert">
+                                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                                        <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                                                        <actionsWhenTrue>
+                                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                                                    <message>--- successfully restored management ip address: [mgmt_ip_addr]</message>
+                                                                                                </actionProperties>
+                                                                                            </item>
+                                                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                            </item>
+                                                                                        </actionsWhenTrue>
+                                                                                        <actionsWhenFalse>
+                                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                                                    <message>--- unsuccessfuly restored management ip address; fail test...</message>
+                                                                                                </actionProperties>
+                                                                                            </item>
+                                                                                            <item actionId="FailTest">
+                                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                            </item>
+                                                                                        </actionsWhenFalse>
+                                                                                    </ruleProperties>
+                                                                                </processorInfo>
+                                                                            </item>
+                                                                        </analysisRules>
+                                                                    </postProcessing>
+                                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="bc63d1e0-8392-41f4-b556-5e4375d6a042" action="else" useFieldsInCommand="false">
+                                                            <nestedSteps>
+                                                                <item guid="8baf60f5-d811-47a6-b889-72a9a86ee3e9" action="message" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>Information:--- found management ip address set to default value: [current_mgmt_ip_addr] </body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                                                        <message inherit="false">--- found management ip address set to default value: [current_mgmt_ip_addr] </message>
+                                                                    </applicationProperties>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="a3936e8f-55db-4460-bf1b-8e8feef9b724" action="if" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>str(current_gateway_ip_addr) != str(gateway_ip_addr):</body>
+                                                            </command>
+                                                            <nestedSteps>
+                                                                <item guid="f8473548-8682-4bfa-ac8e-6f403483ce6e" action="setGatewayIpAddress" session="console" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>-ipAddress [gateway_ip_addr]</body>
+                                                                    </command>
+                                                                    <postProcessing>
+                                                                        <analysisRules>
+                                                                            <item>
+                                                                                <extractorInfo extractorType="query">
+                                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                        <query>retCode()</query>
+                                                                                    </extractorProperties>
+                                                                                </extractorInfo>
+                                                                                <processorInfo ruleType="assert">
+                                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                                        <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                                                        <actionsWhenTrue>
+                                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                                                    <message>--- successfully restored gateway ip address: [gateway_ip_addr]</message>
+                                                                                                </actionProperties>
+                                                                                            </item>
+                                                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                            </item>
+                                                                                        </actionsWhenTrue>
+                                                                                        <actionsWhenFalse>
+                                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                                                    <message>--- unsuccessful restored gateway ip address; fail test...</message>
+                                                                                                </actionProperties>
+                                                                                            </item>
+                                                                                            <item actionId="FailTest">
+                                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                            </item>
+                                                                                        </actionsWhenFalse>
+                                                                                    </ruleProperties>
+                                                                                </processorInfo>
+                                                                            </item>
+                                                                        </analysisRules>
+                                                                    </postProcessing>
+                                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="8789cbbb-3eae-4ea3-903d-736b75d72e15" action="else" useFieldsInCommand="false">
+                                                            <nestedSteps>
+                                                                <item guid="a012f1c5-1613-46c0-914f-898c52d6bca4" action="message" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>Information:--- found gateway ip address set to default value: [current_gateway_ip_addr] </body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                                                        <message inherit="false">--- found gateway ip address set to default value: [current_gateway_ip_addr] </message>
+                                                                    </applicationProperties>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="fcdec201-e2f4-4673-b7d7-e77d2d18cd51" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>velocity auto-discover action</body>
+                                                            </command>
+                                                            <nestedSteps>
+                                                                <item guid="843ff7be-da1d-4da8-9a7d-b7161594776a" action="POST" session="velocity">
+                                                                    <command>
+                                                                        <body>/velocity/api/inventory/v16/device/[device_id]/action?type=discover</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" bodyType.inherit="false" action="/velocity/api/inventory/v16/device/[device_id]/action?type=discover" action.inherit="false" includeHttpHeaders.inherit="false">
+                                                                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                                                        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                                            <memberClasses>
+                                                                                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                                            </memberClasses>
+                                                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry"/>
+                                                                        </httpHeader>
+                                                                    </applicationProperties>
+                                                                </item>
+                                                                <item guid="4f9ce441-b746-48f1-b6ac-1240bc5b52d3" action="sleep">
+                                                                    <command>
+                                                                        <body>10</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="dc878c84-1292-4f8d-816d-c77648b1dcaa" action="command" session="console">
+                                                                    <postProcessing>
+                                                                        <analysisRules>
+                                                                            <item>
+                                                                                <extractorInfo extractorType="query">
+                                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                                        <query>promptName()</query>
+                                                                                    </extractorProperties>
+                                                                                </extractorInfo>
+                                                                                <processorInfo ruleType="assert">
+                                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                                        <expression>str(value) == &quot;prompt1&quot; </expression>
+                                                                                        <actionsWhenTrue>
+                                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                                                    <message>For &quot;[device_name]&quot;: discover operation was successfully</message>
+                                                                                                </actionProperties>
+                                                                                            </item>
+                                                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                            </item>
+                                                                                        </actionsWhenTrue>
+                                                                                        <actionsWhenFalse>
+                                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
+                                                                                                    <message>--- discover operation is still in progress...</message>
+                                                                                                </actionProperties>
+                                                                                            </item>
+                                                                                            <item actionId="RepeatStep">
+                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="100" delayBetweenRepeats="5.0"/>
+                                                                                            </item>
+                                                                                        </actionsWhenFalse>
+                                                                                    </ruleProperties>
+                                                                                </processorInfo>
+                                                                            </item>
+                                                                        </analysisRules>
+                                                                    </postProcessing>
+                                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                                                        <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                                                        <promptProperties>
+                                                                            <stepPrompts>
+                                                                                <item name="prompt1" MatchMethod="WILDCARD">
+                                                                                    <Content sub="true">* login:</Content>
+                                                                                </item>
+                                                                                <item name="prompt2" MatchMethod="WILDCARD" TypeOfPrompt="PASSWORD">
+                                                                                    <Content sub="true">* #</Content>
+                                                                                </item>
+                                                                                <item name="prompt3">
+                                                                                    <Content>Password:</Content>
+                                                                                </item>
+                                                                                <item name="prompt4">
+                                                                                    <Content>--More-- </Content>
+                                                                                    <MoreNextCommand> \\r</MoreNextCommand>
+                                                                                </item>
+                                                                                <item name="prompt5">
+                                                                                    <Content>Do you want to continue? (y/n)</Content>
+                                                                                </item>
+                                                                                <item name="prompt6" MatchMethod="WILDCARD">
+                                                                                    <Content sub="true">* (*) #</Content>
+                                                                                </item>
+                                                                                <item name="prompt7" MatchMethod="WILDCARD">
+                                                                                    <Content sub="true">*:</Content>
+                                                                                </item>
+                                                                                <item name="prompt8" MatchMethod="WILDCARD">
+                                                                                    <Content sub="true">*</Content>
+                                                                                </item>
+                                                                            </stepPrompts>
+                                                                        </promptProperties>
+                                                                        <completionProperties promptLearnUserResponseTime="60" promptLearnUserResponseTime.inherit="false">
+                                                                            <completeWhen inherit="false">AUTO_OR_IDLE</completeWhen>
+                                                                        </completionProperties>
+                                                                    </applicationProperties>
+                                                                    <advancedProperties defaultSessionProfile="application:com.fnfr.svt.applications.telnet"/>
+                                                                </item>
+                                                                <item guid="2e5e5935-7037-482c-b02d-70707f3f790c" action="consoleExit" session="console" useFieldsInCommand="false">
+                                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                                    <advancedProperties defaultSessionProfile="project://Fortigate_console/session_profiles/console.ffsp"/>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="af9296d3-ef8a-4911-b776-0ba713e51d99" action="consoleExit" session="console" useFieldsInCommand="false">
+                                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                        </item>
+                                                        <item guid="a3f4f760-408a-49e6-ae9a-71a3964f5ef2" action="close" session="console" useFieldsInCommand="false">
+                                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="70d2d4cb-08d3-4fab-87e0-421f07b2be05" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>restore default vlan config on management switch</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="5bcfb696-94bb-42b7-ac43-243a7d8014b6" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>get device connection port name on Mgmt side </body>
+                                                            </command>
+                                                            <nestedSteps>
+                                                                <item guid="28dff12b-74a8-4b77-bfea-e9ee92c9eedd" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                                                    <command>
+                                                                        <body>/velocity/api/inventory/v16/device/[device_id]/ports</body>
+                                                                    </command>
+                                                                    <postProcessing>
+                                                                        <analysisRules>
+                                                                            <item>
+                                                                                <extractorInfo extractorType="query">
+                                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                        <query>mapped/Json/ports/item[*]/name</query>
+                                                                                    </extractorProperties>
+                                                                                </extractorInfo>
+                                                                                <processorInfo ruleType="store">
+                                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                        <storageLocation>device_port_names</storageLocation>
+                                                                                        <storeInAList>true</storeInAList>
+                                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                                    </ruleProperties>
+                                                                                </processorInfo>
+                                                                            </item>
+                                                                            <item>
+                                                                                <extractorInfo extractorType="query">
+                                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                        <query>mapped/Json/ports/item[*]/id</query>
+                                                                                    </extractorProperties>
+                                                                                </extractorInfo>
+                                                                                <processorInfo ruleType="store">
+                                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                        <storageLocation>device_port_ids</storageLocation>
+                                                                                        <storeInAList>true</storeInAList>
+                                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                                    </ruleProperties>
+                                                                                </processorInfo>
+                                                                            </item>
+                                                                        </analysisRules>
+                                                                    </postProcessing>
+                                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/inventory/v16/device/[device_id]/ports" action.inherit="false"/>
+                                                                </item>
+                                                                <item guid="5a07c292-5fad-43aa-b4fa-ab1de5bb3e56" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>device_ports_dict=dict(zip(device_port_ids,device_port_names))</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="1a2958ad-9d20-47a3-83c2-12769ab61663" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>print(device_ports_dict)</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="8802c97e-ebf2-497c-92f0-f4b17560f610" action="for" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>port_id, port_name in device_ports_dict.items():</body>
+                                                                    </command>
+                                                                    <nestedSteps>
+                                                                        <item guid="5b37f720-33a3-45dd-a193-26202d6f5e30" action="if" useFieldsInCommand="false">
+                                                                            <command>
+                                                                                <body>port_name ==&quot;mgmt&quot; or port_name ==&quot;mgmt1&quot;:</body>
+                                                                            </command>
+                                                                            <nestedSteps>
+                                                                                <item guid="cba92f9f-da4a-49aa-a270-7272ddcce931" action="eval" useFieldsInCommand="false">
+                                                                                    <command>
+                                                                                        <body>device_mgmt_dict[port_id] = port_name</body>
+                                                                                    </command>
+                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                </item>
+                                                                            </nestedSteps>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                        </item>
+                                                                    </nestedSteps>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="29f2210f-a0b0-432a-9dcc-6347b9d2a6bd" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>print(device_mgmt_dict)</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="33634939-df5d-4d56-8ce4-fb0aa2b46681" action="for" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>mgmt_id in device_mgmt_dict.keys():</body>
+                                                                    </command>
+                                                                    <nestedSteps>
+                                                                        <item guid="19a66d7a-557b-4282-9d1a-621024543ae1" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                                                            <command>
+                                                                                <body>velocity/api/inventory/v16/physical_connections?includeProperties=true&amp;limit=200</body>
+                                                                            </command>
+                                                                            <postProcessing>
+                                                                                <analysisRules>
+                                                                                    <item>
+                                                                                        <extractorInfo extractorType="query">
+                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                                                <query sub="true">mapped/Json/connections/*\\[port1/id=&quot;[mgmt_id]&quot;]/id</query>
+                                                                                            </extractorProperties>
+                                                                                        </extractorInfo>
+                                                                                        <processorInfo ruleType="store">
+                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                                <storageLocation>mgmt_conn_id</storageLocation>
+                                                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                                            </ruleProperties>
+                                                                                        </processorInfo>
+                                                                                    </item>
+                                                                                </analysisRules>
+                                                                            </postProcessing>
+                                                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="velocity/api/inventory/v16/physical_connections?includeProperties=true&amp;limit=200" action.inherit="false"/>
+                                                                        </item>
+                                                                        <item guid="8e6cb5c5-f223-4ef0-863d-ed566232269e" action="if" useFieldsInCommand="false">
+                                                                            <command>
+                                                                                <body>mgmt_conn_id != &quot;&quot;:</body>
+                                                                            </command>
+                                                                            <nestedSteps>
+                                                                                <item guid="8ce8681f-a1cd-42c4-9a58-7b26fe027a31" action="eval" useFieldsInCommand="false">
+                                                                                    <command>
+                                                                                        <body>mgmt_conn_list.append(mgmt_conn_id)</body>
+                                                                                    </command>
+                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                </item>
+                                                                            </nestedSteps>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                        </item>
+                                                                        <item guid="7719b260-6b0d-4f7f-94f5-cd3cd9f1ffe1" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                                                            <command>
+                                                                                <body>velocity/api/inventory/v16/physical_connections?includeProperties=true&amp;limit=200</body>
+                                                                            </command>
+                                                                            <postProcessing>
+                                                                                <analysisRules>
+                                                                                    <item>
+                                                                                        <extractorInfo extractorType="query">
+                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                                                <query sub="true">mapped/Json/connections/*\\[port2/id=&quot;[mgmt_id]&quot;]/id</query>
+                                                                                            </extractorProperties>
+                                                                                        </extractorInfo>
+                                                                                        <processorInfo ruleType="store">
+                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                                <storageLocation>mgmt_conn_id</storageLocation>
+                                                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                                            </ruleProperties>
+                                                                                        </processorInfo>
+                                                                                    </item>
+                                                                                </analysisRules>
+                                                                            </postProcessing>
+                                                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="velocity/api/inventory/v16/physical_connections?includeProperties=true&amp;limit=200" action.inherit="false"/>
+                                                                        </item>
+                                                                        <item guid="ec3e4751-7bfa-4d3b-83e6-e03faab90dd2" action="if" useFieldsInCommand="false">
+                                                                            <command>
+                                                                                <body>mgmt_conn_id != &quot;&quot;:</body>
+                                                                            </command>
+                                                                            <nestedSteps>
+                                                                                <item guid="b950fec8-c9ef-4949-8d0f-82bebcfa333f" action="eval" useFieldsInCommand="false">
+                                                                                    <command>
+                                                                                        <body>mgmt_conn_list.append(mgmt_conn_id)</body>
+                                                                                    </command>
+                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                </item>
+                                                                            </nestedSteps>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                        </item>
+                                                                    </nestedSteps>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="7bea50a4-338e-46ac-acc8-96b2a50b9456" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>get device1 port1 device2 port2 based on connection Id</body>
+                                                            </command>
+                                                            <nestedSteps>
+                                                                <item guid="5c6f67e4-fcb3-4b66-9de0-a3a558bea53f" action="for" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>conn_id in mgmt_conn_list:</body>
+                                                                    </command>
+                                                                    <nestedSteps>
+                                                                        <item guid="8382ace6-2a50-4e55-ba34-24833ebbe3b4" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                                                            <command>
+                                                                                <body>velocity/api/inventory/v16/physical_connections?includeProperties=true&amp;limit=200</body>
+                                                                            </command>
+                                                                            <postProcessing>
+                                                                                <analysisRules>
+                                                                                    <item>
+                                                                                        <extractorInfo extractorType="query">
+                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                                <query sub="true">mapped/Json/connections/*\\[id=&quot;[conn_id]&quot;]/device1/name</query>
+                                                                                            </extractorProperties>
+                                                                                        </extractorInfo>
+                                                                                        <processorInfo ruleType="store">
+                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                                <storageLocation>device1_name</storageLocation>
+                                                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                                            </ruleProperties>
+                                                                                        </processorInfo>
+                                                                                    </item>
+                                                                                    <item>
+                                                                                        <extractorInfo extractorType="query">
+                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                                <query sub="true">mapped/Json/connections/*\\[id=&quot;[conn_id]&quot;]/port1/name</query>
+                                                                                            </extractorProperties>
+                                                                                        </extractorInfo>
+                                                                                        <processorInfo ruleType="store">
+                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                                <storageLocation>device1_port1</storageLocation>
+                                                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                                            </ruleProperties>
+                                                                                        </processorInfo>
+                                                                                    </item>
+                                                                                    <item>
+                                                                                        <extractorInfo extractorType="query">
+                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                                <query sub="true">mapped/Json/connections/*\\[id=&quot;[conn_id]&quot;]/device2/name</query>
+                                                                                            </extractorProperties>
+                                                                                        </extractorInfo>
+                                                                                        <processorInfo ruleType="store">
+                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                                <storageLocation>device2_name</storageLocation>
+                                                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                                            </ruleProperties>
+                                                                                        </processorInfo>
+                                                                                    </item>
+                                                                                    <item>
+                                                                                        <extractorInfo extractorType="query">
+                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                                <query sub="true">mapped/Json/connections/*\\[id=&quot;[conn_id]&quot;]/port2/name</query>
+                                                                                            </extractorProperties>
+                                                                                        </extractorInfo>
+                                                                                        <processorInfo ruleType="store">
+                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                                <storageLocation>device2_port2</storageLocation>
+                                                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                                            </ruleProperties>
+                                                                                        </processorInfo>
+                                                                                    </item>
+                                                                                </analysisRules>
+                                                                            </postProcessing>
+                                                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="velocity/api/inventory/v16/physical_connections?includeProperties=true&amp;limit=200" action.inherit="false"/>
+                                                                        </item>
+                                                                        <item guid="3277ee32-4f5c-45ab-933e-60ef47bd1775" action="eval" useFieldsInCommand="false">
+                                                                            <command>
+                                                                                <body>conn_prop_devices_name_list.append(device1_name)</body>
+                                                                            </command>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                        </item>
+                                                                        <item guid="47bc978e-33ab-49b8-b8fb-8a2f327f9ed2" action="eval" useFieldsInCommand="false">
+                                                                            <command>
+                                                                                <body>conn_prop_devices_name_list.append(device2_name)</body>
+                                                                            </command>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                        </item>
+                                                                        <item guid="3b95c9ab-a8f1-4153-9ac4-2afcc758b761" action="eval" useFieldsInCommand="false">
+                                                                            <command>
+                                                                                <body>conn_prop_devices_port_list.append(device1_port1)</body>
+                                                                            </command>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                        </item>
+                                                                        <item guid="d775bdee-92a0-44e4-84ca-589f97521fc3" action="eval" useFieldsInCommand="false">
+                                                                            <command>
+                                                                                <body>conn_prop_devices_port_list.append(device2_port2)</body>
+                                                                            </command>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                        </item>
+                                                                    </nestedSteps>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="bfe1c818-2e2e-45bd-b6c5-c0b87cae4e20" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>print(conn_prop_devices_name_list,conn_prop_devices_port_list)</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="614aa9f1-fcff-4224-9b60-c3c7138d7b8a" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>get Mgmt port names</body>
+                                                            </command>
+                                                            <nestedSteps>
+                                                                <item guid="18afdb47-69d9-4a7c-9b30-0fe93f41091b" action="for" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>mgmt_conn_id in mgmt_conn_list:</body>
+                                                                    </command>
+                                                                    <nestedSteps>
+                                                                        <item guid="fc14bf05-866c-41d8-b703-16472c671eaa" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                                                            <command>
+                                                                                <body>velocity/api/inventory/v16/physical_connections?includeProperties=true&amp;limit=200</body>
+                                                                            </command>
+                                                                            <postProcessing>
+                                                                                <analysisRules>
+                                                                                    <item>
+                                                                                        <extractorInfo extractorType="query">
+                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                                <query sub="true">mapped/Json/connections/*\\[id=&quot;[mgmt_conn_id]&quot;]/port1/name</query>
+                                                                                            </extractorProperties>
+                                                                                        </extractorInfo>
+                                                                                        <processorInfo ruleType="store">
+                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                                <storageLocation>port1_name</storageLocation>
+                                                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                                            </ruleProperties>
+                                                                                        </processorInfo>
+                                                                                    </item>
+                                                                                    <item>
+                                                                                        <extractorInfo extractorType="query">
+                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                                <query sub="true">mapped/Json/connections/*\\[id=&quot;[mgmt_conn_id]&quot;]/port1/id</query>
+                                                                                            </extractorProperties>
+                                                                                        </extractorInfo>
+                                                                                        <processorInfo ruleType="store">
+                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                                <storageLocation>port1_id</storageLocation>
+                                                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                                            </ruleProperties>
+                                                                                        </processorInfo>
+                                                                                    </item>
+                                                                                    <item>
+                                                                                        <extractorInfo extractorType="query">
+                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                                <query sub="true">mapped/Json/connections/*\\[id=&quot;[mgmt_conn_id]&quot;]/port2/name</query>
+                                                                                            </extractorProperties>
+                                                                                        </extractorInfo>
+                                                                                        <processorInfo ruleType="store">
+                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                                <storageLocation>port2_name</storageLocation>
+                                                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                                            </ruleProperties>
+                                                                                        </processorInfo>
+                                                                                    </item>
+                                                                                    <item>
+                                                                                        <extractorInfo extractorType="query">
+                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                                <query sub="true">mapped/Json/connections/*\\[id=&quot;[mgmt_conn_id]&quot;]/port2/id</query>
+                                                                                            </extractorProperties>
+                                                                                        </extractorInfo>
+                                                                                        <processorInfo ruleType="store">
+                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                                <storageLocation>port2_id</storageLocation>
+                                                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                                            </ruleProperties>
+                                                                                        </processorInfo>
+                                                                                    </item>
+                                                                                </analysisRules>
+                                                                            </postProcessing>
+                                                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="velocity/api/inventory/v16/physical_connections?includeProperties=true&amp;limit=200" action.inherit="false"/>
+                                                                        </item>
+                                                                        <item guid="54c4d9c7-533a-4f15-9150-f8691df52346" action="eval" useFieldsInCommand="false">
+                                                                            <command>
+                                                                                <body>mgmt_conn_ports_dict[port1_id] = port1_name</body>
+                                                                            </command>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                        </item>
+                                                                        <item guid="29eb651f-7dd7-406c-bddb-65dc5f49358a" action="eval" useFieldsInCommand="false">
+                                                                            <command>
+                                                                                <body>mgmt_conn_ports_dict[port2_id] = port2_name</body>
+                                                                            </command>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                        </item>
+                                                                    </nestedSteps>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="d8f754f2-5c4c-4280-9b0b-c46ff86f2c3f" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>print(mgmt_conn_ports_dict)</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="f97c65e1-82e2-4b2e-8014-3b5bca0621a1" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>print(device_mgmt_dict)</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="058dccf9-123e-45c8-8ffc-44384490863e" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>print(mgmt_conn_ports_dict.keys())</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="fde1902b-72da-4642-af4b-a55c37ca20fd" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>mgmt_port_id_list = list(set(mgmt_conn_ports_dict) - set(device_mgmt_dict))</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="1f2df64d-b3e6-4820-9729-fe6ffdf19a23" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>print(mgmt_port_id_list)</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="045160ac-a71a-49cb-a591-47af2ec1f9c1" action="for" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>id in mgmt_port_id_list:</body>
+                                                                    </command>
+                                                                    <nestedSteps>
+                                                                        <item guid="a5ba30bb-3f40-4262-87b0-5ad509812961" action="if" useFieldsInCommand="false">
+                                                                            <command>
+                                                                                <body>id in mgmt_conn_ports_dict.keys():</body>
+                                                                            </command>
+                                                                            <nestedSteps>
+                                                                                <item guid="f3225d53-e96d-4248-a65f-f327a78d5dfe" action="eval" useFieldsInCommand="false">
+                                                                                    <command>
+                                                                                        <body>mgmt_port_names_list.append(mgmt_conn_ports_dict[id])</body>
+                                                                                    </command>
+                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                </item>
+                                                                            </nestedSteps>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                        </item>
+                                                                        <item guid="9ec47136-062f-4408-9d31-bdaf5417b8a6" action="else" useFieldsInCommand="false">
+                                                                            <nestedSteps>
+                                                                                <item guid="42876996-2259-49dc-b1ff-757e10500671" action="comment" useFieldsInCommand="false">
+                                                                                    <command>
+                                                                                        <body>Insert steps here for when expression is false</body>
+                                                                                    </command>
+                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                </item>
+                                                                            </nestedSteps>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                        </item>
+                                                                    </nestedSteps>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="3c7b878e-a254-45ef-86fa-87b3b6c918f7" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>print(mgmt_port_names_list)</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="e795799f-0dd4-4bf9-97b9-fe16719aa321" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>get Mgmt name</body>
+                                                            </command>
+                                                            <nestedSteps>
+                                                                <item guid="f2ec7383-508a-4b67-a716-ffdb3d653c73" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>conn_prop_devices_port_list_copy=conn_prop_devices_port_list.copy()</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="2638ea57-5367-4798-afe9-0bd8310f7284" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>conn_prop_devices_name_list_copy=conn_prop_devices_name_list.copy()</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="d0438368-89b1-455b-8467-f850accdb1dc" action="for" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>mgmt_port_name in mgmt_port_names_list:</body>
+                                                                    </command>
+                                                                    <nestedSteps>
+                                                                        <item guid="bb69a78e-3efe-42a6-9faa-a380468bc11c" action="if" useFieldsInCommand="false">
+                                                                            <command>
+                                                                                <body>mgmt_port_name in conn_prop_devices_port_list_copy:</body>
+                                                                            </command>
+                                                                            <nestedSteps>
+                                                                                <item guid="a230c09c-fd6f-4a5a-8d84-57e458f2fcd4" action="eval" useFieldsInCommand="false">
+                                                                                    <command>
+                                                                                        <body>mgmt_names.append(conn_prop_devices_name_list_copy[conn_prop_devices_port_list_copy.index(mgmt_port_name)])</body>
+                                                                                    </command>
+                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                </item>
+                                                                                <item guid="d82fdab9-6f9f-49df-ab8e-5a8b2b56b4dd" action="eval" useFieldsInCommand="false">
+                                                                                    <command>
+                                                                                        <body>conn_prop_devices_name_list_copy.pop(conn_prop_devices_port_list_copy.index(mgmt_port_name))</body>
+                                                                                    </command>
+                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                </item>
+                                                                                <item guid="2b7d26b6-ea29-4240-9930-1b5dc9a44e8b" action="eval" useFieldsInCommand="false">
+                                                                                    <command>
+                                                                                        <body>conn_prop_devices_port_list_copy.pop(conn_prop_devices_port_list_copy.index(mgmt_port_name))</body>
+                                                                                    </command>
+                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                </item>
+                                                                            </nestedSteps>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                        </item>
+                                                                    </nestedSteps>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="d87dc81c-cff0-4600-95d5-d2044f9ac848" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>print(mgmt_names)</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="c4b6b050-b315-4b20-ade9-7f3dc746b295" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>mgmt_names=list(set(mgmt_names))</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="5056f968-2304-4743-9108-cf3915870ce1" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>print(mgmt_names)</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="ea403d98-a4a1-4880-9631-2e55bacbcd28" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>get Mgmt console port and ipAddress based on device Id </body>
+                                                            </command>
+                                                            <nestedSteps>
+                                                                <item guid="c22df61e-f939-4c51-8fe8-38333cbc9f88" action="for" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>mgmt_name in mgmt_names:</body>
+                                                                    </command>
+                                                                    <nestedSteps>
+                                                                        <item guid="fb567cc6-a1cf-4a3a-a6dc-494b14ad3698" action="message" useFieldsInCommand="false">
+                                                                            <command>
+                                                                                <body>Information:For management switch name &quot;[mgmt_name]&quot;:</body>
+                                                                            </command>
+                                                                            <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                                                                <message inherit="false">For management switch name &quot;[mgmt_name]&quot;:</message>
+                                                                            </applicationProperties>
+                                                                        </item>
+                                                                        <item guid="13d6fdd6-54c2-467e-9c53-cfe1f1ab5235" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                                                            <command>
+                                                                                <body>velocity/api/inventory/v16/devices?includeProperties=true&amp;searchString=[mgmt_name]</body>
+                                                                            </command>
+                                                                            <postProcessing>
+                                                                                <analysisRules>
+                                                                                    <item>
+                                                                                        <extractorInfo extractorType="query">
+                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                                <query>mapped/Json/devices/item/id</query>
+                                                                                            </extractorProperties>
+                                                                                        </extractorInfo>
+                                                                                        <processorInfo ruleType="store">
+                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                                <storageLocation>mgmt_id</storageLocation>
+                                                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                                            </ruleProperties>
+                                                                                        </processorInfo>
+                                                                                    </item>
+                                                                                </analysisRules>
+                                                                            </postProcessing>
+                                                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="velocity/api/inventory/v16/devices?includeProperties=true&amp;searchString=[mgmt_name]" action.inherit="false"/>
+                                                                        </item>
+                                                                        <item guid="da4005a2-5c1e-43ea-b553-b4f606da2a01" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                                                            <command>
+                                                                                <body>/velocity/api/inventory/v16/device/[mgmt_id]</body>
+                                                                            </command>
+                                                                            <postProcessing>
+                                                                                <analysisRules>
+                                                                                    <item>
+                                                                                        <extractorInfo extractorType="query">
+                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                                <query>mapped/Json/properties/*[name=&quot;Console&quot;]/value</query>
+                                                                                            </extractorProperties>
+                                                                                        </extractorInfo>
+                                                                                        <processorInfo ruleType="store">
+                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                                <storageLocation>mgmt_console_ip_addr</storageLocation>
+                                                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                                            </ruleProperties>
+                                                                                        </processorInfo>
+                                                                                    </item>
+                                                                                    <item>
+                                                                                        <extractorInfo extractorType="query">
+                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                                <query>mapped/Json/properties/*[name=&quot;Console Port&quot;]/value</query>
+                                                                                            </extractorProperties>
+                                                                                        </extractorInfo>
+                                                                                        <processorInfo ruleType="store">
+                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                                <storageLocation>mgmt_console_port</storageLocation>
+                                                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                                            </ruleProperties>
+                                                                                        </processorInfo>
+                                                                                    </item>
+                                                                                </analysisRules>
+                                                                            </postProcessing>
+                                                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/inventory/v16/device/[mgmt_id]" action.inherit="false"/>
+                                                                        </item>
+                                                                    </nestedSteps>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="9d75bd43-3080-4bbd-b35e-f50513c68056" action="comment" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>login to management switch and restore default vlan config</body>
+                                                                    </command>
+                                                                    <nestedSteps>
+                                                                        <item guid="b99a6ede-9d1d-4423-9e02-cf8c05e96657" action="for" useFieldsInCommand="false">
+                                                                            <command>
+                                                                                <body>port in mgmt_port_names_list:</body>
+                                                                            </command>
+                                                                            <nestedSteps>
+                                                                                <item guid="d5cf9724-a04e-466c-a83d-64f25b717de5" action="open" session="console_msw" useFieldsInCommand="false">
+                                                                                    <command>
+                                                                                        <body>project://Fortiswitch_console/session_profiles/console.ffsp</body>
+                                                                                    </command>
+                                                                                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                                                                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                                                                            <completionProperties>
+                                                                                                <idleChannel inherit="false">200</idleChannel>
+                                                                                                <completeWhen inherit="false">AUTO_OR_IDLE</completeWhen>
+                                                                                            </completionProperties>
+                                                                                        </stepProperties>
+                                                                                        <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties">
+                                                                                            <ipAddress inherit="false">[mgmt_console_ip_addr]</ipAddress>
+                                                                                            <port inherit="false">[mgmt_console_port]</port>
+                                                                                        </sessionProperties>
+                                                                                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                    </applicationProperties>
+                                                                                    <advancedProperties defaultSessionProfile="project://Fortigate_console/session_profiles/console.ffsp"/>
+                                                                                </item>
+                                                                                <item guid="3ba7b1a6-475f-456e-a3c0-a77c9a66be90" action="consoleLogin" session="console_msw" useFieldsInCommand="false">
+                                                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                                                    <advancedProperties defaultSessionProfile="project://Fortigate_console/session_profiles/console.ffsp"/>
+                                                                                </item>
+                                                                                <item guid="6ebb23ab-2611-4a5f-8eac-0abd9c92074c" action="addPortToNativeVlan" session="console_msw" useFieldsInCommand="false">
+                                                                                    <command>
+                                                                                        <body>-port [port] -vlan [default_vlan]</body>
+                                                                                    </command>
+                                                                                    <postProcessing>
+                                                                                        <analysisRules>
+                                                                                            <item>
+                                                                                                <extractorInfo extractorType="query">
+                                                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                                        <query>retCode()</query>
+                                                                                                    </extractorProperties>
+                                                                                                </extractorInfo>
+                                                                                                <processorInfo ruleType="assert">
+                                                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                                                        <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                                                                        <actionsWhenTrue>
+                                                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                                                                    <message>--- successfully restored default vlan id &quot;[default_vlan]&quot; on port &quot;[port]&quot;</message>
+                                                                                                                </actionProperties>
+                                                                                                            </item>
+                                                                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                                            </item>
+                                                                                                        </actionsWhenTrue>
+                                                                                                        <actionsWhenFalse>
+                                                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                                                                    <message>--- failed to restore default vlan id &quot;[default_vlan]&quot; on port &quot;[port]&quot;; fail test...</message>
+                                                                                                                </actionProperties>
+                                                                                                            </item>
+                                                                                                            <item actionId="FailTest">
+                                                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                                            </item>
+                                                                                                        </actionsWhenFalse>
+                                                                                                    </ruleProperties>
+                                                                                                </processorInfo>
+                                                                                            </item>
+                                                                                        </analysisRules>
+                                                                                    </postProcessing>
+                                                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                                                </item>
+                                                                                <item guid="db4ba879-a42c-4c0a-b17f-5b9d777e9d4a" action="consoleExit" session="console_msw" useFieldsInCommand="false">
+                                                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                                                    <advancedProperties defaultSessionProfile="project://Fortigate_console/session_profiles/console.ffsp"/>
+                                                                                </item>
+                                                                                <item guid="5c0ef422-89ca-43c6-815b-38b387e92a78" action="close" session="console_msw">
+                                                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                                                </item>
+                                                                            </nestedSteps>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                        </item>
+                                                                    </nestedSteps>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="0c110279-dcbd-4605-9796-ee763eb616a2" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>reinit dict</body>
+                                                            </command>
+                                                            <nestedSteps>
+                                                                <item guid="d71a46b9-aae3-4a22-ac91-6cd2e463b58c" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>device_mgmt_dict={}</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="dc916811-4b60-48ab-ada2-a608096e9d77" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>mgmt_conn_list=[]</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="2dd756a8-2cb5-4c96-a3c0-13665f13512e" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>conn_prop_devices_name_list=[]</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="23dfe68e-700e-434a-9d26-ce8ebf079088" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>conn_prop_devices_port_list=[]</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="b3c395a6-7f37-4a51-b570-5f85165cbe2c" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>mgmt_conn_ports_dict={}</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="7ad6fe8a-5337-4b3f-a900-ff63e78c123f" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>mgmt_port_names_list=[]</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="8fe32b40-9bd1-4876-b205-9683c1a16efd" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>mgmt_console_port_list=[]</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="9187bdb7-687e-41e5-b088-a3805874e69c" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>mgmt_console_ip_add_list=[]</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="b8468b10-6f94-487d-8a84-48cb15af5878" action="else" useFieldsInCommand="false">
+                                            <nestedSteps>
+                                                <item guid="f2ef4934-9821-4db0-b7c1-42b71708a2d2" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>skip device</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="159a3a1f-fe92-4454-b02b-cb2b7e668381" action="else" useFieldsInCommand="false">
+                                    <nestedSteps>
+                                        <item guid="42408741-3e9d-4883-b644-b2c41f2ff6a4" action="comment" useFieldsInCommand="false">
+                                            <command>
+                                                <body>skip device</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>
