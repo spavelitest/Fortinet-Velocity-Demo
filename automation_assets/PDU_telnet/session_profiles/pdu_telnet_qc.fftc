@@ -1,0 +1,439 @@
+<?xml version="1.0"?>
+<testCase version="8.7.0.202112151246">
+    <general>
+        <sessionClass includeTestCase="true" sessionType="pdu_telnet.ffsp"/>
+        <language>Python</language>
+    </general>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="56df0ce6-d7e1-4eac-9876-768e5b28b84f" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Quickcall library for PDU telnet connection</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="pduLogin" isPublic="true">
+            <steps>
+                <item guid="674a6c84-1c34-49df-9c1c-87f53312832b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="f59dad83-64db-4047-8bac-e525733c49c0" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(username)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="4bf03e8c-825c-4e95-9834-d081a5d18897" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="cf9559cb-ad31-4a42-80cb-fc891412d75e" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(password)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="6519e4e1-4146-4e05-aff5-b9e29b77b4e8" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="d128e575-9a2f-48f6-87d0-4dfa5ba4a9f6" action="command" session="[session]">
+                            <command>
+                                <body>[username]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>prompt()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;Enter Password: &quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="b11cb5a3-aa99-4a0d-8fe4-626a8f8e65f6" action="command" session="[session]" normalOffset="2.203" estimatedStepExecutionTime="0.125">
+                            <command>
+                                <body>[password]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>User Invalid Credential</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 0</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>--- pdu invalid user credentials; fail test...</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>User Not Found</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 0</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>--- pdu user not found; fail test...</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="86f7d093-c113-454e-abcb-73041044c396" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="28cb7151-c5f6-40fb-8547-fb64fc87c8c4" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: &quot;[retCode]&quot;}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="username">
+                    <defaultValue>admin</defaultValue>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="password">
+                    <defaultValue>admin</defaultValue>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="pduPowerOff" isPublic="true">
+            <steps>
+                <item guid="904624a1-a3fc-49aa-b333-9e591abb2a86" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="5915007a-0ccc-4083-bd26-aaca1c72b30d" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(outlet_num)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="93481231-1421-46aa-81b3-b603031d785c" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="49e1bd91-3235-4188-b731-e4c700f71e0b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="0f0633d4-de2e-47cf-bf4d-e45f9d367781" action="command" session="[session]">
+                            <command>
+                                <body>set PDU.OutletSystem.Outlet\\[[outlet_num]].DelayBeforeShutdown 0</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>int(value) == -1</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>Error:</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>--- pdu power off action for outlet number &quot;[outlet_num]&quot; has errors</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="c9d21170-8caf-48b1-8dd4-217c2403ed43" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="f8160947-cf17-43d6-a96a-959c3cf87f72" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: &quot;[retCode]&quot;}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="outlet_num">
+                    <description>Outlet Number
+e.g. 19</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="pduPowerOn" isPublic="true">
+            <steps>
+                <item guid="85d9a665-e54c-45b1-9284-a9931d85b5d7" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="dea3d462-ce6c-42f6-b36c-b38775d9944e" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(outlet_num)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="1a9e6518-334e-4835-b8b8-d1d3dab11c2a" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2823fcc7-106c-416b-af97-83455879c657" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e8de8635-2913-4087-a06f-ac466e19404e" action="command" session="[session]">
+                            <command>
+                                <body>set PDU.OutletSystem.Outlet\\[[outlet_num]].DelayBeforeStartup 0</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>int(value) == 0</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>Error:</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>--- pdu power on action for outlet number &quot;[outlet_num]&quot; has errors</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;FALSE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ce41b609-dc54-4ee4-abc8-08660bc0c5e7" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e75b3533-8b06-451a-80bc-4fc193b8a834" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: &quot;[retCode]&quot;}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="outlet_num">
+                    <description>Outlet Number
+e.g. 19</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="pduQuitSession" isPublic="true">
+            <steps>
+                <item guid="94b29ec8-a9ab-46a8-800e-f20be361fc70" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="79408741-7a88-4357-8664-dc1bb5d8c928" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;TRUE&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="1f957bd2-2c40-4676-8927-ec325270926c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="5f72ff74-7227-4d5f-97a9-31ccbd1a3325" action="command" session="[session]">
+                            <command>
+                                <body>quit</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="780b0801-7f85-426a-9783-04afd5142227" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return result</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="0fbc3e7d-04c1-448f-ad24-01b449671914" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: &quot;[retCode]&quot;}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+    <eventHandlers>
+        <item name="OnFailTestAction">
+            <item actionId="ExitExecution">
+                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+            </item>
+        </item>
+    </eventHandlers>
+</testCase>

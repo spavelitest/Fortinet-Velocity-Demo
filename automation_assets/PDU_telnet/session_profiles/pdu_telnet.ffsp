@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<SessionTemplate version="8.7.0.202112151246">
+    <baseApplication>com.fnfr.svt.applications.telnet</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties">
+        <ipAddress inherit="false">10.210.107.150</ipAddress>
+        <TerminalProperties>
+            <localEcho inherit="false" defaultValue=""/>
+            <prompts merge="true">
+                <item name="prompt1">
+                    <Content>Enter Login:</Content>
+                </item>
+                <item name="prompt2">
+                    <Content>pdu#0&gt;</Content>
+                </item>
+                <item name="normal1">
+                    <Content>Enter Password:</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://PDU_telnet/</responseLibrary>
+    <formMapLibrary inherit="false">project://PDU_telnet/</formMapLibrary>
+    <sessionClassTestCase inherit="false">pdu_telnet_qc.fftc</sessionClassTestCase>
+    <isReferenceProfile>true</isReferenceProfile>
+    <language>Python</language>
+</SessionTemplate>

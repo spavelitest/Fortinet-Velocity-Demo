@@ -1,0 +1,1529 @@
+<?xml version="1.0"?>
+<testCase version="8.7.0.202112151246">
+    <general>
+        <notes>Power On script for all Devices in a Reservation which have optionPDU tag </notes>
+        <language>Python</language>
+    </general>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="9218e276-e4cb-4c2c-acb4-6c9a8f3d2743" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Initialization</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="6c56b774-1290-424b-ba26-608958a58f6a" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>reservationId = velocity(&quot;reservationId&quot;); print(reservationId)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="827ad3e6-7e3c-4132-8942-763dcb0c4775" action="eval" skip="true" useFieldsInCommand="false">
+                            <command>
+                                <body>reservationId = &quot;be724ed8-b5e6-4776-b51f-0b9aea597efa&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="92c62951-229c-4d0a-9f3d-3fd1a8056d91" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Get PDU connection from Velocity based on device Id</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="82006bf6-e213-4516-9063-01168189c814" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>init dict</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="dd98877c-88a4-4802-8b0e-41033c59fb93" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>device_ports_dict = {}</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="2c5dd218-0dfe-4aed-b2f9-510bb3e7714a" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>device_pdu_dict = {}</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="ce8542f6-eb0e-4f35-8694-1947040343c9" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_conn_list = []</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="9be6577a-88a3-4b01-bfd5-34031a88ba6c" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_port_names_list = []</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="2ae9c361-5bb0-45c8-acbc-3c9acb266941" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_port_id_list = []</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="45adbc56-fe3b-4150-8daa-94bd0234963c" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_conn_ports_dict = {}</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="aa7b8a41-049c-48d1-ae08-c1b37ce56094" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_names=[]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="64069258-b6e4-4863-9d30-10ce04a476a6" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_ip_add_list=[]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="30b35c9a-36d8-4f81-9ed5-65faa9e41a3c" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_username_list=[]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="1a775fca-8a94-4a72-ae97-207aa5558a3f" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_password_list=[]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="4a5de82a-a122-4ed9-a4df-4e557c9da017" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>conn_prop_devices_name_list=[]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="483a4f38-f53b-4b04-91cd-0de170f5c41a" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>conn_prop_devices_port_list=[]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="b7334f0f-84d6-4bd7-a65a-604575919f52" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>list_device_ids_tag=[]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="417029a3-dd11-46ac-9200-3908d93f7133" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>list_device_names_tag={}</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="082d1479-5b11-4b93-b1cf-eaef99d8fbda" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>console_dict = {}</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="b7249339-2d71-45d0-9b5f-023af9a73a88" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>open session</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="89aa7abc-c9b3-44f2-8fb3-1223ae4962d9" action="open" session="velocity" useFieldsInCommand="false">
+                                            <command>
+                                                <body>application:com.fnfr.itest.applications.webservices.restful</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                                <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="https://10.210.107.10" url.inherit="false" version="2" version.inherit="false">
+                                                    <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Basic" authenticationType.inherit="false" user="superadmin" user.inherit="false" password.masked="false" password="superadmin" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                                </sessionProperties>
+                                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </applicationProperties>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="c307cf6a-5f1c-49e1-8347-3505ca9e7e01" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>get list of device ids with specific tag from reservation</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="59271e90-cd7f-4600-9c78-0e33046ebc57" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                            <command>
+                                                <body>/velocity/api/reservation/v18/reservation/[reservationId]/resources</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>mapped/Json/items/*[type = &quot;DEVICE&quot;]/inventoryResourceId</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>reservation_devices_ids</storageLocation>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/reservation/v18/reservation/[reservationId]/resources" action.inherit="false"/>
+                                        </item>
+                                        <item guid="c886cff7-737a-4a3a-b0a4-b8960494d9f1" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>type(reservation_devices_ids)</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>class()</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>type</storageLocation>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="08627ec8-0728-47a1-aca7-30abf80ef6f2" action="if" useFieldsInCommand="false">
+                                            <command>
+                                                <body>str(type) == &quot;str&quot;:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="1c4e6ec7-1c96-4014-9a5b-823fb3501186" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>reservation_devices_list = reservation_devices_ids.split(&quot; &quot;); print(reservation_devices_list)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="a5eab7fa-6d88-4a54-8b7b-4fa027f99844" action="else" useFieldsInCommand="false">
+                                            <nestedSteps>
+                                                <item guid="64ec3d27-06b0-4b60-aedb-8973e571d4d2" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>reservation_devices_list = list(reservation_devices_ids); print(reservation_devices_list)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="0bb9c261-3943-4ac4-939e-4400f4c93cb2" action="for" useFieldsInCommand="false">
+                                            <command>
+                                                <body>dev_id in reservation_devices_list:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="2e22557b-3dcd-4acb-8c17-713a778ecbc2" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                                    <command>
+                                                        <body>/velocity/api/inventory/v16/device/[dev_id]</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query>mapped/Json/tags</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>tags</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query>mapped/Json/name</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>name</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query>mapped/Json/properties/item[name = &apos;Console&apos;]/value</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>console_ip_addr</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query>mapped/Json/properties/item[name = &apos;Console Port&apos;]/value</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>console_port</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/inventory/v16/device/[dev_id]" action.inherit="false"/>
+                                                </item>
+                                                <item guid="38383737-09f2-4469-9610-cdfb0808f54b" action="if" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>&quot;optionPDU&quot; in tags:</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="6e6f982a-2e1a-4972-ae74-bffa3b198174" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>list_device_ids_tag.append(dev_id)</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="241e4f7c-c279-4e62-b564-725435e3a457" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>list_device_names_tag[dev_id] = name</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="766647bf-b655-4bb0-a083-1e90e5468414" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>console_dict[console_port] = console_ip_addr</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="c679d738-35c7-4220-bc79-460f2f0d5191" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>print(console_dict)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="9c9645e2-ee04-41e1-94aa-20aedb63e1d5" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>PDU Outlet System Power On each device from reservation</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="db97f55e-b8d9-4bf1-8146-d7d375159962" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>item in list_device_ids_tag:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="445d8f67-e7c4-4c6b-8d23-0a65e707a25f" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>device_id=item</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="a3df1acc-142b-43f7-9eff-50aafdedf6e6" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>device_name = list_device_names_tag[item]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="061b47e1-b64d-4d54-ad3c-359812130879" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>get device connection port name on PDU side </body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="e7e7af2a-ad71-4939-9f4b-4226eb5e9f90" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                            <command>
+                                                <body>/velocity/api/inventory/v16/device/[device_id]/ports</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>mapped/Json/ports/item[*]/name</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>device_port_names</storageLocation>
+                                                                <storeInAList>true</storeInAList>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>mapped/Json/ports/item[*]/id</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>device_port_ids</storageLocation>
+                                                                <storeInAList>true</storeInAList>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/inventory/v16/device/[device_id]/ports" action.inherit="false"/>
+                                        </item>
+                                        <item guid="6f762333-f2b5-4331-8383-50fae531a66e" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>print(device_port_names, device_port_ids)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="d365138f-9b38-4797-9718-7ec464fe573f" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>device_ports_dict=dict(zip(device_port_ids,device_port_names))</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="977f12d2-bf28-46c4-a84c-60357ed0724e" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>print(device_ports_dict)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="214065a9-773e-481d-a061-15ec9f20cb1e" action="for" useFieldsInCommand="false">
+                                            <command>
+                                                <body>port_id, port_name in device_ports_dict.items():</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="975669ba-6501-485b-b4f6-aa35975fc43c" action="if" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>re.search(&quot;pdu&quot;, port_name):</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="fd1e365a-684d-4938-997b-9ad2313df46a" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>device_pdu_dict[port_id] = port_name</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="2b9a223d-e33c-4a06-a1eb-53a8fdfce2f1" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>print(device_pdu_dict)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="4da48d25-8029-4efb-9d67-ed1fd7e9d5d3" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>print(device_pdu_dict.keys())</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="76112956-236a-45bf-8058-af75e205ccba" action="for" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_id in device_pdu_dict.keys():</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="f6ec626f-e116-424a-a23d-9756f463935c" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                                    <command>
+                                                        <body>velocity/api/inventory/v16/physical_connections?includeProperties=true&amp;limit=200</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                        <query sub="true">mapped/Json/connections/*\\[port1/id=&quot;[pdu_id]&quot;]/id</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>pdu_conn_id</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="velocity/api/inventory/v16/physical_connections?includeProperties=true&amp;limit=200" action.inherit="false"/>
+                                                </item>
+                                                <item guid="d89df74a-5877-4d91-98a4-d65494fb7e5e" action="if" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>pdu_conn_id != &quot;&quot;:</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="f323cc4f-5dcb-49bb-8507-8209434e8ddb" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>pdu_conn_list.append(pdu_conn_id)</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="477aa8c9-ea24-4a98-ad8d-31a71b57c54f" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                                    <command>
+                                                        <body>velocity/api/inventory/v16/physical_connections?includeProperties=true&amp;limit=200</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                        <query sub="true">mapped/Json/connections/*\\[port2/id=&quot;[pdu_id]&quot;]/id</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>pdu_conn_id</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="velocity/api/inventory/v16/physical_connections?includeProperties=true&amp;limit=200" action.inherit="false"/>
+                                                </item>
+                                                <item guid="ad3271ba-4fcf-4ef5-90f3-6828c6235f99" action="if" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>pdu_conn_id != &quot;&quot;:</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="a3ee5ad7-e3a1-4eb2-a6f3-ec21b999b4c9" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>pdu_conn_list.append(pdu_conn_id)</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="3ee5bcb2-17ec-444d-8110-006f18ee8509" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>print(pdu_conn_list)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="87ab4202-681f-4b52-8371-a0c4b690f2f2" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>get device1 port1 device2 port2 based on connection Id</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="bd3f72ce-6575-443b-8cf3-534af0d1faff" action="for" useFieldsInCommand="false">
+                                            <command>
+                                                <body>conn_id in pdu_conn_list:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="7fa59151-5668-4138-a7ae-46cca9687830" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                                    <command>
+                                                        <body>velocity/api/inventory/v16/physical_connections?includeProperties=true&amp;limit=200</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query sub="true">mapped/Json/connections/*\\[id=&quot;[conn_id]&quot;]/device1/name</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>device1_name</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query sub="true">mapped/Json/connections/*\\[id=&quot;[conn_id]&quot;]/port1/name</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>device1_port1</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query sub="true">mapped/Json/connections/*\\[id=&quot;[conn_id]&quot;]/device2/name</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>device2_name</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query sub="true">mapped/Json/connections/*\\[id=&quot;[conn_id]&quot;]/port2/name</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>device2_port2</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="velocity/api/inventory/v16/physical_connections?includeProperties=true&amp;limit=200" action.inherit="false"/>
+                                                </item>
+                                                <item guid="679a14da-8003-4c65-a3d9-060c4a53fccd" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>conn_prop_devices_name_list.append(device1_name)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="71a30aa5-2d5f-4a57-b676-cf8ad3091044" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>conn_prop_devices_name_list.append(device2_name)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="f98e8079-c4b9-4312-ab93-4271b15668f4" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>conn_prop_devices_port_list.append(device1_port1)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="359c8906-a160-4d6c-9a66-2db93af437f6" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>conn_prop_devices_port_list.append(device2_port2)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="164fbb12-feef-4ecc-b2f3-a06d9d462b7c" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>print(conn_prop_devices_name_list,conn_prop_devices_port_list)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="747757f4-d140-4a53-ad5a-f441e8f3142a" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>get PDU port names</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="5a2784b7-d388-43ac-b662-110e5d304e81" action="for" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_conn_id in pdu_conn_list:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="bf3fb1b7-fd37-491c-810d-280e985ed693" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                                    <command>
+                                                        <body>velocity/api/inventory/v16/physical_connections?includeProperties=true&amp;limit=200</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query sub="true">mapped/Json/connections/*\\[id=&quot;[pdu_conn_id]&quot;]/port1/name</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>port1_name</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query sub="true">mapped/Json/connections/*\\[id=&quot;[pdu_conn_id]&quot;]/port1/id</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>port1_id</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query sub="true">mapped/Json/connections/*\\[id=&quot;[pdu_conn_id]&quot;]/port2/name</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>port2_name</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query sub="true">mapped/Json/connections/*\\[id=&quot;[pdu_conn_id]&quot;]/port2/id</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>port2_id</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="velocity/api/inventory/v16/physical_connections?includeProperties=true&amp;limit=200" action.inherit="false"/>
+                                                </item>
+                                                <item guid="69a32567-6e2b-4bdf-88e5-f99d8b728e54" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>pdu_conn_ports_dict[port1_id] = port1_name</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="e4526287-219b-4760-93c4-6b2476b0f339" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>pdu_conn_ports_dict[port2_id] = port2_name</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="a35e6d1a-6684-4a9b-bfb0-64072a797e70" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>print(pdu_conn_ports_dict)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="7c6782ba-7228-46cd-8fb6-9169ec1d6c5d" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>print(device_pdu_dict)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="aafa3966-f3a3-441f-87dc-db252647bc1f" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>print(pdu_conn_ports_dict.keys())</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="0e3531f5-04fe-4608-9fcf-7a8ad325db19" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_port_id_list = list(set(pdu_conn_ports_dict) - set(device_pdu_dict))</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="d69e05e7-af0c-457e-af4d-4d1ae4679a5a" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>print(pdu_port_id_list)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="8e4b8747-cf49-4d09-8b04-98a0d4b22640" action="for" useFieldsInCommand="false">
+                                            <command>
+                                                <body>id in pdu_port_id_list:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="a8d27fe9-38b8-45ec-b28d-34bdd8feb882" action="if" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>id in pdu_conn_ports_dict.keys():</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="92748cff-43ea-46d6-b0d4-2a6ee5ba4a5e" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>pdu_port_names_list.append(pdu_conn_ports_dict[id])</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="ee2e682d-ca8b-4a3a-a114-e151ece00881" action="else" useFieldsInCommand="false">
+                                                    <nestedSteps>
+                                                        <item guid="b47fea09-abf0-4586-b466-ff32c1833fe3" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>Insert steps here for when expression is false</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="7113ae0a-82ef-4ecc-85e6-1867682b5c12" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>print(pdu_port_names_list)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="0a53b091-6f57-45a1-a50e-84ad55531cc4" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>get PDU name</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="9e6541d8-0fe9-4452-9533-68a567358807" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>conn_prop_devices_port_list_copy=conn_prop_devices_port_list.copy()</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="e9a53d2b-f4d4-47f6-be62-b1943b5e2459" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>conn_prop_devices_name_list_copy=conn_prop_devices_name_list.copy()</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="28d3685f-dad5-471a-8d7d-008e4a86b91f" action="for" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_port_name in pdu_port_names_list:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="c54dbda9-9e40-42cf-b0ea-7aa9ae05d5eb" action="if" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>pdu_port_name in conn_prop_devices_port_list_copy:</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="e07cbfdf-8ea9-4475-83af-b7a223511d08" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>pdu_names.append(conn_prop_devices_name_list_copy[conn_prop_devices_port_list_copy.index(pdu_port_name)])</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="7d758f2e-496a-45e0-81f3-ff9512909223" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>conn_prop_devices_name_list_copy.pop(conn_prop_devices_port_list_copy.index(pdu_port_name))</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="ff76fe86-c8e8-4d7d-a9f2-c22b6fabc36f" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>conn_prop_devices_port_list_copy.pop(conn_prop_devices_port_list_copy.index(pdu_port_name))</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="be3aa379-ef06-4819-b25d-c8462380c7c2" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>print(pdu_names)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="c2dabf72-ee15-4c46-811a-13f94a8f731c" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_names=list(set(pdu_names))</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="203624df-2d2a-4ddb-99ce-102c2bf770e7" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>print(pdu_names)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="ef2ce92a-5e0e-4aa9-8212-dccfd6d34c67" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>get PDU ipAddress, username and password based on device Id </body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="6f2fe1cb-e786-4f80-9945-6c8486d798da" action="for" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_name in pdu_names:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="dd0444ea-3411-4ae3-ba67-8488b8286264" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                                    <command>
+                                                        <body>velocity/api/inventory/v16/devices?includeProperties=true&amp;searchString=[pdu_name]</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query>mapped/Json/devices/item/id</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>pdu_id</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="velocity/api/inventory/v16/devices?includeProperties=true&amp;searchString=[pdu_name]" action.inherit="false"/>
+                                                </item>
+                                                <item guid="1614469c-0556-4293-8be1-47a283d464e1" action="GET" session="velocity" estimatedStepExecutionTime="0.305">
+                                                    <command>
+                                                        <body>/velocity/api/inventory/v16/device/[pdu_id]</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query>mapped/Json/properties/*[name=&quot;ipAddress&quot;]/value</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>pdu_ip_addr</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query>mapped/Json/properties/*[name=&quot;username&quot;]/value</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>pdu_username</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query>mapped/Json/properties/*[name=&quot;password&quot;]/value</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>pdu_password</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/inventory/v16/device/[pdu_id]" action.inherit="false"/>
+                                                </item>
+                                                <item guid="0a85d50d-b261-4f6d-a230-cd90531d21a1" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>pdu_ip_add_list.append(pdu_ip_addr)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="6608e1b1-b18b-4d4c-a565-521df035df29" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>pdu_username_list.append(pdu_username)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="a322a219-6324-436d-8bad-50d439667a0d" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>pdu_password_list.append(pdu_password)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="51458d5d-f1e5-40cf-a22f-ea2b8ded2fce" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>print(pdu_password_list)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="ab5aa1a2-89c6-497d-9963-b65cc8c5d659" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>print(pdu_username_list)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="9abd2c0f-7a92-4ee7-b88b-37dbd66986cf" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>print(pdu_ip_add_list)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="db13434a-1f51-4d47-95e5-52dab976fa8c" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Login to PDU and Power Outlet On</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="450ea231-317d-46e9-80a8-119fcbc2ffa5" action="for" useFieldsInCommand="false">
+                                            <command>
+                                                <body>item in range(len(pdu_ip_add_list)):</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="b5058536-5f6d-4d7b-8f99-d2b7f9e5735c" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>pdu_ip_add=pdu_ip_add_list[item]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="e41fa14c-699b-42c3-9fb2-2172a76d1588" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>pdu_username=pdu_username_list[item]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="6a7d6c71-4b57-418a-b48d-59e5b65127cc" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>pdu_password=pdu_password_list[item]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="04bc18cf-e7a1-4c55-b87b-5facbd33c503" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>pdu_session=&quot;pdu&quot; + str(item)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="55db5d8f-ec54-41c1-81ef-37b752a14db2" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>open session to PDU</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="f82289ad-1916-40e6-adb6-299216f2c78e" action="open" session="[pdu_session]" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>project://PDU_telnet/session_profiles/pdu_telnet.ffsp</body>
+                                                            </command>
+                                                            <postProcessing>
+                                                                <analysisRules>
+                                                                    <item>
+                                                                        <extractorInfo extractorType="none">
+                                                                            <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                                        </extractorInfo>
+                                                                        <processorInfo ruleType="message">
+                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                                                <message>Open PDU connection to device name &quot;[device_name]&quot;:</message>
+                                                                                <tag sub="false" defaultValue=""/>
+                                                                            </ruleProperties>
+                                                                        </processorInfo>
+                                                                    </item>
+                                                                </analysisRules>
+                                                            </postProcessing>
+                                                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                                                <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                                <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties">
+                                                                    <ipAddress inherit="false">[pdu_ip_add_list[item]]</ipAddress>
+                                                                </sessionProperties>
+                                                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </applicationProperties>
+                                                            <advancedProperties defaultSessionProfile="project://PDU_telnet/session_profiles/pdu_telnet.ffsp"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="b25ceff3-1394-407a-83cd-4f4cb056c85b" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>Login to PDU</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="7595f34e-a43b-4155-b878-168d8a04bd87" action="pduLogin" session="[pdu_session]" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>-username [pdu_username] -password [pdu_password]</body>
+                                                            </command>
+                                                            <postProcessing>
+                                                                <analysisRules>
+                                                                    <item>
+                                                                        <extractorInfo extractorType="query">
+                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                <query>retCode()</query>
+                                                                            </extractorProperties>
+                                                                        </extractorInfo>
+                                                                        <processorInfo ruleType="assert">
+                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                                <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                                                <actionsWhenTrue>
+                                                                                    <item actionId="DeclareExecutionIssue">
+                                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                                            <message>--- pdu login is OK</message>
+                                                                                        </actionProperties>
+                                                                                    </item>
+                                                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                    </item>
+                                                                                </actionsWhenTrue>
+                                                                                <actionsWhenFalse>
+                                                                                    <item actionId="DeclareExecutionIssue">
+                                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                                            <message>--- pdu login is NOK; fail test...</message>
+                                                                                        </actionProperties>
+                                                                                    </item>
+                                                                                    <item actionId="FailTest">
+                                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                    </item>
+                                                                                </actionsWhenFalse>
+                                                                            </ruleProperties>
+                                                                        </processorInfo>
+                                                                    </item>
+                                                                </analysisRules>
+                                                            </postProcessing>
+                                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                            <advancedProperties defaultSessionProfile="project://PDU_telnet/session_profiles/pdu_telnet.ffsp"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="65f6c352-6b62-4d30-a3e1-4281b0869aee" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>PDU Outlet System Power On</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="055cc49a-a870-4781-ae57-7366432a2124" action="GET" session="velocity">
+                                                            <command>
+                                                                <body>velocity/api/inventory/v16/devices?includeProperties=true&amp;searchString=[pdu_ip_add]</body>
+                                                            </command>
+                                                            <postProcessing>
+                                                                <analysisRules>
+                                                                    <item>
+                                                                        <extractorInfo extractorType="query">
+                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                <query>mapped/Json/devices/item/name</query>
+                                                                            </extractorProperties>
+                                                                        </extractorInfo>
+                                                                        <processorInfo ruleType="store">
+                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                <storageLocation>device_name_PDU</storageLocation>
+                                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                            </ruleProperties>
+                                                                        </processorInfo>
+                                                                    </item>
+                                                                </analysisRules>
+                                                            </postProcessing>
+                                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="velocity/api/inventory/v16/devices?includeProperties=true&amp;searchString=[pdu_ip_add]" action.inherit="false"/>
+                                                        </item>
+                                                        <item guid="6f5127fb-3b6d-471a-9d74-4e041f46df77" action="for" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>index in range(len(conn_prop_devices_name_list)):</body>
+                                                            </command>
+                                                            <nestedSteps>
+                                                                <item guid="c01e9f0b-ea1c-4971-a61a-675691b9c71c" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>device=conn_prop_devices_name_list[index]</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="0721b89f-9390-43eb-a84d-804e29645787" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>num=conn_prop_devices_port_list[index]</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="ec7da9d0-1493-4c8e-9229-3415734a4b17" action="if" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>device==device_name_PDU:</body>
+                                                                    </command>
+                                                                    <nestedSteps>
+                                                                        <item guid="0e9b2752-dc48-428c-b0c6-19c4e1bf33a3" action="pduPowerOn" session="[pdu_session]" useFieldsInCommand="false">
+                                                                            <command>
+                                                                                <body>-outlet_num [num]</body>
+                                                                            </command>
+                                                                            <postProcessing>
+                                                                                <analysisRules>
+                                                                                    <item>
+                                                                                        <extractorInfo extractorType="query">
+                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                                                <query>retCode()</query>
+                                                                                            </extractorProperties>
+                                                                                        </extractorInfo>
+                                                                                        <processorInfo ruleType="assert">
+                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                                                <expression>str(value) == &quot;TRUE&quot;</expression>
+                                                                                                <actionsWhenTrue>
+                                                                                                    <item actionId="DeclareExecutionIssue">
+                                                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                                                            <message>--- pdu power on action is OK for outlet number &quot;[num]&quot;</message>
+                                                                                                        </actionProperties>
+                                                                                                    </item>
+                                                                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                                    </item>
+                                                                                                </actionsWhenTrue>
+                                                                                                <actionsWhenFalse>
+                                                                                                    <item actionId="DeclareExecutionIssue">
+                                                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                                                            <message>--- pdu power on action is NOK for outlet number &quot;[num]&quot;; fail test...</message>
+                                                                                                        </actionProperties>
+                                                                                                    </item>
+                                                                                                    <item actionId="FailTest">
+                                                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                                    </item>
+                                                                                                </actionsWhenFalse>
+                                                                                            </ruleProperties>
+                                                                                        </processorInfo>
+                                                                                    </item>
+                                                                                </analysisRules>
+                                                                            </postProcessing>
+                                                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                                            <advancedProperties defaultSessionProfile="project://PDU_telnet/session_profiles/pdu_telnet.ffsp"/>
+                                                                        </item>
+                                                                    </nestedSteps>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="5c168990-6f5c-432a-958a-a991b5f17941" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>Close sessions</body>
+                                                            </command>
+                                                            <nestedSteps>
+                                                                <item guid="0b671c73-b81b-4d9b-a57c-f79d284e4912" action="pduQuitSession" session="[pdu_session]" useFieldsInCommand="false">
+                                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                                    <advancedProperties defaultSessionProfile="project://PDU_telnet/session_profiles/pdu_telnet.ffsp"/>
+                                                                </item>
+                                                                <item guid="fc4c4e3b-8769-41cb-8b18-198281a1ba4c" action="close" session="[pdu_session]">
+                                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                                    <advancedProperties defaultSessionProfile="project://PDU_telnet/session_profiles/pdu_telnet.ffsp"/>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="aa95533c-7717-4503-beaf-43dc04021b02" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>reinit dict</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="bcef605b-4ee5-4027-b2aa-4116cc42b4ec" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>device_pdu_dict={}</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="5c2df440-6ebe-4895-b5b2-17f89a40ef33" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_conn_list=[]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="78dab8f9-5e1f-49a7-8932-390f71a01bda" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>conn_prop_devices_name_list=[]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="e895b846-f432-42a5-bff7-83953f60d821" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>conn_prop_devices_port_list=[]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="5a350729-84f6-4b1a-a4f0-3fe50f3c2530" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_conn_ports_dict={}</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="353f31b4-c487-4e73-a879-c61565e6acd2" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_port_names_list=[]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="e1c74223-f6c4-47f4-be8c-45366ffbd1b3" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_password_list=[]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="f85ae5f2-7a62-47ff-b24f-acdcf3279dba" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_username_list=[]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="270e5f92-8a7f-4872-9bae-2afc98cbd409" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>pdu_ip_add_list=[]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="0ebf70dc-08b5-4237-aec2-d213e87cefee" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Wait until Devices are operational after powered on:</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="none">
+                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                </extractorInfo>
+                                <processorInfo ruleType="message">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                        <message>Wait until devices are operational after powered on:</message>
+                                        <tag sub="false" defaultValue=""/>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <nestedSteps>
+                        <item guid="8a9405d8-3b6d-45d5-8725-45108df7426a" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>console_port, console_ip_addr in console_dict.items():</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="dd40ca5f-c56d-4655-8c29-ab822f7ab98f" action="open" session="[console_port]" useFieldsInCommand="false">
+                                    <command>
+                                        <body>application:com.fnfr.svt.applications.telnet</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                            <promptProperties>
+                                                <stepPrompts>
+                                                    <item name="prompt1" MatchMethod="WILDCARD">
+                                                        <Content sub="true">*</Content>
+                                                    </item>
+                                                </stepPrompts>
+                                            </promptProperties>
+                                            <completionProperties>
+                                                <completeWhen inherit="false">TIMED</completeWhen>
+                                            </completionProperties>
+                                        </stepProperties>
+                                        <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties">
+                                            <ipAddress inherit="false">[console_ip_addr]</ipAddress>
+                                            <port inherit="false">[console_port]</port>
+                                            <TerminalProperties>
+                                                <keyboardProperties>
+                                                    <carriageReturn inherit="false">SLASH_R</carriageReturn>
+                                                </keyboardProperties>
+                                            </TerminalProperties>
+                                        </sessionProperties>
+                                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    </applicationProperties>
+                                    <advancedProperties defaultSessionProfile="application:com.fnfr.svt.applications.telnet"/>
+                                </item>
+                                <item guid="6d9cc52e-f128-49af-909a-9984c5479995" action="sleep">
+                                    <command>
+                                        <body>10</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <advancedProperties defaultSessionProfile="application:com.fnfr.svt.applications.telnet"/>
+                                </item>
+                                <item guid="1a05bf58-89ed-4665-b898-98ae977b774b" action="command" session="[console_port]" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Q</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                        <query>promptName()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>str(value) == &quot;prompt1&quot;</expression>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                    <message>--- device console ip addr &quot;[console_ip_addr]&quot; port &quot;[console_port]&quot; is operational</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                        <actionsWhenFalse>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
+                                                                    <message>--- need to wait for prompt...</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="RepeatStep">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="100" delayBetweenRepeats="5.0"/>
+                                                            </item>
+                                                        </actionsWhenFalse>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                        <promptProperties>
+                                            <stepPrompts>
+                                                <item name="prompt1" MatchMethod="WILDCARD">
+                                                    <Content sub="true">* login:</Content>
+                                                </item>
+                                                <item name="prompt2" MatchMethod="WILDCARD" TypeOfPrompt="PASSWORD">
+                                                    <Content sub="true">* #</Content>
+                                                </item>
+                                                <item name="prompt3">
+                                                    <Content>Password:</Content>
+                                                </item>
+                                                <item name="prompt4">
+                                                    <Content>--More-- </Content>
+                                                    <MoreNextCommand> \\r</MoreNextCommand>
+                                                </item>
+                                                <item name="prompt5">
+                                                    <Content>Do you want to continue? (y/n)</Content>
+                                                </item>
+                                                <item name="prompt6" MatchMethod="WILDCARD">
+                                                    <Content sub="true">* (*) #</Content>
+                                                </item>
+                                                <item name="prompt7" MatchMethod="WILDCARD">
+                                                    <Content sub="true">*:</Content>
+                                                </item>
+                                                <item name="prompt8" MatchMethod="WILDCARD">
+                                                    <Content sub="true">*</Content>
+                                                </item>
+                                            </stepPrompts>
+                                        </promptProperties>
+                                        <completionProperties promptLearnUserResponseTime="60" promptLearnUserResponseTime.inherit="false">
+                                            <completeWhen inherit="false">AUTO_OR_IDLE</completeWhen>
+                                        </completionProperties>
+                                    </applicationProperties>
+                                    <advancedProperties defaultSessionProfile="application:com.fnfr.svt.applications.telnet"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="26da1b54-5a12-457b-96c3-ff7f34939224" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Close session</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="27de442e-9c6a-42a3-825f-afb58dca2d39" action="close" session="velocity">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>
