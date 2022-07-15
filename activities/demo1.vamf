@@ -13,13 +13,13 @@
 			"startupTasks": [
 				{
 					"addRepositoryNamePrefix": "false",
-					"testPath": "automation_assets/PDU_telnet/test_cases/optionAllDevicesPowerOn.fftc"
+					"testPath": "Fortinet-Velocity-Demo/automation_assets/PDU_telnet/test_cases/optionAllDevicesPowerOn.fftc"
 				}
 			],
 			"teardownTasks": [
 				{
 					"addRepositoryNamePrefix": "false",
-					"testPath": "automation_assets/PDU_telnet/test_cases/optionAllDevicesPowerOff.fftc"
+					"testPath": "Fortinet-Velocity-Demo/automation_assets/PDU_telnet/test_cases/optionAllDevicesPowerOff.fftc"
 				}
 			]
 		}
