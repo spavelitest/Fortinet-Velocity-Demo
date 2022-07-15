@@ -13,13 +13,13 @@
 			"startupTasks": [
 				{
 					"addRepositoryNamePrefix": "true",
-					"testPath": "/automation_assets/PDU_telnet/test_cases/optionAllDevicesPowerOn.fftc"
+					"testPath": "automation_assets/PDU_telnet/test_cases/optionAllDevicesPowerOn.fftc"
 				}
 			],
 			"teardownTasks": [
 				{
 					"addRepositoryNamePrefix": "true",
-					"testPath": "/automation_assets/PDU_telnet/test_cases/optionAllDevicesPowerOff.fftc"
+					"testPath": "automation_assets/PDU_telnet/test_cases/optionAllDevicesPowerOff.fftc"
 				}
 			]
 		}
