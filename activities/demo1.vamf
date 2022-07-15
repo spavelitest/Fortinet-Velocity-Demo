@@ -12,13 +12,13 @@
 			"reservationDuration": "60",
 			"startupTasks": [
 				{
-					"addRepositoryNamePrefix": "true",
+					"addRepositoryNamePrefix": "false",
 					"testPath": "automation_assets/PDU_telnet/test_cases/optionAllDevicesPowerOn.fftc"
 				}
 			],
 			"teardownTasks": [
 				{
-					"addRepositoryNamePrefix": "true",
+					"addRepositoryNamePrefix": "false",
 					"testPath": "automation_assets/PDU_telnet/test_cases/optionAllDevicesPowerOff.fftc"
 				}
 			]
