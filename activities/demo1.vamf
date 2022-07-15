@@ -10,6 +10,7 @@
 			"actionTitle": "Reserve",
 			"description": "Topology reservation for a single Fortigate Firewall resource",
 			"reservationDuration": "60",
+			"intervalToRunEndTestCase": "60",
 			"startupTasks": [
 				{
 					"addRepositoryNamePrefix": "false",
