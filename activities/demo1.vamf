@@ -10,45 +10,16 @@
 			"actionTitle": "Reserve",
 			"description": "Topology reservation for a single Fortigate Firewall resource",
 			"reservationDuration": "60",
-			"automation": [
+			"startupTasks": [
 				{
 					"addRepositoryNamePrefix": "true",
-					"testPath": "activity-catalog-assets/regression/velo-6974_1.fftc"
-				},
+					"testPath": "/automation_assets/PDU_telnet/test_cases/optionAllDevicesPowerOn.fftc"
+				}
+			],
+			"teardownTasks": [
 				{
 					"addRepositoryNamePrefix": "true",
-					"name": "Name Defined In Manifest",
-					"testPath": "activity-catalog-assets/regression/velo-6974_2.fftc"
-				},
-				{
-					"addRepositoryNamePrefix": "false",
-					"testPath": "main/simpleTestCase/test_cases/nothing.fftc"
-				},
-				{
-					"testPath": "demo/activity-catalog-assets/test_cases/runlistParamFile.fftc",
-					"allowToRunWithOptions":true,
-					"parameterFilePath": "demo/activity-catalog-assets/parameters/parameterFile1.ffpt",
-					"parametersList": [
-						{
-							"name": "parameterFile2",
-							"value": "asuihfasdhfu",
-							"type": "TEXT"
-						}
-					]
-				},
-				{
-					"testPath": "demo/activity-catalog-assets/test_cases/agentReq1.fftc",
-					"allowToRunWithOptions":true,
-					"requirements":[
-						{
-							"name": "testreq1",
-							"value": "testvalue2"
-						}
-					]
-				},
-				{
-					"testPath": "eduard-repo-package/runlists/scl_1.vrl",
-					"parameterFilePath": "main/simpleTestCase/libraries/parameters.ffpt"
+					"testPath": "/automation_assets/PDU_telnet/test_cases/optionAllDevicesPowerOff.fftc"
 				}
 			]
 		}
