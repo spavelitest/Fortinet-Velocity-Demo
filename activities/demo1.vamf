@@ -10,16 +10,17 @@
 			"actionTitle": "Reserve",
 			"description": "Topology reservation for a single Fortigate Firewall resource",
 			"reservationDuration": "60",
+			"intervalToRunEndTestCase": "60",
 			"startupTasks": [
 				{
-					"addRepositoryNamePrefix": "true",
-					"testPath": "/automation_assets/PDU_telnet/test_cases/optionAllDevicesPowerOn.fftc"
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/PDU_telnet/test_cases/optionAllDevicesPowerOn.fftc"
 				}
 			],
 			"teardownTasks": [
 				{
-					"addRepositoryNamePrefix": "true",
-					"testPath": "/automation_assets/PDU_telnet/test_cases/optionAllDevicesPowerOff.fftc"
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/PDU_telnet/test_cases/optionAllDevicesPowerOff.fftc"
 				}
 			]
 		}
