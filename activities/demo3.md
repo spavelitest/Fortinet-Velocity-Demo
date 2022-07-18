@@ -18,7 +18,7 @@
     * On "Information" tab you should see the Reservation status as Active
     * Goto "Resources" tab from the Reservation page and check "Resources Added when the Topology was Resolved" tab; you should see the L1 ports that have been dynamically added by Velocity; also here you should see you should see Ports information from the Test switch and VLAN information per Port (if any)
     * For "Reservation of \[demo#3\] Topology 1" goto "Topology" page and click on the Link between the two Resources - you should see the option to "Break" and then "Restore" the link; Velocity displays in real time the status of the L1 connection (please see snapshot below under Images section)
-    * For "Reservation of \[demo#3\] Topology 2" goto "Topology" page; you will see VLAN information as L2 connectivity is on top of the L1; L1 connectivity information is located under "Resources" page 
+    * For "Reservation of \[demo#3\] Topology 2" goto "Topology" page; you will see VLAN information as L2 connectivity is on top of the L1; L1 connectivity information is located under "Resources" page (please see snapshot below under Images section)
     * Goto "Automation" tab to see the configured mandatory automated tasks
 * **Mandatory Automation Tasks:**
     * Goto "Topologies" section below this activity page and open Startup and Teardown tasks; these are mandatory tasks created by the Admin and configured to execute at the start and end of each Reservation
@@ -31,4 +31,5 @@
 
 # Images:
 #![Image from file](demo3_1.jpg)
+#![Image from file](demo3_2.jpg)
 
