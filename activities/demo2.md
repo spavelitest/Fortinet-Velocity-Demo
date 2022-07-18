@@ -20,8 +20,8 @@
     * If Reservation is successful you should see "Release" button to end Reservation; goto "Reservation" page
 * **On Reservation Page:**
     * On "Information" tab you should see the Reservation status as Active
-    * Goto "Topology" tab and check that "MultiVLAN" cloud is coloured in "green" meaning that VLAN configuration created by the "Driver" script was successful; you can select "MultiVLAN cloud" and validate VLAN IDs definition from "MultiVLAN Ports" panel
     * Goto "Resources" tab and check what Resources were added after the Topology got resolved; you should see Ports information from the Test switch and VLAN information per Port
+    * If multiple VLANs are expected go to the "Topology" tab and check that "MultiVLAN" cloud is coloured in "green" meaning that VLAN configuration created by the "Driver" script was successful; you can select "MultiVLAN cloud" and validate VLAN IDs definition from "MultiVLAN Ports" panel
     * Goto "Automation" tab to see the configured mandatory automated tasks
 * **Mandatory Automation Tasks:**
     * Goto "Topologies" section below this activity page and open Startup and Teardown tasks; these are mandatory tasks created by the Admin and configured to execute at the start and end of each Reservation
