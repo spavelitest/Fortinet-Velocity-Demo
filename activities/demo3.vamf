@@ -1,0 +1,57 @@
+{
+	"name": "Demo#3",
+	"shortDescription": "Reservation of a Fortigate firewall connected to a another Resource using L1 switch: Topology reservation demo; Dynamic L1 port mapping during activation",
+	"icon": "fortinet-logo.png",
+	"descriptionMarkdown": "demo2.md",
+	"topology": [
+		{
+			"name": "[demo#2] Topology 1",
+			"addRepositoryNamePrefix": "false",
+			"actionTitle": "Reserve",
+			"description": "Topology with Fortigate firewall connected to a Test switch using a single Port and Vlan",
+			"reservationDuration": "15",
+			"intervalToRunEndTestCase": "60",
+			"startupTasks": [
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/PDU_telnet/test_cases/optionAllDevicesPowerOn.fftc"
+				}
+			],
+			"teardownTasks": [
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/optionBackupVelocityReservationDetails.fftc"
+				},
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/PDU_telnet/test_cases/optionAllDevicesPowerOff.fftc"
+				}
+			]
+		},
+		{
+			"name": "[demo#2] Topology 2",
+			"addRepositoryNamePrefix": "false",
+			"actionTitle": "Reserve",
+			"description": "Topology with Fortigate firewall connected to a Test switch using a two Ports and multiple Vlans",
+			"reservationDuration": "15",
+			"intervalToRunEndTestCase": "60",
+			"startupTasks": [
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/PDU_telnet/test_cases/optionAllDevicesPowerOn.fftc"
+				}
+			],
+			"teardownTasks": [
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/optionBackupVelocityReservationDetails.fftc"
+				},
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/PDU_telnet/test_cases/optionAllDevicesPowerOff.fftc"
+				}
+			]
+		}
+		
+	]
+}
