@@ -9,7 +9,7 @@
     * If Reservation is successful you should see "Release" button to end Reservation
     * Click (open in a new tab) on "Reservation of \[demo#1\] Topology" to enter Velocity Reservations page
 * **On Reservation Page:**
-    * On Information tab you should see the Reservation status as Active
+    * On Information tab you should see the Reservation status as Active; Reservation becomes Active after the Driver and other mandatory automation startup tasks have completed successfully
     * Goto Topology tab and click on the Fortigate resource; the Topology page should open
     * Click on Fortigate resource and select "Actions" -> "HTTP"; a new HTTP connection to Fortigate should open in a new window
     * Click on Fortigate resource and select "Sessions" tab located in the left side of the page; Inherited sessions tab should display the "console" session
