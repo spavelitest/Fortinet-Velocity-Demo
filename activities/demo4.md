@@ -11,7 +11,8 @@
     * Startup task "optionSetMgmtIpAddr.fftc" will be executed ONLY IF property "Dynamic ipAddress" of the Fortigate is set to "yes" (by default "Dynamic ipAddress" resource property is set to "no"); Only Fortigate devices have this property and you'll need to "Edit" the Fortigate resource before you create the Topology (please see snapshot below under Images section)
     * Velocity will choose the first available host ip address (not used in Velocity for other Resource) based on the Management VLAN ID configured in the Topology
     * Teardown task "optionRestoreDefaultMgmtIpAddr.fftc" will bring back the default Management ipAddress of the Fortigate based on the resource unique Name property
-    * Auto "Discover" action should update the ipAddress property of the Fortigate and should be visible automatically in the Topology page (please see snapshot below under Images section)  
+    * Auto "Discover" action should update the ipAddress property of the Fortigate and should be visible automatically in the Topology page (please see snapshot below under Images section) 
+    * The default management VLAN ID is "1020" and will be configured by the Driver on the Management switch when Reservation ends and VLAN configuration gets removed
 * **Reserve Topology**  
     * Default Reservation duration is set to 30 minutes
     * If Reservation is successful you should see "Release" button to end Reservation; goto "Reservation" page
@@ -22,9 +23,10 @@
 * **Mandatory Automation Tasks:**
     * Goto "Topologies" section below this activity page and open Startup and Teardown tasks; these are mandatory tasks created by the Admin and configured to execute at the start and end of each Reservation
     * As soon as you hit "Reserve" on this Topology the mandatory Startup task to "Power On" executes for the Fortigate; Click on "Reservation of \[demo#4\] Topology 1" and in the Reservation page navigate to "Automation" tab; The script "optionAllDevicesPowerOn.fftc" (configured as mandatory Startup task) execution report can be displayed in real time if you click on "View report"
-    * 
+    * Startup task "optionSetMgmtIpAddr.fftc" will be executed ONLY IF property "Dynamic ipAddress" of the Fortigate is set to "yes" (by default "Dynamic ipAddress" resource property is set to "no"); Only Fortigate devices have this property and you'll need to "Edit" the Fortigate resource before you reserve the Topology and the startup task execution starts; Auto-Discover will update the new ipAddress property of the Fortigate
     * The "Backup" script "optionBackupVelocityReservationDetails.fftc" configured as mandatory Teardown task is creating a backup archive which is sent to the "Reservation"'s owner (User) email address; the email displays all "Reservation" detailed information about Topology, Resources, Ports and VLANs taken from Velocity as HTML format and also contains the configuration files from all "Fortigate firewall" and "Management switch" devices from Topology and the Topology file as TBML (The TBML file can be imported manually in Velocity)  
-    * Expect new email from "velocity@fortinet.com" and check L1 device and port information
+    * Expect new email from "velocity@fortinet.com" and check the new assigned management ipAddress for the Fortigate resource
+    * Teardown task "optionRestoreDefaultMgmtIpAddr.fftc" will bring back the default Management ipAddress on the Fortigate based on the resource unique "Name" property; Auto-Discover is triggered again to update the default ipAddress and default VLAN configuration on the Management switch (default management VLAN ID is "1020")
     * All Fortigate devices should be Powered Off if they are not used in an active Reservation; these mandatory automated tasks to Power On/Off apply to "Fortigate Firewall" devices only (test switches which are shared among users will not be Powered Off by these automated tasks) 
 
 
