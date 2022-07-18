@@ -1,6 +1,6 @@
 {
 	"name": "Demo#4",
-	"shortDescription": "Reservation of Fortigate firewall dynamically connected to L2 management switch: Topology reservation demo; Dynamic management ipAddress allocation; Dynamic management VLAN configuration; Dynamically restoring default VLAN configuration and ipAddress",
+	"shortDescription": "Reservation of Fortigate firewall dynamically connected to L2 management switch: Topology reservation demo; Dynamic management ipAddress allocation; Dynamic mgmt VLAN configuration; Dynamic restore of default settings.",
 	"icon": "fortinet-logo.png",
 	"descriptionMarkdown": "demo4.md",
 	"topology": [
