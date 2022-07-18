@@ -1,0 +1,41 @@
+{
+	"name": "Demo#4",
+	"shortDescription": "Reservation of Fortigate firewall dynamically connected to L2 management switch: Topology reservation demo; Dynamic management ipAddress allocation; Dynamic management VLAN configuration; Dynamically restoring default VLAN configuration and ipAddress",
+	"icon": "fortinet-logo.png",
+	"descriptionMarkdown": "demo4.md",
+	"topology": [
+		{
+			"name": "[demo#4] Topology 1",
+			"addRepositoryNamePrefix": "false",
+			"actionTitle": "Reserve",
+			"description": "Topology with Fortigate firewall dynamically connected to another Resource using L1 switch",
+			"reservationDuration": "30",
+			"intervalToRunEndTestCase": "60",
+			"startupTasks": [
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/PDU_telnet/test_cases/optionAllDevicesPowerOn.fftc"
+				},
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/optionSetMgmtIpAddr.fftc"
+				}
+			],
+			"teardownTasks": [
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/optionBackupVelocityReservationDetails.fftc"
+				},
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/optionRestoreDefaultMgmtIpAddr.fftc"
+				},
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/PDU_telnet/test_cases/optionAllDevicesPowerOff.fftc"
+				}
+			]
+		}
+		
+	]
+}
