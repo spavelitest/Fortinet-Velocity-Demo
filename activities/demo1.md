@@ -7,7 +7,7 @@
 * **Reserve Topology**  
     * Default Reservation duration is 60 minutes
     * If Reservation is successful you should see "Release" button to end Reservation
-    * Click on "Reservation of \[demo#1\] Topology" to enter Velocity Reservations page
+    * Click (open in a new tab) on "Reservation of \[demo#1\] Topology" to enter Velocity Reservations page
 * **On Reservation Page:**
     * On Information tab you should see the Reservation status as Active
     * Goto Topology tab and click on the Fortigate resource; the Topology page should open
