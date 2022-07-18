@@ -2,14 +2,14 @@
 	"name": "Demo#3",
 	"shortDescription": "Topology with Fortigate firewall dynamically connected to another Resource using L1 switch: Topology reservation demo; Dynamic L1 port mapping during activation; Resolved L1 ports after activation; Break or Restore link option; Dynamic L1 under L2",
 	"icon": "fortinet-logo.png",
-	"descriptionMarkdown": "demo2.md",
+	"descriptionMarkdown": "demo3.md",
 	"topology": [
 		{
-			"name": "[demo#2] Topology 1",
+			"name": "[demo#3] Topology 1",
 			"addRepositoryNamePrefix": "false",
 			"actionTitle": "Reserve",
-			"description": "Topology with Fortigate firewall connected to a Test switch using a single Port and Vlan",
-			"reservationDuration": "15",
+			"description": "Topology with Fortigate firewall dynamically connected to another Resource using L1 switch",
+			"reservationDuration": "30",
 			"intervalToRunEndTestCase": "60",
 			"startupTasks": [
 				{
@@ -29,12 +29,12 @@
 			]
 		},
 		{
-			"name": "[demo#2] Topology 2",
+			"name": "[demo#3] Topology 2",
 			"addRepositoryNamePrefix": "false",
 			"actionTitle": "Reserve",
-			"description": "Topology with Fortigate firewall connected to a Test switch using a two Ports and multiple Vlans",
+			"description": "Topology with Fortigate firewall dynamically connected to a Test switch using L1 switch under a L2 connection",
 			"reservationDuration": "15",
-			"intervalToRunEndTestCase": "60",
+			"intervalToRunEndTestCase": "30",
 			"startupTasks": [
 				{
 					"addRepositoryNamePrefix": "false",
