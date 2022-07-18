@@ -1,26 +1,22 @@
 # User Steps:
 
-* **Create a new Topology with a single Fortigate resource connected to a Test switch using a single VLAN on a single Port**
-    * When connecting the Fortigate to a L2 Inventory Resource just select "New VLAN" from the right side panel within the "Topology" page; Velocity will know how to connect the Fortigate to a L2 switch based on the existing "Physical Connections" under the Inventory (otherwise you'll get a "Connection" error)
-    * Below in this activity page you can find a sample Topology (\[demo#2\] Topology 1) that can be used for training purposes
-    * Click (open in a new window) on "\[demo#2\] Topology 1" below in this activity page and go to the "Topology" page; click "Edit" to open the Topology for editing; click on "VLAN" cloud and check "ID" field in the left side of the page; you can define a custom VLAN ID or you can let Velocity choose a VLAN ID which is not used; Velocity is selecting the VLAN ID value from the "VLAN ID Set" which is defined for all Test switch resources independently (current set is \[10-1000\] for all Test switches). Change VLAN ID value and save Topology
-    * From this activity page click on "Reserve" to start the Reservation; click on "Reservation of \[demo#2\] Topology 1" and go to the "Reservation" page
-    * The Test switch "Driver" script is triggered to build the VLAN expected configuration and resolve the Reservation
-    * For a single VLAN, Velocity is using tagging "untagged" to identify the request; this translates in sending specific commands through the console connection to create a mode access VLAN (Arista Test switch) or trun native VLAN (Fortinet Test switch) using the VLAN ID from Topology
-* **Create a new Topology with a single Fortigate resource connected to a Test switch using a multiple VLANs on multiple Ports**
-    * When connecting the Fortigate to a L2 Inventory Resource just select "New MultiVLAN" from the right side panel within the "Topology" page; Velocity will know how to connect the Fortigate to a L2 switch based on the existing "Physical Connections" under the Inventory (otherwise you'll get a "Connection" error)
-    * Below in this activity page you can find a sample Topology (\[demo#2\] Topology 2) that can be used for training purposes
-    * Click (open in a new window) on "\[demo#2\] Topology 2" below in this activity page and go to the "Topology" page; click "Edit" to open the Topology for editing; click on "MultiVLAN" cloud and check "MultiVLAN Ports" panel in the left side of the page; click on "View port properties" to check the current definition for the "untagged" and "tagged" VLAN IDs values (please note that Port1 and Port2 have different VLAN ID sets)
-    * Change VLAN IDs values and save Topology
-    * From this activity page click on "Reserve" to start the Reservation; click on "Reservation of \[demo#2\] Topology 2" and go to the "Reservation" page
-    * The Test switch "Driver" script is triggered to build the VLAN expected configuration and resolve the Reservation
-    * For multiple VLANs, Velocity is using both "tagged" and "untagged" tagging to identify the request; this translates in sending specific commands through the console connection to create trunk native VLAN (for tagging "untagged") and trunk allowed-vlans (for tagging "tagged") using the VLAN IDs from Topology
+* **Create a new Topology with a Fortigate resource connected to a Tester or other Resource (except L2 switch) using L1 connections in between**
+    * When connecting the Fortigate to another Resource and there is a L1 connection in between, you will not see the L1 ports in Velocity; Velocity knows how to map the L1 ports to establish the requested connection between Resources; Options to "Break" and/or "Restore" the L1 connection will be available in the Topology page after the Reservation becomes Active
+    * Once the Reservation becomes Active you will see the L1 resolved ports under "Resources" tab in the Reservation page
+    * Below in this activity page you can find a sample Topology (\[demo#3\] Topology 1) that can be used for training purposes
+    * Click (open in a new window) on "\[demo#3\] Topology 1" below in this activity page and go to the "Topology" page; you will see the Fortigate connected to a Tester device; the L1 connection between these 2 Resources is not visible in the Topology page, but should be already created in the "Physical Connections" page under Inventory
+    * From this activity page click on "Reserve" to start the Reservation; click (open in a new tab) on "Reservation of \[demo#3\] Topology 1" and go to the "Reservation" page
+* **Create a new Topology with a Fortigate resource connected to a Test switch using L1 connections in between**
+    * When connecting the Fortigate to a L2 switch and there is a L1 connection in between, you will not see neither L1 and L2 connections in Velocity; Velocity knows how to map the L1 ports to establish the requested connection to a L2 switch; the Driver dynamically build the requested VLAN on top of the L1 connection; Options to "Break" and/or "Restore" the L1 connections are not available if there is an L2 connections on top 
+    * Below in this activity page you can find a sample Topology (\[demo#3\] Topology 2) that can be used for training purposes
+    * Click (open in a new window) on "\[demo#3\] Topology 2" below in this activity page and go to the "Topology" page; you will see the Fortigate connected to a VLAN cloud; the L1 connection is not visible in the Topology page, but should be already created in the "Physical Connections" page under Inventory
+    * From this activity page click on "Reserve" to start the Reservation; click (open in a new tab) on "Reservation of \[demo#3\] Topology 2" and go to the "Reservation" page
 * **Reserve Topology**  
-    * Default Reservation duration is set to 15 minutes
+    * Default Reservation duration is set to 30 minutes
     * If Reservation is successful you should see "Release" button to end Reservation; goto "Reservation" page
 * **On Reservation Page:**
     * On "Information" tab you should see the Reservation status as Active
-    * Goto "Topology" tab and check that "MultiVLAN" cloud is coloured in "green" meaning that VLAN configuration created by the "Driver" script was successful; you can select "MultiVLAN cloud" and validate VLAN IDs definition from "MultiVLAN Ports" panel
+    * Goto "Resources" tab from the Reservation page and check "Resources Added when the Topology was Resolved" tab; you should see the L1 ports that have been dynamically added by Velocity
     * Goto "Resources" tab and check what Resources were added after the Topology got resolved; you should see Ports information from the Test switch and VLAN information per Port
     * Goto "Automation" tab to see the configured mandatory automated tasks
 * **Mandatory Automation Tasks:**
