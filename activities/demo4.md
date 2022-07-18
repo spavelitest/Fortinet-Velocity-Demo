@@ -7,6 +7,9 @@
     * From this activity page click on "Reserve" to start the Reservation; click on "Reservation of \[demo#4\] Topology 1" and go to the "Reservation" page
     * The Management switch "Driver" script is triggered to build the VLAN expected configuration and resolve the Reservation
     * For a single VLAN, Velocity is using tagging "untagged" to identify the request; this translates in sending specific commands through the console connection to create a trunk native VLAN (Fortinet Management switch) using the VLAN ID from Topology
+    * If you change the Management VLAN you may want to assign a new management ipAddress to the Fortigate firewall resource; for this purpose there is a mandatory startup task which will assign a new ipAddress for the Fortigate based on range of ip addresses predefined for the Management networks (current: 1200 - 1209)
+    * Startup task "optionSetMgmtIpAddr.fftc" will be executed ONLY IF property "Dynamic ipAddress" of the Fortigate is set to "yes" (by default "Dynamic ipAddress" resource property is set to "no"); Only Fortigate devices have this property and you'll need to Edit the Fortigate resource before you create the Topology (please see snapshot below under Images section)
+    * Teardown task "optionRestoreDefaultMgmtIpAddr.fftc" will bring back the default Management ipAddress of the Fortigate based on the resource unique Name property 
 * **Reserve Topology**  
     * Default Reservation duration is set to 30 minutes
     * If Reservation is successful you should see "Release" button to end Reservation; goto "Reservation" page
