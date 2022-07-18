@@ -1,6 +1,6 @@
 {
 	"name": "Demo#3",
-	"shortDescription": "Topology with Fortigate firewall dynamically connected to another Resource using L1 switch: Topology reservation demo; Dynamic L1 port mapping during activation; Resolved L1 ports after activation; Break or Restore link option; Dynamic L1 under L2 connectivity.",
+	"shortDescription": "Topology with Fortigate firewall dynamically connected to another Resource using L1 switch: Topology reservation demo; Dynamic L1 port mapping during activation; Resolved L1 ports after activation; Break or Restore link option; Dynamic L1 under L2.",
 	"icon": "fortinet-logo.png",
 	"descriptionMarkdown": "demo3.md",
 	"topology": [
