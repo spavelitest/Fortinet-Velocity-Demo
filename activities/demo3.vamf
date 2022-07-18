@@ -32,8 +32,8 @@
 			"name": "[demo#3] Topology 2",
 			"addRepositoryNamePrefix": "false",
 			"actionTitle": "Reserve",
-			"description": "Topology with Fortigate firewall dynamically connected to a Test switch using L1 switch under a L2 connection",
-			"reservationDuration": "15",
+			"description": "Topology with Fortigate firewall dynamically connected to a Test switch using a L1 switch under the L2 connection",
+			"reservationDuration": "30",
 			"intervalToRunEndTestCase": "30",
 			"startupTasks": [
 				{
