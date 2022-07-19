@@ -12,7 +12,8 @@
     * On "Information" tab you should see the Reservation status as Active
     * Goto "Resources" tab and check what Resources were added after the Topology got resolved; you should see Ports and VLAN information per Port
 * **Automation Scripts:**
-    * Open the drop-down menu from Topologies/Automation section below in this activity page and check existing options; there are 4 scripts 
+    * Open the drop-down menu from "Topologies/Automation" section below in this activity page and check existing options; there are 4 scripts available - you may notice that all of their names start with "tool(something).fftc" - this notation is used to identify them as scripts which require the User to input parameters values for execution; in contrast all mandatory automation task names start with "option(something).fftc" - indicating that there is no need for the User to input any parameter value
+    * For "Port Speed" actions you should try automated script "toolSetPortSpeed.fftc" and click on "Run with Options"; the Automation Assets page opens with the script details; go to "Parameters" tab and 
 * **Mandatory Automation Tasks:**
     * Goto "Topologies" section below this activity page and open Startup and Teardown tasks; these are mandatory tasks created by the Admin and configured to execute at the start and end of each Reservation
     * As soon as you hit "Reserve" on this Topology the mandatory Startup task to "Power On" executes for the Fortigate; Click on "Reservation of \[demo#4\] Topology 1" and in the Reservation page navigate to "Automation" tab; The script "optionAllDevicesPowerOn.fftc" (configured as mandatory Startup task) execution report can be displayed in real time if you click on "View report"
