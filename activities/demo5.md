@@ -13,8 +13,10 @@
     * Goto "Resources" tab and check what Resources were added after the Topology got resolved; you should see Ports and VLAN information per Port
 * **Automation Scripts:**
     * Open the drop-down menu from "Topologies/Automation" section below in this activity page and check existing options; there are 4 scripts available - you may notice that all of their names start with "tool(something).fftc" - this notation is used to identify them as scripts which require the User to input parameters values for execution; in contrast all mandatory automation task names start with "option(something).fftc" - indicating that there is no need for the User to input any parameter value
-    * For "Port Speed" actions you should try automated script "toolSetPortSpeed.fftc" and click on "Run with Options"; the Automation Assets page opens with the script details; go to "Parameters" tab and input values for required Parameters ("device_name", "device_port" and "port_speed"); then click Run and you'll get back to the activity page and can view the script execution report in real time (please see snapshot below under Images)
+    * For "Port Speed" actions you should try automated script "toolSetPortSpeed.fftc" and click on "Run with Options"; the Automation Assets page opens with the script details; go to "Parameters" tab and input values for required Parameters ("device_name", "device_port", "port_speed"); then click Run and you'll get back to the activity page and can view the script execution report in real time (please see snapshot below under Images)
     * "Port Speed" script execution triggers an Auto-Discover so that Ports information gets updated in Velocity; you can go and check Resource Port Speed property from Inventory (please see snapshot below under Images) 
+    * For "Port Split" actions you may want to try first automated script "toolSetSplitPort.fftc" and click on "Run with Options";  the Automation Assets page opens with the script details; go to "Parameters" tab and input values for Parameters ("device_name", "device_port", "phy_mode", "protocol", "device_speed" and "vlan_id"); then click Run and you'll get back to the activity page and can view the script execution report in real time (please see snapshot below under Images)
+    * "Port Split" script execution triggers an Auto-Discover so that Ports information gets updated in Velocity; you can go and check Resource Ports information from Inventory (please see snapshot below under Images)
 * **Mandatory Automation Tasks:**
     * Goto "Topologies" section below this activity page and open Startup and Teardown tasks; these are mandatory tasks created by the Admin and configured to execute at the start and end of each Reservation
     * As soon as you hit "Reserve" on this Topology the mandatory Startup task to "Power On" executes for the Fortigate; Click on "Reservation of \[demo#4\] Topology 1" and in the Reservation page navigate to "Automation" tab; The script "optionAllDevicesPowerOn.fftc" (configured as mandatory Startup task) execution report can be displayed in real time if you click on "View report"
@@ -29,4 +31,6 @@
 ![Image from file](demo5_1.jpg)
 ![Image from file](demo5_2.jpg)
 ![Image from file](demo5_3.jpg)
+![Image from file](demo5_4.jpg)
+![Image from file](demo5_5.jpg)
 
