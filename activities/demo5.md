@@ -1,8 +1,8 @@
 # User Steps:
 
 * **Create a new Topology with a Fortigate resource connected to L2 switch and use Port Speed and Port Split options when building the link**
-    * When connecting the Fortigate to a L2 switch for Management just select "New VLAN" from the right side panel within the "Topology" page; Velocity will know how to connect the Fortigate to a L2 management switch based on the existing "Physical Connections" under the Inventory (otherwise you'll get a "Connection" error) 
-    * Below in this activity page you can find a sample Topology (\[demo#4\] Topology 1) that can be used for training purposes
+    * When connecting the Fortigate to a L2 switch just select "New VLAN" from the right side panel within the "Topology" page; Velocity will know how to connect the Fortigate to a L2 switch based on the existing "Physical Connections" under the Inventory (otherwise you'll get a "Connection" error) 
+    * After Reservation becomes active you may want to perform a get/set Port Speed and/or Port Split actions; Below in this activity page you can find a sample Topology (\[demo#5\] Topology 1) that can be used for training purposes
     * Click (open in a new window) on "\[demo#5\] Topology 1" below in this activity page and go to the "Topology" page; click "Edit" to open the Topology for editing; click on "VLAN" cloud and check "ID" field in the left side of the page; you can define a custom VLAN ID or you can let Velocity choose a VLAN ID which is not used; Velocity is selecting the VLAN ID value from the "VLAN ID Set" which is defined for all Management L2 switch resources independently (current set is \[1200-1209\] for all Management switches). Change VLAN ID value and save Topology
     * From this activity page click on "Reserve" to start the Reservation; click on "Reservation of \[demo#4\] Topology 1" and go to the "Reservation" page
     * The Management switch "Driver" script is triggered to build the VLAN expected configuration and resolve the Reservation
