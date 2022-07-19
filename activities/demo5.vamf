@@ -34,7 +34,7 @@
 			"automation": [
 				{
 					"addRepositoryNamePrefix": "false",
-					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetPortSpeed.fftc"
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetPortSpeed.fftc",
 					"allowToRunWithOptions":true,
 					"parametersList": [
 						{
