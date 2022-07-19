@@ -41,16 +41,6 @@
 							"name": "device_name",
 							"value": "",
 							"type": "TEXT"
-						},
-						{
-							"name": "device_port",
-							"value": "",
-							"type": "TEXT"
-						},
-						{
-							"name": "port_speed",
-							"value": "",
-							"type": "TEXT"
 						}
 					]
 				},
