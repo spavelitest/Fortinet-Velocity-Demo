@@ -35,7 +35,7 @@
 				{
 					"addRepositoryNamePrefix": "false",
 					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetPortSpeed.fftc",
-					"allowToRunWithOptions":true,
+					"allowToRunWithOptions": "true",
 					"parametersList": [
 						{
 							"name": "device_name",
