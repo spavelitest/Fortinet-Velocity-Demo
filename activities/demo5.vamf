@@ -33,16 +33,16 @@
 			],
 			"automation": [
 				{
-					"addRepositoryNamePrefix": "false",
-					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetPortSpeed.fftc"
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetPortSpeed.fftc",
+					"allowToRunWithOptions":true
 				},
 				{
-					"addRepositoryNamePrefix": "false",
-					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetSplitPort.fftc"
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetSplitPort.fftc",
+					"allowToRunWithOptions":true
 				},
 				{
-					"addRepositoryNamePrefix": "false",
-					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetDevicesSplitPort.fftc"
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetDevicesSplitPort.fftc",
+					"allowToRunWithOptions":true
 				}
 			]	
 		}
