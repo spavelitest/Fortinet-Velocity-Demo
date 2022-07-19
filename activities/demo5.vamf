@@ -9,7 +9,7 @@
 			"addRepositoryNamePrefix": "false",
 			"actionTitle": "Reserve",
 			"description": "Topology with Fortigate firewall dynamically connected to L2 switch using port speed and port split options to create the link",
-			"reservationDuration": "20",
+			"reservationDuration": "45",
 			"intervalToRunEndTestCase": "60",
 			"startupTasks": [
 				{
