@@ -43,6 +43,10 @@
 				{
 					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetDevicesSplitPort.fftc",
 					"allowToRunWithOptions":true
+				},
+				{
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolUnsetSplitPort.fftc",
+					"allowToRunWithOptions":true
 				}
 			]	
 		}
