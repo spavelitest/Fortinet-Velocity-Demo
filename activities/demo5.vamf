@@ -1,0 +1,33 @@
+{
+	"name": "Demo#5",
+	"shortDescription": "Reservation of Fortigate firewall dynamically connected to L2 switch using port speed and port split options to create the link.: Topology reservation demo; Port Speed and Port Split automation; Running Automation with user input parameters.",
+	"icon": "fortinet-logo.png",
+	"descriptionMarkdown": "demo5.md",
+	"topology": [
+		{
+			"name": "[demo#5] Topology 1",
+			"addRepositoryNamePrefix": "false",
+			"actionTitle": "Reserve",
+			"description": "Topology with Fortigate firewall dynamically connected to L2 switch using port speed and port split options to create the link",
+			"reservationDuration": "20",
+			"intervalToRunEndTestCase": "60",
+			"startupTasks": [
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/PDU_telnet/test_cases/optionAllDevicesPowerOn.fftc"
+				}
+			],
+			"teardownTasks": [
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/optionBackupVelocityReservationDetails.fftc"
+				},
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/PDU_telnet/test_cases/optionAllDevicesPowerOff.fftc"
+				}
+			]
+		}
+		
+	]
+}
