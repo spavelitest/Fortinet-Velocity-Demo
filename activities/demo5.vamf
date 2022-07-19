@@ -52,7 +52,7 @@
 							"value": "",
 							"type": "TEXT"
 						}
-					
+					]
 				},
 				{
 					"addRepositoryNamePrefix": "false",
