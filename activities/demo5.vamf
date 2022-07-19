@@ -8,7 +8,7 @@
 			"name": "[demo#5] Topology 1",
 			"addRepositoryNamePrefix": "false",
 			"actionTitle": "Reserve",
-			"description": "Topology with Fortigate firewall dynamically connected to L2 switch using port speed and port split options to create the link",
+			"description": "Topology with Fortigate firewall dynamically connected to L2 switch and Port Speed and Port Split automated tools",
 			"reservationDuration": "60",
 			"intervalToRunEndTestCase": "60",
 			"startupTasks": [
@@ -41,11 +41,45 @@
 					"allowToRunWithOptions":true
 				},
 				{
-					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetDevicesSplitPort.fftc",
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolUnsetSplitPort.fftc",
+					"allowToRunWithOptions":true
+				}
+			]	
+		},
+		{
+			"name": "[demo#5] Topology 2",
+			"addRepositoryNamePrefix": "false",
+			"actionTitle": "Reserve",
+			"description": "Topology with Fortigate firewall dynamically connected to L2 switch using a L1 connection and Port Speed and Port Split automated tools",
+			"reservationDuration": "60",
+			"intervalToRunEndTestCase": "60",
+			"startupTasks": [
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/PDU_telnet/test_cases/optionAllDevicesPowerOn.fftc"
+				}
+			],
+			"teardownTasks": [
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/optionBackupVelocityReservationDetails.fftc"
+				},
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/optionUnsetDevicesSplitPort.fftc"
+				},
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/PDU_telnet/test_cases/optionAllDevicesPowerOff.fftc"
+				}
+			],
+			"automation": [
+				{
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetPortSpeed.fftc",
 					"allowToRunWithOptions":true
 				},
 				{
-					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolUnsetSplitPort.fftc",
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetDevicesSplitPort.fftc",
 					"allowToRunWithOptions":true
 				}
 			]	
