@@ -1739,6 +1739,13 @@
                                                         </actionProperties>
                                                     </item>
                                                 </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;TRUE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
                                             </ruleProperties>
                                         </processorInfo>
                                     </item>
@@ -1905,6 +1912,13 @@ e.g. backup.cfg</description>
                                         <processorInfo ruleType="assert">
                                             <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
                                                 <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;TRUE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
                                                 <actionsWhenFalse>
                                                     <item actionId="Eval">
                                                         <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
@@ -2133,6 +2147,13 @@ e.g. backup.cfg</description>
                                                                 </actionProperties>
                                                             </item>
                                                         </actionsWhenTrue>
+                                                        <actionsWhenFalse>
+                                                            <item actionId="Eval">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                    <statement>retCode = &quot;TRUE&quot;</statement>
+                                                                </actionProperties>
+                                                            </item>
+                                                        </actionsWhenFalse>
                                                     </ruleProperties>
                                                 </processorInfo>
                                             </item>
@@ -2373,6 +2394,13 @@ e.g. backup.cfg</description>
                                                                 </actionProperties>
                                                             </item>
                                                         </actionsWhenTrue>
+                                                        <actionsWhenFalse>
+                                                            <item actionId="Eval">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                    <statement>retCode = &quot;TRUE&quot;</statement>
+                                                                </actionProperties>
+                                                            </item>
+                                                        </actionsWhenFalse>
                                                     </ruleProperties>
                                                 </processorInfo>
                                             </item>
@@ -2387,7 +2415,61 @@ e.g. backup.cfg</description>
                                     <command>
                                         <body>end</body>
                                     </command>
-                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>promptName()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>prompt</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                        <storeResponseAt>speed_output</storeResponseAt>
+                                        <storeResponseText>true</storeResponseText>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <lineTerminator inherit="false">SLASH_N</lineTerminator>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="16e7e239-871f-412b-881e-b66e9a6a7480" action="if" useFieldsInCommand="false">
+                                    <command>
+                                        <body>prompt == &quot;prompt5&quot;:</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="1d3d3e39-9533-46f3-bd23-92ac35cecf1a" action="command" session="[session]">
+                                            <command>
+                                                <body>y</body>
+                                            </command>
+                                            <postProcessing>
+                                                <storeResponseAt>speed_output</storeResponseAt>
+                                                <storeResponseText>true</storeResponseText>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                            </applicationProperties>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="3ac7c43f-9184-4ee8-9136-019fd53d70c0" action="else" useFieldsInCommand="false">
+                                    <nestedSteps>
+                                        <item guid="a40f011e-d71d-4a8a-8e6d-9989dfa357ec" action="comment" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Insert steps here for when the expression evaluates to false</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
@@ -2585,6 +2667,13 @@ e.g. backup.cfg</description>
                                                         </actionProperties>
                                                     </item>
                                                 </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;TRUE&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
                                             </ruleProperties>
                                         </processorInfo>
                                     </item>
@@ -2781,15 +2870,6 @@ e.g. backup.cfg</description>
                                         <completionProperties expectedIdleTime="0.681" expectedIdleTime.inherit="false"/>
                                     </applicationProperties>
                                 </item>
-                                <item guid="cce7233c-11e4-44a2-89e1-b627d9292255" action="command" session="[session]" normalOffset="5.115" estimatedStepExecutionTime="0.115">
-                                    <command>
-                                        <body>end</body>
-                                    </command>
-                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
-                                        <lineTerminator inherit="false">SLASH_R</lineTerminator>
-                                        <completionProperties expectedIdleTime="0.681" expectedIdleTime.inherit="false"/>
-                                    </applicationProperties>
-                                </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
@@ -2946,23 +3026,99 @@ e.g. backup.cfg</description>
                                 <lineTerminator inherit="false">SLASH_R</lineTerminator>
                             </applicationProperties>
                         </item>
-                        <item guid="e1d8d5c9-43d4-4c79-a0cd-e068572dd081" action="command" session="[session]" normalOffset="1.351" estimatedStepExecutionTime="0.111">
+                        <item guid="2f1d7c1f-e290-40dc-9609-99abbc3be3f6" action="command" session="[session]" normalOffset="1.351" estimatedStepExecutionTime="0.111">
                             <command>
                                 <body>end</body>
                             </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>promptName()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == &quot;prompt2&quot;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="RepeatStep">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="4" delayBetweenRepeats="1.0"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
                             <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
                                 <lineTerminator inherit="false">SLASH_R</lineTerminator>
                                 <completionProperties expectedIdleTime="0.252" expectedIdleTime.inherit="false"/>
                             </applicationProperties>
                         </item>
-                        <item guid="2f1d7c1f-e290-40dc-9609-99abbc3be3f6" action="command" session="[session]" normalOffset="1.351" estimatedStepExecutionTime="0.111">
-                            <command>
-                                <body>end</body>
-                            </command>
+                        <item guid="d0e95fed-df9f-457a-8452-44168a5276e8" action="command" session="[session]" normalOffset="1.351" estimatedStepExecutionTime="0.111">
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>prompt()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>prompt</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
                             <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
                                 <lineTerminator inherit="false">SLASH_R</lineTerminator>
                                 <completionProperties expectedIdleTime="0.252" expectedIdleTime.inherit="false"/>
                             </applicationProperties>
+                        </item>
+                        <item guid="8764c44d-6c62-4b08-9be7-03942a8bcc50" action="while" useFieldsInCommand="false">
+                            <command>
+                                <body>&quot; (&quot; in prompt and &quot;) # &quot; in prompt and prompt.endswith(&quot;) # &quot;)==True:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="168268a7-ff5e-4a02-91a3-b8ff80f3d998" action="command" session="[session]">
+                                    <command>
+                                        <body>end</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                                <item guid="dfa1249b-0595-4810-b350-de5aa7bd6bba" action="command" session="[session]" normalOffset="1.351" estimatedStepExecutionTime="0.111">
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>prompt()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>prompt</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                        <completionProperties expectedIdleTime="0.252" expectedIdleTime.inherit="false"/>
+                                    </applicationProperties>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>

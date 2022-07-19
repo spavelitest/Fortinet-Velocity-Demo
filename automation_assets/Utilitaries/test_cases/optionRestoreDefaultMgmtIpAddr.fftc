@@ -47,9 +47,9 @@
                                     </postProcessing>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="eed438d8-3e02-4c53-bd75-11f7144d4810" action="eval" skip="true" useFieldsInCommand="false">
+                                <item guid="634428fa-fa20-466e-b4be-8fe07be70746" action="eval" skip="true" useFieldsInCommand="false">
                                     <command>
-                                        <body>reservationId = &quot;9d87bab5-e6c0-4f04-a717-c70cfa251635&quot;</body>
+                                        <body>reservationId = &quot;451a1a01-1695-40ab-bdc3-58d4bbb80e09&quot;</body>
                                     </command>
                                     <postProcessing>
                                         <analysisRules>
@@ -172,6 +172,12 @@
                                 <item guid="1a9b5b3b-989b-4108-9bf6-5346a80955a2" action="eval" useFieldsInCommand="false">
                                     <command>
                                         <body>mgmt_console_port_list=[]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="d04c80b8-2f14-4308-b715-df9aa4ab08cd" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>discover=&quot;false&quot;</body>
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
@@ -303,7 +309,7 @@
                                         <analysisRules>
                                             <item>
                                                 <extractorInfo extractorType="query">
-                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
                                                         <query>mapped/Json/tags</query>
                                                     </extractorProperties>
                                                 </extractorInfo>
@@ -318,7 +324,7 @@
                                             </item>
                                             <item>
                                                 <extractorInfo extractorType="query">
-                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
                                                         <query>mapped/Json/properties/item[name = &quot;Console&quot;]/value</query>
                                                     </extractorProperties>
                                                 </extractorInfo>
@@ -333,7 +339,7 @@
                                             </item>
                                             <item>
                                                 <extractorInfo extractorType="query">
-                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
                                                         <query>mapped/Json/properties/item[name = &quot;Console Port&quot;]/value</query>
                                                     </extractorProperties>
                                                 </extractorInfo>
@@ -348,7 +354,7 @@
                                             </item>
                                             <item>
                                                 <extractorInfo extractorType="query">
-                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
                                                         <query>mapped/Json/properties/item[name = &quot;username&quot;]/value</query>
                                                     </extractorProperties>
                                                 </extractorInfo>
@@ -363,7 +369,7 @@
                                             </item>
                                             <item>
                                                 <extractorInfo extractorType="query">
-                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
                                                         <query>mapped/Json/properties/item[name = &quot;password&quot;]/value</query>
                                                     </extractorProperties>
                                                 </extractorInfo>
@@ -378,7 +384,7 @@
                                             </item>
                                             <item>
                                                 <extractorInfo extractorType="query">
-                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
                                                         <query>mapped/Json/properties/item[name = &quot;Dynamic ipAddress&quot;]/value</query>
                                                     </extractorProperties>
                                                 </extractorInfo>
@@ -393,7 +399,7 @@
                                             </item>
                                             <item>
                                                 <extractorInfo extractorType="query">
-                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
                                                         <query>mapped/Json/name</query>
                                                     </extractorProperties>
                                                 </extractorInfo>
@@ -559,6 +565,12 @@
                                                                     </postProcessing>
                                                                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                                                                 </item>
+                                                                <item guid="0236569a-4a52-4517-b711-298c2066670f" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>discover=&quot;true&quot;</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
                                                             </nestedSteps>
                                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                         </item>
@@ -643,112 +655,139 @@
                                                                 <body>velocity auto-discover action</body>
                                                             </command>
                                                             <nestedSteps>
-                                                                <item guid="843ff7be-da1d-4da8-9a7d-b7161594776a" action="POST" session="velocity">
+                                                                <item guid="33a5e50c-0802-45af-80a8-3beb8cfec508" action="if" useFieldsInCommand="false">
                                                                     <command>
-                                                                        <body>/velocity/api/inventory/v16/device/[device_id]/action?type=discover</body>
+                                                                        <body>discover == &quot;true&quot;:</body>
                                                                     </command>
-                                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" bodyType.inherit="false" action="/velocity/api/inventory/v16/device/[device_id]/action?type=discover" action.inherit="false" includeHttpHeaders.inherit="false">
-                                                                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
-                                                                        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
-                                                                            <memberClasses>
-                                                                                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
-                                                                            </memberClasses>
-                                                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry"/>
-                                                                        </httpHeader>
-                                                                    </applicationProperties>
-                                                                </item>
-                                                                <item guid="4f9ce441-b746-48f1-b6ac-1240bc5b52d3" action="sleep">
-                                                                    <command>
-                                                                        <body>10</body>
-                                                                    </command>
+                                                                    <nestedSteps>
+                                                                        <item guid="843ff7be-da1d-4da8-9a7d-b7161594776a" action="POST" session="velocity">
+                                                                            <command>
+                                                                                <body>/velocity/api/inventory/v16/device/[device_id]/action?type=discover</body>
+                                                                            </command>
+                                                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" bodyType.inherit="false" action="/velocity/api/inventory/v16/device/[device_id]/action?type=discover" action.inherit="false" includeHttpHeaders.inherit="false">
+                                                                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                                                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                                                    <memberClasses>
+                                                                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                                                    </memberClasses>
+                                                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry"/>
+                                                                                </httpHeader>
+                                                                            </applicationProperties>
+                                                                        </item>
+                                                                        <item guid="4f9ce441-b746-48f1-b6ac-1240bc5b52d3" action="sleep">
+                                                                            <command>
+                                                                                <body>10</body>
+                                                                            </command>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                        </item>
+                                                                        <item guid="dc878c84-1292-4f8d-816d-c77648b1dcaa" action="command" session="console">
+                                                                            <postProcessing>
+                                                                                <analysisRules>
+                                                                                    <item>
+                                                                                        <extractorInfo extractorType="query">
+                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                                                <query>promptName()</query>
+                                                                                            </extractorProperties>
+                                                                                        </extractorInfo>
+                                                                                        <processorInfo ruleType="assert">
+                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                                                <expression>str(value) == &quot;prompt1&quot; </expression>
+                                                                                                <actionsWhenTrue>
+                                                                                                    <item actionId="DeclareExecutionIssue">
+                                                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                                                            <message>For &quot;[device_name]&quot;: discover operation was successfully</message>
+                                                                                                        </actionProperties>
+                                                                                                    </item>
+                                                                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                                    </item>
+                                                                                                </actionsWhenTrue>
+                                                                                                <actionsWhenFalse>
+                                                                                                    <item actionId="DeclareExecutionIssue">
+                                                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
+                                                                                                            <message>--- discover operation is still in progress...</message>
+                                                                                                        </actionProperties>
+                                                                                                    </item>
+                                                                                                    <item actionId="RepeatStep">
+                                                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="100" delayBetweenRepeats="5.0"/>
+                                                                                                    </item>
+                                                                                                </actionsWhenFalse>
+                                                                                            </ruleProperties>
+                                                                                        </processorInfo>
+                                                                                    </item>
+                                                                                </analysisRules>
+                                                                            </postProcessing>
+                                                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                                                                <lineTerminator inherit="false">SLASH_R</lineTerminator>
+                                                                                <promptProperties>
+                                                                                    <stepPrompts>
+                                                                                        <item name="prompt1" MatchMethod="WILDCARD">
+                                                                                            <Content sub="true">* login:</Content>
+                                                                                        </item>
+                                                                                        <item name="prompt2" MatchMethod="WILDCARD" TypeOfPrompt="PASSWORD">
+                                                                                            <Content sub="true">* #</Content>
+                                                                                        </item>
+                                                                                        <item name="prompt3">
+                                                                                            <Content>Password:</Content>
+                                                                                        </item>
+                                                                                        <item name="prompt4">
+                                                                                            <Content>--More-- </Content>
+                                                                                            <MoreNextCommand> \\r</MoreNextCommand>
+                                                                                        </item>
+                                                                                        <item name="prompt5">
+                                                                                            <Content>Do you want to continue? (y/n)</Content>
+                                                                                        </item>
+                                                                                        <item name="prompt6" MatchMethod="WILDCARD">
+                                                                                            <Content sub="true">* (*) #</Content>
+                                                                                        </item>
+                                                                                        <item name="prompt7" MatchMethod="WILDCARD">
+                                                                                            <Content sub="true">*:</Content>
+                                                                                        </item>
+                                                                                        <item name="prompt8" MatchMethod="WILDCARD">
+                                                                                            <Content sub="true">*</Content>
+                                                                                        </item>
+                                                                                    </stepPrompts>
+                                                                                </promptProperties>
+                                                                                <completionProperties promptLearnUserResponseTime="60" promptLearnUserResponseTime.inherit="false">
+                                                                                    <completeWhen inherit="false">AUTO_OR_IDLE</completeWhen>
+                                                                                </completionProperties>
+                                                                            </applicationProperties>
+                                                                            <advancedProperties defaultSessionProfile="application:com.fnfr.svt.applications.telnet"/>
+                                                                        </item>
+                                                                        <item guid="2e5e5935-7037-482c-b02d-70707f3f790c" action="consoleExit" session="console" useFieldsInCommand="false">
+                                                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                                            <advancedProperties defaultSessionProfile="project://Fortigate_console/session_profiles/console.ffsp"/>
+                                                                        </item>
+                                                                    </nestedSteps>
                                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                                 </item>
-                                                                <item guid="dc878c84-1292-4f8d-816d-c77648b1dcaa" action="command" session="console">
-                                                                    <postProcessing>
-                                                                        <analysisRules>
-                                                                            <item>
-                                                                                <extractorInfo extractorType="query">
-                                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
-                                                                                        <query>promptName()</query>
-                                                                                    </extractorProperties>
-                                                                                </extractorInfo>
-                                                                                <processorInfo ruleType="assert">
-                                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
-                                                                                        <expression>str(value) == &quot;prompt1&quot; </expression>
-                                                                                        <actionsWhenTrue>
-                                                                                            <item actionId="DeclareExecutionIssue">
-                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                                                                    <message>For &quot;[device_name]&quot;: discover operation was successfully</message>
-                                                                                                </actionProperties>
-                                                                                            </item>
-                                                                                            <item actionId="PassTestIfNotAlreadyFailed">
-                                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                                                            </item>
-                                                                                        </actionsWhenTrue>
-                                                                                        <actionsWhenFalse>
-                                                                                            <item actionId="DeclareExecutionIssue">
-                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
-                                                                                                    <message>--- discover operation is still in progress...</message>
-                                                                                                </actionProperties>
-                                                                                            </item>
-                                                                                            <item actionId="RepeatStep">
-                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="100" delayBetweenRepeats="5.0"/>
-                                                                                            </item>
-                                                                                        </actionsWhenFalse>
-                                                                                    </ruleProperties>
-                                                                                </processorInfo>
-                                                                            </item>
-                                                                        </analysisRules>
-                                                                    </postProcessing>
-                                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
-                                                                        <lineTerminator inherit="false">SLASH_R</lineTerminator>
-                                                                        <promptProperties>
-                                                                            <stepPrompts>
-                                                                                <item name="prompt1" MatchMethod="WILDCARD">
-                                                                                    <Content sub="true">* login:</Content>
-                                                                                </item>
-                                                                                <item name="prompt2" MatchMethod="WILDCARD" TypeOfPrompt="PASSWORD">
-                                                                                    <Content sub="true">* #</Content>
-                                                                                </item>
-                                                                                <item name="prompt3">
-                                                                                    <Content>Password:</Content>
-                                                                                </item>
-                                                                                <item name="prompt4">
-                                                                                    <Content>--More-- </Content>
-                                                                                    <MoreNextCommand> \\r</MoreNextCommand>
-                                                                                </item>
-                                                                                <item name="prompt5">
-                                                                                    <Content>Do you want to continue? (y/n)</Content>
-                                                                                </item>
-                                                                                <item name="prompt6" MatchMethod="WILDCARD">
-                                                                                    <Content sub="true">* (*) #</Content>
-                                                                                </item>
-                                                                                <item name="prompt7" MatchMethod="WILDCARD">
-                                                                                    <Content sub="true">*:</Content>
-                                                                                </item>
-                                                                                <item name="prompt8" MatchMethod="WILDCARD">
-                                                                                    <Content sub="true">*</Content>
-                                                                                </item>
-                                                                            </stepPrompts>
-                                                                        </promptProperties>
-                                                                        <completionProperties promptLearnUserResponseTime="60" promptLearnUserResponseTime.inherit="false">
-                                                                            <completeWhen inherit="false">AUTO_OR_IDLE</completeWhen>
-                                                                        </completionProperties>
-                                                                    </applicationProperties>
-                                                                    <advancedProperties defaultSessionProfile="application:com.fnfr.svt.applications.telnet"/>
-                                                                </item>
-                                                                <item guid="2e5e5935-7037-482c-b02d-70707f3f790c" action="consoleExit" session="console" useFieldsInCommand="false">
-                                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                                                                    <advancedProperties defaultSessionProfile="project://Fortigate_console/session_profiles/console.ffsp"/>
+                                                                <item guid="3c9aa18c-f1c3-42c9-bf43-587164756448" action="else" useFieldsInCommand="false">
+                                                                    <nestedSteps>
+                                                                        <item guid="3c7a0103-5e42-45f7-9694-c633206c74fd" action="comment" useFieldsInCommand="false">
+                                                                            <command>
+                                                                                <body>skip discover operation</body>
+                                                                            </command>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                        </item>
+                                                                    </nestedSteps>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                                 </item>
                                                             </nestedSteps>
                                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                         </item>
-                                                        <item guid="af9296d3-ef8a-4911-b776-0ba713e51d99" action="consoleExit" session="console" useFieldsInCommand="false">
-                                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                                                        </item>
-                                                        <item guid="a3f4f760-408a-49e6-ae9a-71a3964f5ef2" action="close" session="console" useFieldsInCommand="false">
-                                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                        <item guid="98d65377-85c5-4260-ba2e-f3b6f64e3d14" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>close session</body>
+                                                            </command>
+                                                            <nestedSteps>
+                                                                <item guid="a3f4f760-408a-49e6-ae9a-71a3964f5ef2" action="consoleExit" session="console" useFieldsInCommand="false">
+                                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                                </item>
+                                                                <item guid="cb8ecdae-8c59-4920-8d29-5cf55fa21102" action="close" session="console" useFieldsInCommand="false">
+                                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                         </item>
                                                     </nestedSteps>
                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
@@ -1517,6 +1556,12 @@
                                                                 <item guid="9187bdb7-687e-41e5-b088-a3805874e69c" action="eval" useFieldsInCommand="false">
                                                                     <command>
                                                                         <body>mgmt_console_ip_add_list=[]</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="b3a43c3e-2ae8-4b58-a364-2b9c65d8724b" action="eval" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>discover=&quot;false&quot;</body>
                                                                     </command>
                                                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                                 </item>

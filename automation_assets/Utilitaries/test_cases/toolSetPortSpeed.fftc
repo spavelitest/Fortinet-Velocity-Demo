@@ -16,6 +16,8 @@
                 <item name="device_name">
                     <items>
                         <item name="fgt3501F-velocity_107.202"/>
+                        <item name="FGT-1800F-V_107.110"/>
+                        <item name="FGT-3400E-V_107.111"/>
                     </items>
                 </item>
                 <item name="device_port">
@@ -229,7 +231,7 @@
                                                         <actionsWhenTrue>
                                                             <item actionId="DeclareExecutionIssue">
                                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                                    <message>For &quot;[device_name]&quot;: set speed-port command for port &quot;[device_port]&quot; is ok</message>
+                                                                    <message>For &quot;[device_name]&quot;: set speed-port [port_speed] for port &quot;[device_port]&quot; is ok</message>
                                                                 </actionProperties>
                                                             </item>
                                                             <item actionId="PassTestIfNotAlreadyFailed">
@@ -251,6 +253,9 @@
                                             </item>
                                         </analysisRules>
                                     </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                                <item guid="5c0f1ec3-e14a-4e87-a343-cfa03b1df8c7" action="consoleExit" session="fortigate" useFieldsInCommand="false">
                                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                                 </item>
                             </nestedSteps>

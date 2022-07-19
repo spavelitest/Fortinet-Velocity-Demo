@@ -11,7 +11,7 @@
                     <device_port pt:description="Device Port Names"/>
                     <sw_mode pt:datatype="sw_mode" pt:description="LACP Mode"/>
                     <untagged_vlan_id pt:description="Native vlanId"/>
-                    <tagged_vlan_id pt:description="Allowed vlanIds"/>
+                    <tagged_vlan_id pt:description="Allowed vlanIds">1</tagged_vlan_id>
                     <po_number pt:description="Port-channel Number"/>
                 </parameters>
             </parameters>
@@ -23,6 +23,9 @@
                         <item name="fgt3501F-velocity_107.202"/>
                         <item name="tsw1-velocity_107.40"/>
                         <item name="arista-velocity_107.205"/>
+                        <item name="FGT-1800F-V_107.110"/>
+                        <item name="FGT-3400E-V_107.111"/>
+                        <item name="FS-3032E-V"/>
                     </items>
                 </item>
                 <item name="sw_mode">
@@ -278,6 +281,52 @@
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
+                        <item guid="a0e053c3-4ed3-448a-9435-60835860712e" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Remove blank spaces from port names if needed</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="9860096d-4e4e-4e57-95f3-851aa04350d8" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>device_port=[]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="31b33519-3023-4488-9684-1ba58f48844c" action="for" useFieldsInCommand="false">
+                                    <command>
+                                        <body>port in device_ports:</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="44c95359-5e07-412a-b955-1886bbe8576d" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>port_name = port.replace(&apos; &apos;,&apos;&apos;)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="4e122eed-a76f-4d0e-8f55-c18ee2e6bd3b" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>device_port.append(port_name)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="1f0a9202-7a98-4e8f-b0ad-0e6d5b0a060d" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>device_ports=device_port.copy()</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="3ee08bba-2815-45c9-becc-d2fb678b60f5" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>print(device_ports)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
@@ -364,11 +413,17 @@
                                     <nestedSteps>
                                         <item guid="57270022-205e-4653-b83d-e0321b21a5c0" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>name=&quot;DATA&quot;+&quot;_&quot;+&quot;_&quot;.join(device_ports)</body>
+                                                <body>name=&quot;DATA&quot;+&quot;_&quot;+&quot;_&quot;.join(device_ports).replace(&quot;port&quot;,&quot;&quot;)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
                                         <item guid="d6989374-8fb8-4e2e-b3be-d22bbdce5b09" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>name=name[:10]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="6998b12f-6366-4faa-b803-39977ea8acda" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>print(name)</body>
                                             </command>
@@ -388,13 +443,13 @@
                                         </item>
                                         <item guid="e5b17fc3-619d-47ca-a3ec-5c89fd451ba3" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>lag=&quot;LAG&quot;+&quot;_&quot;+&quot;_&quot;.join(device_ports)</body>
+                                                <body>lag=&quot;LAG&quot;+&quot;_&quot;+&quot;_&quot;.join(device_ports).replace(&quot;port&quot;,&quot;&quot;)</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
                                         <item guid="39978c4f-2126-4ba7-8e39-099decffe1e8" action="eval" useFieldsInCommand="false">
                                             <command>
-                                                <body>print(lag)</body>
+                                                <body>lag=lag[:13]</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
@@ -762,12 +817,9 @@
                                                                 </actionsWhenTrue>
                                                                 <actionsWhenFalse>
                                                                     <item actionId="DeclareExecutionIssue">
-                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                                                            <message>For &quot;[device_name]&quot; set native-vlan is not ok</message>
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
+                                                                            <message>For &quot;[device_name]&quot; set native-vlan was not ok</message>
                                                                         </actionProperties>
-                                                                    </item>
-                                                                    <item actionId="FailTest">
-                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                                     </item>
                                                                 </actionsWhenFalse>
                                                             </ruleProperties>
