@@ -22,7 +22,9 @@
     * For example run vBOT "Power Cycle" and check "Results" tab for the execution report; Click on "View report" to open the "Execution Report" page in a new window (you can check script result and execution messages for detailed information)
     *  You may also try to save the Fortigate configuration by selecting "backupConfigTFTP" quickcall from the console; for this Quickcall the user needs to enter "config_name" and "tftp" parameters values
     * Goto TFTP server (currently VDS is configured as TFTP server and can be accessed at here: [tftp](https://10.210.107.20/tftp); Download and validate Fortigate configuration
-    * To load a saved configuration you may use "restoreConfigTFTP" quickcall or the Fortigate Driver script before starting a Reservation; "Fortigate Driver" is a script which can perform on demand (when clicking "Discover" button under Inventory) to collect Resource properties and port information or while Reservation is Activating to load a configuration file (please see snapshot under Images section below)  
+    * To load a saved configuration you may use "restoreConfigTFTP" quickcall or the Fortigate Driver script before starting a new Reservation; "Fortigate Driver" is a script which can perform on demand (when clicking "Discover" button under Inventory) to collect Resource properties and port information or while Reservation is Activating to load a configuration file
+    * To use Fortigate Driver for uploading a local configuration file you'll need to end the current Reservation and goto Topologies section below this activity page; Open Topology in a new tab and click on "Reserve"; a new Reservation page opens with more user options before "Submit"; Goto "Resources" tab and select "Upload" for the Configuration filed from the Fortigate resource (please see snapshot under Images section below)
+    * Goto "Automation" tab and check madatory tasks execution report (please see snapshot under Images section below) 
 
 
 * **Mandatory Automation Tasks:**
@@ -32,4 +34,5 @@
 
 # Images:
 ![Image from file](demo1.jpg)
+![Image from file](demo1_1.jpg)
 ![Image from file](demo1_2.jpg)
