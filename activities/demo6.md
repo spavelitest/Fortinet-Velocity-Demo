@@ -39,6 +39,6 @@
 # Images:
 ![Image from file](demo6_1.jpg)
 ![Image from file](demo6_2.jpg)
-![Image from file](demo6_2.jpg)
+![Image from file](demo6_3.jpg)
 
 
