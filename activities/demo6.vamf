@@ -2,7 +2,7 @@
 	"name": "Demo#6",
 	"shortDescription": "Reservation of Fortigate firewall dynamically connected to L2 switch using LAG feature for port connectivity: Topology reservation demo; LAG connection types (LAG, LAG_FGT and LAG_SW); Automated scripts and tasks to build LAG feature on ports.",
 	"icon": "fortinet-logo.png",
-	"descriptionMarkdown": "demo5.md",
+	"descriptionMarkdown": "demo6.md",
 	"topology": [
 		{
 			"name": "[demo#6] Topology 1",
