@@ -3102,7 +3102,7 @@
                                                                                                                                                         <actionsWhenTrue>
                                                                                                                                                             <item actionId="DeclareExecutionIssue">
                                                                                                                                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                                                                                                                                    <message>For &quot;[conn_lepton_device_name]&quot;: discover operation was successfully</message>
+                                                                                                                                                                    <message>For &quot;[conn_device_name]&quot;: discover operation was successfully</message>
                                                                                                                                                                 </actionProperties>
                                                                                                                                                             </item>
                                                                                                                                                             <item actionId="PassTestIfNotAlreadyFailed">
@@ -6794,7 +6794,7 @@
                                                                                                                                                         <actionsWhenTrue>
                                                                                                                                                             <item actionId="DeclareExecutionIssue">
                                                                                                                                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                                                                                                                                    <message>For &quot;[conn_lepton_device_name]&quot;: discover operation was successfully</message>
+                                                                                                                                                                    <message>For &quot;[conn_device_CN_name]&quot;: discover operation was successfully</message>
                                                                                                                                                                 </actionProperties>
                                                                                                                                                             </item>
                                                                                                                                                             <item actionId="PassTestIfNotAlreadyFailed">

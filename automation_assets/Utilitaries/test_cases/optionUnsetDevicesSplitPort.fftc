@@ -2613,57 +2613,95 @@
                                                                                                                                 </httpHeader>
                                                                                                                             </applicationProperties>
                                                                                                                         </item>
-                                                                                                                        <item guid="0dc9d317-36d1-4904-b6ef-7a9cf54d874e" action="sleep">
+                                                                                                                        <item guid="32ce882b-246b-4deb-877f-4a25df06b26a" action="eval" useFieldsInCommand="false">
                                                                                                                             <command>
-                                                                                                                                <body>15</body>
+                                                                                                                                <body>i=0</body>
                                                                                                                             </command>
                                                                                                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                                                                                         </item>
-                                                                                                                        <item guid="ac727c07-2cf4-48ab-975f-69231e111325" action="consoleLogin" session="arista_lepton" useFieldsInCommand="false">
+                                                                                                                        <item guid="56c085b6-ec5e-4a39-8e2d-32c0f9d37361" action="while" useFieldsInCommand="false">
                                                                                                                             <command>
-                                                                                                                                <body>-username [conn_lepton_device_username] -password [conn_lepton_device_password]</body>
+                                                                                                                                <body>i&lt;10:</body>
                                                                                                                             </command>
-                                                                                                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                                                                                                                        </item>
-                                                                                                                        <item guid="8e707517-ecb8-411d-a15f-6178f56ffc32" action="command" session="arista_lepton">
-                                                                                                                            <postProcessing>
-                                                                                                                                <analysisRules>
-                                                                                                                                    <item>
-                                                                                                                                        <extractorInfo extractorType="query">
-                                                                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
-                                                                                                                                                <query>promptName()</query>
-                                                                                                                                            </extractorProperties>
-                                                                                                                                        </extractorInfo>
-                                                                                                                                        <processorInfo ruleType="assert">
-                                                                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
-                                                                                                                                                <expression>str(value) == &quot;prompt1&quot; or &quot;exit&quot; in str(value)</expression>
-                                                                                                                                                <actionsWhenTrue>
-                                                                                                                                                    <item actionId="DeclareExecutionIssue">
-                                                                                                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                                                                                                                            <message>For &quot;[conn_lepton_device_name]&quot;: discover operation was successfully</message>
-                                                                                                                                                        </actionProperties>
-                                                                                                                                                    </item>
-                                                                                                                                                    <item actionId="PassTestIfNotAlreadyFailed">
-                                                                                                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                                                                                                                    </item>
-                                                                                                                                                </actionsWhenTrue>
-                                                                                                                                                <actionsWhenFalse>
-                                                                                                                                                    <item actionId="DeclareExecutionIssue">
-                                                                                                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
-                                                                                                                                                            <message>--- discover operation is still in progress...</message>
-                                                                                                                                                        </actionProperties>
-                                                                                                                                                    </item>
-                                                                                                                                                    <item actionId="RepeatStep">
-                                                                                                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="100" delayBetweenRepeats="5.0"/>
-                                                                                                                                                    </item>
-                                                                                                                                                </actionsWhenFalse>
-                                                                                                                                            </ruleProperties>
-                                                                                                                                        </processorInfo>
-                                                                                                                                    </item>
-                                                                                                                                </analysisRules>
-                                                                                                                            </postProcessing>
-                                                                                                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                                                                                                                            <advancedProperties defaultSessionProfile="application:com.fnfr.svt.applications.telnet"/>
+                                                                                                                            <nestedSteps>
+                                                                                                                                <item guid="095a028c-6409-4ebc-a933-d1eb59ec89dc" action="eval" useFieldsInCommand="false">
+                                                                                                                                    <command>
+                                                                                                                                        <body>i = i + 2</body>
+                                                                                                                                    </command>
+                                                                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                                                                </item>
+                                                                                                                                <item guid="a9f4eb13-0f41-4db3-b0a1-bb4ffc74b23c" action="sleep">
+                                                                                                                                    <command>
+                                                                                                                                        <body>3</body>
+                                                                                                                                    </command>
+                                                                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                                                                </item>
+                                                                                                                                <item guid="a222a003-782c-48d0-96ac-859280e349d7" action="eval" useFieldsInCommand="false">
+                                                                                                                                    <command>
+                                                                                                                                        <body>print(i)</body>
+                                                                                                                                    </command>
+                                                                                                                                    <postProcessing>
+                                                                                                                                        <analysisRules>
+                                                                                                                                            <item>
+                                                                                                                                                <extractorInfo extractorType="query">
+                                                                                                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                                                                                                        <query>responseLine()</query>
+                                                                                                                                                    </extractorProperties>
+                                                                                                                                                </extractorInfo>
+                                                                                                                                                <processorInfo ruleType="assert">
+                                                                                                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                                                                                                        <expression>int(value) == 9</expression>
+                                                                                                                                                        <actionsWhenTrue>
+                                                                                                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                                                                                                                    <message>For &quot;[conn_lepton_device_name]&quot;: discover operation was successfully</message>
+                                                                                                                                                                </actionProperties>
+                                                                                                                                                            </item>
+                                                                                                                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                                                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                                                                                            </item>
+                                                                                                                                                        </actionsWhenTrue>
+                                                                                                                                                        <actionsWhenFalse>
+                                                                                                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
+                                                                                                                                                                    <message>--- discover operation is still in progress...</message>
+                                                                                                                                                                </actionProperties>
+                                                                                                                                                            </item>
+                                                                                                                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                                                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                                                                                            </item>
+                                                                                                                                                        </actionsWhenFalse>
+                                                                                                                                                    </ruleProperties>
+                                                                                                                                                </processorInfo>
+                                                                                                                                            </item>
+                                                                                                                                        </analysisRules>
+                                                                                                                                    </postProcessing>
+                                                                                                                                    <eventHandlers>
+                                                                                                                                        <item name="OnQueryExtractorInvalidQuery">
+                                                                                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                                                                                                                    <message>{auto_message_wait}</message>
+                                                                                                                                                </actionProperties>
+                                                                                                                                            </item>
+                                                                                                                                            <item actionId="RepeatStep">
+                                                                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup"/>
+                                                                                                                                            </item>
+                                                                                                                                        </item>
+                                                                                                                                        <item name="OnNoMatchesFound">
+                                                                                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                                                                                                                    <message>{auto_message_wait}</message>
+                                                                                                                                                </actionProperties>
+                                                                                                                                            </item>
+                                                                                                                                            <item actionId="RepeatStep">
+                                                                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup"/>
+                                                                                                                                            </item>
+                                                                                                                                        </item>
+                                                                                                                                    </eventHandlers>
+                                                                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                                                                </item>
+                                                                                                                            </nestedSteps>
+                                                                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                                                                                         </item>
                                                                                                                         <item guid="0029b7b8-94d7-49d7-bae1-c60df24971e1" action="close" session="discoverArista_lepton">
                                                                                                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
@@ -2879,83 +2917,95 @@
                                                                                                                 </httpHeader>
                                                                                                             </applicationProperties>
                                                                                                         </item>
-                                                                                                        <item guid="f6323ff7-11e0-4cb7-b024-7251a8204629" action="sleep">
+                                                                                                        <item guid="72c312f3-37d5-425d-a0ae-1d334bd0d8fc" action="eval" useFieldsInCommand="false">
                                                                                                             <command>
-                                                                                                                <body>15</body>
+                                                                                                                <body>i=0</body>
                                                                                                             </command>
                                                                                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                                                                         </item>
-                                                                                                        <item guid="41ce4c77-83cd-47e6-9ac0-19aca07d835a" action="consoleLogin" session="arista" useFieldsInCommand="false">
+                                                                                                        <item guid="8dbb225b-fa86-4c16-871e-3cdd16ac62d0" action="while" useFieldsInCommand="false">
                                                                                                             <command>
-                                                                                                                <body>-username [conn_device_username] -password [conn_device_password]</body>
+                                                                                                                <body>i&lt;10:</body>
                                                                                                             </command>
-                                                                                                            <postProcessing>
-                                                                                                                <analysisRules>
-                                                                                                                    <item>
-                                                                                                                        <extractorInfo extractorType="query">
-                                                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                                                                                                                <query>retCode()</query>
-                                                                                                                            </extractorProperties>
-                                                                                                                        </extractorInfo>
-                                                                                                                        <processorInfo ruleType="assert">
-                                                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
-                                                                                                                                <expression>str(value) == &quot;TRUE&quot;</expression>
-                                                                                                                                <actionsWhenFalse>
-                                                                                                                                    <item actionId="DeclareExecutionIssue">
-                                                                                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                                                                                                                            <message>--- console login not ok; fail test</message>
-                                                                                                                                        </actionProperties>
-                                                                                                                                    </item>
-                                                                                                                                    <item actionId="FailTest">
-                                                                                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                                                                                                    </item>
-                                                                                                                                </actionsWhenFalse>
-                                                                                                                            </ruleProperties>
-                                                                                                                        </processorInfo>
-                                                                                                                    </item>
-                                                                                                                </analysisRules>
-                                                                                                            </postProcessing>
-                                                                                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                                                                                                        </item>
-                                                                                                        <item guid="b98a1523-6154-47ad-b32d-9b242a717108" action="command" session="arista">
-                                                                                                            <postProcessing>
-                                                                                                                <analysisRules>
-                                                                                                                    <item>
-                                                                                                                        <extractorInfo extractorType="query">
-                                                                                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
-                                                                                                                                <query>promptName()</query>
-                                                                                                                            </extractorProperties>
-                                                                                                                        </extractorInfo>
-                                                                                                                        <processorInfo ruleType="assert">
-                                                                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
-                                                                                                                                <expression>str(value) == &quot;prompt1&quot; </expression>
-                                                                                                                                <actionsWhenTrue>
-                                                                                                                                    <item actionId="DeclareExecutionIssue">
-                                                                                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                                                                                                            <message>For &quot;[dev_name]&quot;: discover operation was successfully</message>
-                                                                                                                                        </actionProperties>
-                                                                                                                                    </item>
-                                                                                                                                    <item actionId="PassTestIfNotAlreadyFailed">
-                                                                                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                                                                                                    </item>
-                                                                                                                                </actionsWhenTrue>
-                                                                                                                                <actionsWhenFalse>
-                                                                                                                                    <item actionId="DeclareExecutionIssue">
-                                                                                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
-                                                                                                                                            <message>--- discover operation is still in progress...</message>
-                                                                                                                                        </actionProperties>
-                                                                                                                                    </item>
-                                                                                                                                    <item actionId="RepeatStep">
-                                                                                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="100" delayBetweenRepeats="5.0"/>
-                                                                                                                                    </item>
-                                                                                                                                </actionsWhenFalse>
-                                                                                                                            </ruleProperties>
-                                                                                                                        </processorInfo>
-                                                                                                                    </item>
-                                                                                                                </analysisRules>
-                                                                                                            </postProcessing>
-                                                                                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                                                                                                            <advancedProperties defaultSessionProfile="application:com.fnfr.svt.applications.telnet"/>
+                                                                                                            <nestedSteps>
+                                                                                                                <item guid="03dedbb3-031f-4267-9c44-0e035c4b618b" action="eval" useFieldsInCommand="false">
+                                                                                                                    <command>
+                                                                                                                        <body>i = i + 2</body>
+                                                                                                                    </command>
+                                                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                                                </item>
+                                                                                                                <item guid="03e9a95e-678e-4718-bde0-c7a738eca76c" action="sleep">
+                                                                                                                    <command>
+                                                                                                                        <body>3</body>
+                                                                                                                    </command>
+                                                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                                                </item>
+                                                                                                                <item guid="2443ecea-363b-4139-a974-3952c0654883" action="eval" useFieldsInCommand="false">
+                                                                                                                    <command>
+                                                                                                                        <body>print(i)</body>
+                                                                                                                    </command>
+                                                                                                                    <postProcessing>
+                                                                                                                        <analysisRules>
+                                                                                                                            <item>
+                                                                                                                                <extractorInfo extractorType="query">
+                                                                                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                                                                                        <query>responseLine()</query>
+                                                                                                                                    </extractorProperties>
+                                                                                                                                </extractorInfo>
+                                                                                                                                <processorInfo ruleType="assert">
+                                                                                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                                                                                        <expression>int(value) == 9</expression>
+                                                                                                                                        <actionsWhenTrue>
+                                                                                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                                                                                                    <message>For &quot;[dev_name]&quot;: discover operation was successfully</message>
+                                                                                                                                                </actionProperties>
+                                                                                                                                            </item>
+                                                                                                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                                                                            </item>
+                                                                                                                                        </actionsWhenTrue>
+                                                                                                                                        <actionsWhenFalse>
+                                                                                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
+                                                                                                                                                    <message>--- discover operation is still in progress...</message>
+                                                                                                                                                </actionProperties>
+                                                                                                                                            </item>
+                                                                                                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                                                                            </item>
+                                                                                                                                        </actionsWhenFalse>
+                                                                                                                                    </ruleProperties>
+                                                                                                                                </processorInfo>
+                                                                                                                            </item>
+                                                                                                                        </analysisRules>
+                                                                                                                    </postProcessing>
+                                                                                                                    <eventHandlers>
+                                                                                                                        <item name="OnQueryExtractorInvalidQuery">
+                                                                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                                                                                                    <message>{auto_message_wait}</message>
+                                                                                                                                </actionProperties>
+                                                                                                                            </item>
+                                                                                                                            <item actionId="RepeatStep">
+                                                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup"/>
+                                                                                                                            </item>
+                                                                                                                        </item>
+                                                                                                                        <item name="OnNoMatchesFound">
+                                                                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                                                                                                    <message>{auto_message_wait}</message>
+                                                                                                                                </actionProperties>
+                                                                                                                            </item>
+                                                                                                                            <item actionId="RepeatStep">
+                                                                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup"/>
+                                                                                                                            </item>
+                                                                                                                        </item>
+                                                                                                                    </eventHandlers>
+                                                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                                                </item>
+                                                                                                            </nestedSteps>
+                                                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                                                                                         </item>
                                                                                                         <item guid="5f40352f-9762-488c-b602-c91d1b5ade21" action="close" session="discoverArista">
                                                                                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
