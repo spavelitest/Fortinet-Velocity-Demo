@@ -1,0 +1,89 @@
+{
+	"name": "Demo#6",
+	"shortDescription": "Reservation of Fortigate firewall dynamically connected to L2 switch using LAG feature for port connectivity: Topology reservation demo; LAG connection types (LAG, LAG_FGT and LAG_SW); Automated scripts and tasks to build LAG feature on ports.",
+	"icon": "fortinet-logo.png",
+	"descriptionMarkdown": "demo5.md",
+	"topology": [
+		{
+			"name": "[demo#6] Topology 1",
+			"addRepositoryNamePrefix": "false",
+			"actionTitle": "Reserve",
+			"description": "Topology with Fortigate firewall dynamically connected to L2 switch using LAG feature for port connectivity",
+			"reservationDuration": "60",
+			"intervalToRunEndTestCase": "60",
+			"startupTasks": [
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/PDU_telnet/test_cases/optionAllDevicesPowerOn.fftc"
+				}
+			],
+			"teardownTasks": [
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/optionBackupVelocityReservationDetails.fftc"
+				},
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/optionUnsetDevicesSplitPort.fftc"
+				},
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/PDU_telnet/test_cases/optionAllDevicesPowerOff.fftc"
+				}
+			],
+			"automation": [
+				{
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetPortSpeed.fftc",
+					"allowToRunWithOptions":true
+				},
+				{
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetSplitPort.fftc",
+					"allowToRunWithOptions":true
+				},
+				{
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolUnsetSplitPort.fftc",
+					"allowToRunWithOptions":true
+				}
+			]	
+		},
+		{
+			"name": "[demo#6] Topology 2",
+			"addRepositoryNamePrefix": "false",
+			"actionTitle": "Reserve",
+			"description": "Topology with Fortigate firewall dynamically connected to L2 switch using LAG feature (LAG_FGT and LAG_SW cases) for port connectivity",
+			"reservationDuration": "60",
+			"intervalToRunEndTestCase": "60",
+			"startupTasks": [
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/PDU_telnet/test_cases/optionAllDevicesPowerOn.fftc"
+				}
+			],
+			"teardownTasks": [
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/optionBackupVelocityReservationDetails.fftc"
+				},
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/optionUnsetDevicesSplitPort.fftc"
+				},
+				{
+					"addRepositoryNamePrefix": "false",
+					"testPath": "Fortinet Demo Activity Catalog/PDU_telnet/test_cases/optionAllDevicesPowerOff.fftc"
+				}
+			],
+			"automation": [
+				{
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetPortSpeed.fftc",
+					"allowToRunWithOptions":true
+				},
+				{
+					"testPath": "Fortinet Demo Activity Catalog/Utilitaries/test_cases/toolSetDevicesSplitPort.fftc",
+					"allowToRunWithOptions":true
+				}
+			]	
+		}
+		
+	]
+}
