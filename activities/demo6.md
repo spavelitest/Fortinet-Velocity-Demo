@@ -1,17 +1,20 @@
 # User Steps:
 
 * **Create a new Topology with a Fortigate resource connected to L2 switch and using LAG feature for port connectivity (Automation scripts)**
-    * When connecting the Fortigate to a L2 switch just select "New VLAN" from the right side panel within the "Topology" page; Velocity will know how to connect the Fortigate to a L2 switch based on the existing "Physical Connections" under the Inventory (otherwise you'll get a "Connection" error) 
-    * For LAG feature training click (open in a new window) on "\[demo#6\] Topology 1" below in this activity page and go to the "Topology" page; click "Edit" to open the Topology for editing; click on "VLAN" cloud and check "ID" field in the left side of the page; you can define a custom VLAN ID or you can let Velocity choose a VLAN ID which is not used; Please notice that connection type is "LAG"; this is the indicator that the User wants to build LAG Ports dynamicaly by using mandatory automation tasks and tool scripts 
-    * For LAG feature dynamic implementation you'll need to define a LAG connection type. There 3 different LAG connection types: "LAG" - to build LAG ports on the Link (both ends), "LAG_FGT" - to build LAG ports only on Fortigate end and "LAG_SW" - to build LAG ports only on L2 Test switch side. In the Topology page click Edit and select the connection between Fortigate firewall and L2 Test switch (please see snapshot under Imgaes section below)
-    * For testing connection type "LAG" please click on "Reservation of \[demo#6\] Topology 1" and go to the "Reservation" page; the VLAN expected configuration is created by the Driver script; Under "Automation" tab you can see the mandatory Startup tasks being executed in real time by viewing the Report; Under "Information" tab you can check when Reservation becomes Active
-    * For testing connection types "LAG_FGT" and "LAG_SW" please click on "Reservation of \[demo#6\] Topology 2" and go to the "Reservation" page
-    * Check "Automation scripts" and "Mandatory Automation Tasks" sections below for details about LAG feature automation
+    * When connecting the Fortigate to a L2 switch just select "New VLAN" from the right side panel within the "Topology" page; Velocity will know how to connect the Fortigate to a L2 switch based on the existing "Physical Connections" under the Inventory (otherwise you'll get a "Connection" error)
+    * For LAG feature dynamic implementation you'll need to define a LAG connection type; there are 3 different LAG connection types available: "LAG" - to build LAG ports on the Link (both ends), "LAG_FGT" - to build LAG ports only on Fortigate end and "LAG_SW" - to build LAG ports only on L2 Test switch side
+    * For LAG feature training there are 2 Topologies available below in this activity page; "\[demo#6\] Topology 1"  - for "LAG" connection type and "\[demo#6\] Topology 2" - for "LAG_FGT" and "LAG_SW" connection types
+    * Open Topology link in a new tab and click "Edit"; click on "VLAN" cloud and check "ID" field in the left side of the page; you can define a custom VLAN ID or you can let Velocity choose a VLAN ID which is not used; select the connection between Fortigate firewall and the L2 switch and check connection type field (please see snapshot under Imgaes section below) 
+    * "Save" Topology
+
+
 * **Reserve Topology**  
     * Default Reservation duration is set to 60 minutes
-    * If Reservation is successful you should see "Release" button to end Reservation; goto "Topologies/Automation" section below in this activity page 
+    * In this activity page click on "Reserve" to create a new Reservation; you should see "Release" button to end the Reservation
+
+
 * **On Reservation Page:**
-    * On "Information" tab you should see the Reservation status as Active
+    * Open Reservation link in a new tab and wait for Reservation to become "Active"; on "Information" tab you should see the Reservation status as Active if Reservation is successful
     * Goto "Resources" tab and check what Resources were added after the Topology got resolved; you should see Ports and VLAN information per Port   
 * **Mandatory Automation Tasks:**
     * Goto "Topologies" section below this activity page and open Startup and Teardown tasks; these are mandatory tasks created by the Admin and configured to be executed at the start and end of each Reservation; execution reports are displayed in real time if you click on "View report" link
