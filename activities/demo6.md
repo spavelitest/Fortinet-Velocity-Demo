@@ -2,9 +2,9 @@
 
 * **Create a new Topology with a Fortigate resource connected to L2 switch and use LAG feature automation**
     * When connecting the Fortigate to a L2 switch just select "New VLAN" from the right side panel within the "Topology" page; Velocity will know how to connect the Fortigate to a L2 switch based on the existing "Physical Connections" under the "Inventory" (otherwise you'll get a "Connection" error)
-    * For LAG feature dynamic implementation you'll need to define a LAG connection type; there are 3 different LAG connection types available: "LAG" - to build LAG ports on the Link (at both ends), "LAG_FGT" - to build LAG ports only on Fortigate end and "LAG_SW" - to build LAG ports only on L2 Test switch side
+    * For LAG feature dynamic implementation you'll need to define a LAG connection type; there are 3 different LAG connection types available: "LAG" - to build LAG ports on the Link (at both ends), "LAG_FGT" - to build LAG ports only on Fortigate end and "LAG_SW" - to build LAG ports only on L2 Test switch side (please see snapshot#1 under Images section below)
     * For LAG feature training there are 2 Topologies available below in this activity page; "\[demo#6\] Topology 1"  - for "LAG" connection type and "\[demo#6\] Topology 2" - for "LAG_FGT" and "LAG_SW" connection types
-    * Open Topology link in a new tab and click "Edit"; click on "VLAN" cloud and check "ID" field in the left side of the page; you can define a custom VLAN ID or you can let Velocity choose a VLAN ID for you; select the connection between Fortigate firewall and the L2 switch and check connection type field (please see snapshot#1 under Images section below) 
+    * Open Topology link in a new tab and click "Edit"; click on "VLAN" cloud and check "ID" field in the left side of the page; you can define a custom VLAN ID or you can let Velocity choose a VLAN ID for you; select the connection between Fortigate firewall and the L2 switch and check connection type field  
     * "Save" Topology after editing
 
 
