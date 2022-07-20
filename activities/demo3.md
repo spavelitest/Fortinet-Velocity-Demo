@@ -1,7 +1,11 @@
 # User Steps:
 
-* **Create a new Topology with a Fortigate resource connected to a Tester or other Resource (except L2 switch) using L1 connections in between**
-    * When connecting the Fortigate to another Resource and there is a L1 connection in between, you will not see the L1 ports in Velocity; Velocity knows how to map the L1 ports to establish the requested connection between Resources; Options to "Break" and/or "Restore" the L1 connection will be available in the Topology page after the Reservation becomes Active
+* **Create a new Topology with a Fortigate resource connected to a (non) L2 switch using L1 connections in between**
+    * When connecting the Fortigate to another Resource (non L2 switch) and there is a L1 connection in between, you will not see the L1 ports in Velocity; Velocity knows how to map the L1 ports to establish the requested connection between Resources; Options to "Break" and/or "Restore" the L1 connection will be available in the Topology page after the Reservation becomes "Active"
+    * When connecting the Fortigate to a L2 switch and there is a L1 connection in between, you will not see neither L1 and L2 connections in Velocity; Velocity knows how to map the L1 ports to establish the requested connection to a L2 switch; the Driver dynamically build the requested VLAN on top of the L1 connection; Options to "Break" and/or "Restore" the L1 connections are not available if there is an L2 connections on top
+
+
+
     * Once the Reservation becomes Active you will see the L1 resolved ports under "Resources" tab in the Reservation page
     * Below in this activity page you can find a sample Topology (\[demo#3\] Topology 1) that can be used for training purposes
     * Click (open in a new window) on "\[demo#3\] Topology 1" below in this activity page and go to the "Topology" page; you will see the Fortigate connected to a Tester device; the L1 connection between these 2 Resources is not visible in the Topology page, but should be already created in the "Physical Connections" page under Inventory
