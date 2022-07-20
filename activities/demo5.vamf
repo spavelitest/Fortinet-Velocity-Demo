@@ -1,6 +1,6 @@
 {
 	"name": "Demo#5",
-	"shortDescription": "Reservation of Fortigate firewall dynamically connected to L2 switch using port speed and port split options to create the link.: Topology reservation demo; Port Speed and Port Split automation; Running Automation with user input parameters.",
+	"shortDescription": "Reservation of Fortigate firewall dynamically connected to L2 switch using port speed and port split options to create the link: Topology reservation demo; Port Speed and Port Split automation; Running Automation with user input parameters.",
 	"icon": "fortinet-logo.png",
 	"descriptionMarkdown": "demo5.md",
 	"topology": [
