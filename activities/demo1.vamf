@@ -1,6 +1,6 @@
 {
 	"name": "Demo#1",
-	"shortDescription": "Reservation of a single Fortigate resource topology: Topology reservation demo; HTTP and Console access and custom user actions (e.g. backupConfigTFTP); Power On/Off/Cycle user automated actions and tasks"icon": "fortinet-logo.png",
+	"shortDescription": "Reservation of a single Fortigate resource topology: Topology reservation demo; HTTP and Console access and custom user actions; Power On/Off/Cycle user automated actions and tasks"icon": "fortinet-logo.png",
 	"descriptionMarkdown": "demo1.md",
 	"topology": [
 		{
