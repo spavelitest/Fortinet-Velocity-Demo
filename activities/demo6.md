@@ -29,7 +29,7 @@
     * Teardown mandatory task "optionAllDevicesPowerOff.fftc" - will "Power Off" all Fortigate firewall devices from Topology; if not used in an Active Reservation all Fortigate devices should be powered off
 
 
-    * **Automation Scripts:**
+ * **Automation Scripts:**
     * Open the drop-down menu from "Topologies/Automation" section below in this activity page and check existing options; there is a total of 2 scripts available for both topologies - you may notice that all of their names start with "tool(something).fftc" - this notation is used to identify them as scripts which require the User to input parameters values for execution; in contrast all mandatory automation tasks names start with "option(something).fftc" - indicating that there is no need for the User to input any parameter value
     * While the Reservation is Active the User has the availability to create/dstroy LAG ports configuration on demand; the "tool" scripts apply to a sigle Device and require specific Parameters for execution
     * To build LAG ports on-demand you can try automated script "toolSetLagPorts.fftc" and click on "Run with Options"; the "Automation Assets" page opens with the script details; go to "Parameters" tab and input values for Parameters ("device_name", "device_port", "sw_mode", "untagged_vlan_id", "tagged_vlan_id" and "po_number"); then click Run and you'll get back to the activity page and can view the script execution report in real time; LAG ports are not added automatically to any VLAN 
