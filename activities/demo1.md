@@ -1,23 +1,25 @@
 # User Steps:
 
 * **Create a new Topology with a single Fortigate resource added from Velocity Inventory**
-    * L1 and L2 Inventory Resources are not available to choose when creating a new Toplogy as they are used dynamically by Velocity when building L1 or L2 connections between Resources
-    * Make sure to fill in Name, Description and Tags fields for advanced filtering
-    * Below you can find a sample Topology that can be used for training purposes (click on "Reserve" button for \[demo#1\] Topology)
+    * Goto Library/Topologies page from Velocity top menu and click on "Add" to create a new Topology; select any available Fortigate firewall; make sure to fill in Name, Description and Tags fields for advanced Topology filtering; "Save" Topology 
+    * L1 and L2 Inventory Resources are not available to choose from when creating a new Toplogy as they are used dynamically by Velocity when building L1 or L2 connections between Resources
+    * Below you can find a sample Topology "\[demo#1\] Topology" that can be used for training purposes; open Topology link in a new tab and click "Edit" if you want to make changes; "Save" Topology after editing 
+
 * **Reserve Topology**  
     * Default Reservation duration is 60 minutes
-    * If Reservation is successful you should see "Release" button to end Reservation
-    * Click (open in a new tab) on "Reservation of \[demo#1\] Topology" to enter Velocity Reservations page
+    * In this activity page click on "Reserve" topology to create a new Reservation; you should see "Release" button to end the Reservation
+
 * **On Reservation Page:**
-    * On Information tab you should see the Reservation status as Active; Reservation becomes Active after the Driver and other mandatory automation startup tasks have completed successfully
+    * Open Reservation link in a new tab and wait for Reservation to become "Active"; on "Information" tab you should see the Reservation status as "Active" if Reservation is successful
     * Goto Topology tab and click on the Fortigate resource; the Topology page should open
     * Click on Fortigate resource and select "Actions" -> "HTTP"; a new HTTP connection to Fortigate should open in a new window
-    * Click on Fortigate resource and select "Sessions" tab located in the left side of the page; Inherited sessions tab should display the "console" session
-    * Run "console" session to open a new Console connection to Fortigate
+    * Click on Fortigate resource and select "Sessions" tab located in the left side of the page; inherited sessions tab should display the "console" session; run "console" session to open a new Console connection to Fortigate (console connection type is telnet)
     * Inside the console connection you should see "QuickCalls" menu in the top-left corner of the page; a list of console quickcalls (custom user actions) are implemented and available for use
     * Select "consoleLogin" and "Run Quickcall"; you should automatically connect to Resource via the console connection
     * Now, you can eiter use the console to enter any commands or use some of the avilable quickcalls to perform specific actions (some of the quickcalls require user input parameters) 
     * For example select "getPortSpeed" quickcall and enter port name parameter (e.g. port31) to display port name speed settings inside the console window
+    * You may also try to save the Fortigate configuration by selecting "backupConfigTFTP" quickcall; for this Quickcall the User needs to enter "config_name" and "tftp" parameters values
+    * Goto TFTP server (currently VDS is configured as TFTP server and can be accessed [here](https://10.210.107.20/tftp)
     * Click on Fortigate resource and select "VBOTS" tab located in the top-left corner of the page; "Power On", "Power Off" and "Power Cycle" user actions list should be available for use (please note that Power On/Off actions are implemented for Fortigate resources only; implementation is based on specific tag "optionPDU" assigned to "Fortigate Firewall" template)
     * For example run vBOT "Power Cycle" and check "Results" tab for the execution report; Click on "View report" to open the "Execution Report" page in a new window (you can check script result and execution messages for detailed information)
 * **Mandatory Automation Tasks:**
