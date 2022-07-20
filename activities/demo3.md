@@ -14,8 +14,8 @@
 
 * **On Reservation Page:**
     * Open Reservation link in a new tab and wait for Reservation to become "Active"; on "Information" tab you should see the Reservation status as "Active" if Reservation is successful
-    * Goto "Topology" tab and select the Link - you should see the option to "Break" and "Restore" the link; Velocity displays in real time the status of the L1 connection (please see snapshot below under Images section); if L2 connectivity is built on top of L1 you will not have these actions available
-    * Goto "Resources" tab and check what Resources were added after the Topology got resolved; you should see the L1 devices and ports that have been dynamically added by Velocity; you should also see Ports and VLAN information (if any) per Port (please see snapshot below under Images section)
+    * Goto "Topology" tab and select the Link - you should see the option to "Break" and "Restore" the link; Velocity displays in real time the status of the L1 connection (please see snapshot#1 below under Images section); if L2 connectivity is built on top of L1 you will not have these actions available
+    * Goto "Resources" tab and check what Resources were added after the Topology got resolved; you should see the L1 devices and ports that have been dynamically added by Velocity; you should also see Ports and VLAN information (if any) per Port (please see snapshot#2 below under Images section)
     * Goto "Automation" tab and check madatory tasks execution reports
 
 
