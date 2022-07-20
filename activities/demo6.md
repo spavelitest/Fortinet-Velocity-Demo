@@ -15,7 +15,7 @@
 
 * **On Reservation Page:**
     * Open Reservation link in a new tab and wait for Reservation to become "Active"; on "Information" tab you should see the Reservation status as "Active" if Reservation is successful 
-    * Goto "Topology" tab and check Driver execution for VLAN configuration; you can select the Fortigate resource and open Console to build VLAN under LAG; Quickcalls are available for custom actions with input arguments (e.g. getLagDetails, configureLag, configureVdom, configureVlanUnderLag, assignInterfacesToVdom, deleteLag, disableVdom, enableVdom) 
+    * Goto "Topology" tab and check Driver execution for VLAN configuration; you can select the Fortigate firewall resource and open Console to build VLAN under LAG configuration; Quickcalls are available for custom actions with input arguments (e.g. getLagDetails, configureLag, configureVdom, configureVlanUnderLag, deleteVlanUnderLag, assignInterfacesToVdom, deleteLag, disableVdom, enableVdom); You can call the following sequence of Quickcalls: 1) getLagDetails, 2) configureVlanUnderLag, 3) getLagDetails - to validate VLAN under LAG configuration, 4) deleteVlanUnderLag - as this is a uder option under an Active Reservation and you will need to delete VLAN configuration under LAG for a smooth ending of the Reservation, 5) getLagDetails - to validate cleanup
     * Goto "Resources" tab and check what Resources were added after the Topology got resolved; you should see Ports and VLAN information per Port 
     * Goto "Automation" tab and check madatory tasks execution reports  
 
